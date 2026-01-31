@@ -30,7 +30,7 @@ const reviews = [
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="py-24 bg-white border-t border-slate-100">
+    <section id="testimonials" className="py-24 bg-white border-t border-slate-100">
       <div className="container mx-auto px-6 lg:px-12">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">
           <span className="text-primary-600">200+</span> 프로젝트의 고객들이<br />
