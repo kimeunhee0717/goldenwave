@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "slug": "ai-marketing-guide-2024",
+    "title": "2024 AI 마케팅 완벽 가이드: 비즈니스 성장을 위한 전략",
+    "excerpt": "AI 기술을 마케팅에 활용하는 방법과 실제 사례를 통해 비즈니스 성장 전략을 알아봅니다. ChatGPT부터 자동화 도구까지 실무에서 바로 적용할 수 있는 내용을 담았습니다.",
+    "coverImage": "/images/blog/ai-marketing.jpg",
+    "categoryId": "ai",
+    "tags": ["AI", "마케팅", "자동화", "ChatGPT", "트렌드"],
+    "authorId": "ceo",
+    "publishedAt": "2024-02-01",
+    "featured": true
+  },
+  {
+    "id": "2",
+    "slug": "seo-strategy-small-business",
+    "title": "중소기업을 위한 SEO 전략: 예산 없이 검색 1페이지 달성하기",
+    "excerpt": "제한된 예산으로도 효과적인 SEO 전략을 수립하고 실행하는 방법을 소개합니다. 키워드 연구부터 콘텐츠 최적화까지 단계별 가이드를 제공합니다.",
+    "coverImage": "/images/blog/seo-strategy.jpg",
+    "categoryId": "seo",
+    "tags": ["SEO", "검색 최적화", "중소기업", "콘텐츠", "키워드"],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-01-28",
+    "featured": true
+  },
+  {
+    "id": "3",
+    "slug": "content-marketing-roi",
+    "title": "콘텐츠 마케팅 ROI 측정하기: 성과를 수치로 증명하는 방법",
+    "excerpt": "콘텐츠 마케팅의 효과를 정확하게 측정하고 보고하는 방법을 알아봅니다. KPI 설정부터 대시보드 구축까지 실무 가이드를 제공합니다.",
+    "coverImage": "/images/blog/content-roi.jpg",
+    "categoryId": "marketing",
+    "tags": ["콘텐츠 마케팅", "ROI", "KPI", "데이터 분석"],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-01-20",
+    "featured": false
+  },
+  {
+    "id": "4",
+    "slug": "startup-growth-case-study",
+    "title": "스타트업 A사의 6개월 300% 성장 스토리",
+    "excerpt": "초기 스타트업이 어떻게 6개월 만에 매출 300% 성장을 이뤘는지 실제 사례를 통해 알아봅니다. 전략 수립부터 실행까지의 과정을 상세히 공개합니다.",
+    "coverImage": "/images/blog/case-study.jpg",
+    "categoryId": "case-study",
+    "tags": ["스타트업", "성장", "케이스 스터디", "마케팅 전략"],
+    "authorId": "ceo",
+    "publishedAt": "2024-01-15",
+    "featured": true
+  }
+]

@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 
-const menuItems = [
+interface MenuItem {
+  label: string;
+  href: string;
+  isRoute?: boolean;
+}
+
+const menuItems: MenuItem[] = [
   { label: '서비스', href: '#services' },
   { label: '포트폴리오', href: '#portfolio' },
+  { label: '블로그', href: '/blog', isRoute: true },
   { label: '고객 후기', href: '#testimonials' },
   { label: '상담 신청', href: '#contact' },
 ];
@@ -11,6 +19,7 @@ const menuItems = [
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +31,13 @@ const Navbar: React.FC = () => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+
+    // 홈페이지가 아닌 경우 홈으로 이동 후 스크롤
+    if (location.pathname !== '/') {
+      window.location.href = '/' + href;
+      return;
+    }
+
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
     if (element) {
@@ -34,6 +50,14 @@ const Navbar: React.FC = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleMenuClick = (item: MenuItem, e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (!item.isRoute) {
+      scrollToSection(e, item.href);
+    } else {
+      setIsMobileMenuOpen(false);
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -42,26 +66,40 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-to-tr from-primary-600 to-indigo-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary-500/30">
             G
           </div>
           <span className={`font-bold text-xl tracking-tight ${isScrolled ? 'text-slate-900' : 'text-slate-900'}`}>
             골든웨이브
           </span>
-        </div>
+        </Link>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-8">
           {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => scrollToSection(e, item.href)}
-              className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors"
-            >
-              {item.label}
-            </a>
+            item.isRoute ? (
+              <Link
+                key={item.label}
+                to={item.href}
+                className={`text-sm font-medium transition-colors ${
+                  location.pathname.startsWith(item.href)
+                    ? 'text-primary-600'
+                    : 'text-slate-600 hover:text-primary-600'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleMenuClick(item, e)}
+                className="text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors"
+              >
+                {item.label}
+              </a>
+            )
           ))}
         </nav>
 
@@ -87,16 +125,31 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl p-6 flex flex-col gap-4 animate-fade-in-down">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl p-6 flex flex-col gap-4">
           {menuItems.map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              onClick={(e) => scrollToSection(e, item.href)}
-              className="text-base font-medium text-slate-600 hover:text-primary-600 py-2 border-b border-slate-50 last:border-0"
-            >
-              {item.label}
-            </a>
+            item.isRoute ? (
+              <Link
+                key={item.label}
+                to={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`text-base font-medium py-2 border-b border-slate-50 last:border-0 ${
+                  location.pathname.startsWith(item.href)
+                    ? 'text-primary-600'
+                    : 'text-slate-600 hover:text-primary-600'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <a
+                key={item.label}
+                href={item.href}
+                onClick={(e) => handleMenuClick(item, e)}
+                className="text-base font-medium text-slate-600 hover:text-primary-600 py-2 border-b border-slate-50 last:border-0"
+              >
+                {item.label}
+              </a>
+            )
           ))}
           <div className="flex flex-col gap-3 mt-4">
             <a
