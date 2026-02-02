@@ -11,48 +11,60 @@ interface Props {
 export default function BlogCard({ post, featured = false }: Props) {
   return (
     <article className={`group ${featured ? 'md:col-span-2' : ''}`}>
-      <Link to={`/blog/${post.slug}`} className="block">
+      <Link to={`/blog/${post.slug}`} className="block h-full">
         <div className={`
-          overflow-hidden rounded-2xl bg-white shadow-md
-          hover:shadow-xl transition-shadow duration-300
+          h-full overflow-hidden rounded-2xl bg-white 
+          border border-gray-100 shadow-sm
+          hover:shadow-xl hover:shadow-gray-200/50 hover:border-gray-200
+          hover:-translate-y-1
+          transition-all duration-300 ease-out
           ${featured ? 'md:flex' : ''}
         `}>
           {/* 이미지 */}
           <div className={`
-            relative overflow-hidden bg-gray-100
+            relative overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200
             ${featured ? 'md:w-1/2 aspect-[4/3]' : 'aspect-video'}
           `}>
             <img
               src={post.coverImage}
               alt={post.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               onError={(e) => {
-                e.currentTarget.src = 'https://via.placeholder.com/800x450?text=No+Image'
+                e.currentTarget.src = '/images/placeholder-card.svg'
               }}
             />
+            {/* 이미지 오버레이 효과 */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
 
           {/* 콘텐츠 */}
-          <div className={`p-6 ${featured ? 'md:w-1/2 md:flex md:flex-col md:justify-center' : ''}`}>
-            <Badge color={post.category.color} size="sm" className="mb-3">
-              {post.category.title}
-            </Badge>
+          <div className={`p-6 flex flex-col ${featured ? 'md:w-1/2 md:p-8' : ''}`}>
+            <div className="flex-1">
+              <Badge 
+                color={post.category.color} 
+                size="sm" 
+                className="mb-3 px-2.5 py-1 font-semibold"
+              >
+                {post.category.title}
+              </Badge>
 
-            <h3 className={`
-              font-bold text-gray-900 mb-2
-              group-hover:text-primary-600 transition-colors
-              ${featured ? 'text-2xl' : 'text-lg'}
-              line-clamp-2
-            `}>
-              {post.title}
-            </h3>
+              <h3 className={`
+                font-bold text-gray-900 mb-3
+                group-hover:text-primary-600 
+                transition-colors duration-300
+                ${featured ? 'text-2xl md:text-3xl leading-tight' : 'text-lg leading-snug'}
+                line-clamp-2
+              `}>
+                {post.title}
+              </h3>
 
-            <p className="text-gray-600 text-sm line-clamp-2 mb-4">
-              {post.excerpt}
-            </p>
+              <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
+                {post.excerpt}
+              </p>
+            </div>
 
-            <div className="flex items-center text-sm text-gray-500">
-              <div className="w-6 h-6 rounded-full bg-gray-200 mr-2 overflow-hidden">
+            <div className="flex items-center text-sm text-gray-500 pt-4 border-t border-gray-50">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-100 to-purple-100 mr-2.5 overflow-hidden ring-2 ring-white shadow-sm">
                 <img
                   src={post.author.image}
                   alt={post.author.name}
@@ -62,13 +74,13 @@ export default function BlogCard({ post, featured = false }: Props) {
                   }}
                 />
               </div>
-              <span>{post.author.name}</span>
-              <span className="mx-2">•</span>
-              <time>{formatDate(post.publishedAt)}</time>
+              <span className="font-medium text-gray-700">{post.author.name}</span>
+              <span className="mx-2 text-gray-300">|</span>
+              <time className="text-gray-500">{formatDate(post.publishedAt)}</time>
               {post.readingTime && (
                 <>
-                  <span className="mx-2">•</span>
-                  <span>{post.readingTime}분</span>
+                  <span className="mx-2 text-gray-300">|</span>
+                  <span className="text-gray-500">{post.readingTime}분</span>
                 </>
               )}
             </div>
