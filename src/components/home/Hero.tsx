@@ -41,12 +41,12 @@ const Hero: React.FC = () => {
         {/* Hero Image Mockup */}
         <div className="mt-20 relative animate-fade-in-up animation-delay-400">
             <div className="relative mx-auto max-w-5xl rounded-2xl shadow-2xl bg-white border border-slate-200 overflow-hidden aspect-[16/9] group">
-                <img 
-                    src="https://picsum.photos/id/20/1920/1080" 
-                    alt="Dashboard Interface" 
+                <img
+                    src="https://picsum.photos/id/20/1920/1080"
+                    alt="Dashboard Interface"
                     className="w-full h-full object-cover"
                 />
-                
+
                 {/* Floating Elements */}
                 <div className="absolute bottom-10 left-10 p-4 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-white/50 flex items-center gap-4 transform transition-transform group-hover:scale-105 duration-500">
                     <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">

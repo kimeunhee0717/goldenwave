@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
 const reviews = [
   {
@@ -30,33 +30,50 @@ const reviews = [
 
 const Testimonials: React.FC = () => {
   return (
-    <section id="testimonials" className="py-24 bg-white border-t border-slate-100">
-      <div className="container mx-auto px-6 lg:px-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-center text-slate-900 mb-16">
-          <span className="text-primary-600">200+</span> 프로젝트의 고객들이<br />
-          골든웨이브와 함께 성장하고 있습니다
-        </h2>
+    <section id="testimonials" className="py-28 bg-white relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-20 left-0 w-72 h-72 bg-skyblue-300/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-0 w-72 h-72 bg-linen-200/50 rounded-full blur-3xl"></div>
+
+      <div className="container mx-auto px-6 lg:px-12 relative">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="inline-block text-sm font-bold tracking-widest text-skyblue-400 uppercase mb-4">Testimonials</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-steel-700 mb-6">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-steel-700 to-skyblue-300">200+</span> 프로젝트의 고객들이<br />
+            골든웨이브와 함께 성장하고 있습니다
+          </h2>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reviews.map((review, index) => (
-            <div key={index} className="bg-slate-50 p-8 rounded-3xl relative">
+            <div key={index} className="group bg-gradient-to-br from-alice-100/80 to-linen-100/50 p-8 rounded-3xl relative border border-alice-200 hover:shadow-xl hover:shadow-steel-700/10 transition-all duration-500 hover:-translate-y-1">
+              {/* Quote Icon */}
+              <div className="absolute top-6 right-6 text-skyblue-300/30">
+                <Quote size={32} />
+              </div>
+
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  <Star key={i} className="w-5 h-5 text-linen-400 fill-current" />
                 ))}
               </div>
-              <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+              <p className="text-steel-600 text-lg mb-8 leading-relaxed relative">
                 "{review.content}"
               </p>
               <div className="flex items-center gap-4">
-                <img 
-                  src={review.avatar} 
-                  alt={review.author} 
-                  className="w-12 h-12 rounded-full object-cover ring-2 ring-white"
-                />
+                <div className="relative">
+                  <img
+                    src={review.avatar}
+                    alt={review.author}
+                    className="w-14 h-14 rounded-2xl object-cover ring-2 ring-white shadow-lg"
+                  />
+                  <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-gradient-to-br from-skyblue-300 to-glaucous-400 rounded-full flex items-center justify-center">
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+                  </div>
+                </div>
                 <div>
-                  <h4 className="font-bold text-slate-900">{review.author}</h4>
-                  <p className="text-sm text-slate-500">{review.role}</p>
+                  <h4 className="font-bold text-steel-700">{review.author}</h4>
+                  <p className="text-sm text-glaucous-400">{review.role}</p>
                 </div>
               </div>
             </div>

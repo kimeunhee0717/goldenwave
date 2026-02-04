@@ -52,9 +52,9 @@ const ThemeGallery: React.FC = () => {
           {themes.map((theme) => (
             <div key={theme.id} className="group relative cursor-pointer">
               <div className="overflow-hidden rounded-2xl shadow-lg bg-white aspect-[3/4]">
-                <img 
-                  src={theme.image} 
-                  alt={theme.title} 
+                <img
+                  src={theme.image}
+                  alt={theme.title}
                   className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                 />
                 {/* Overlay */}

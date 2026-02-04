@@ -68,8 +68,8 @@ const Footer: React.FC = () => {
           <p className="text-xs text-slate-400">
             © 2024 골든웨이브(Golden Wave) All Rights Reserved. | 사업자등록번호: 123-45-67890
           </p>
-          <button 
-            onClick={scrollToTop} 
+          <button
+            onClick={scrollToTop}
             className="flex items-center gap-2 text-sm font-bold text-slate-900 hover:text-primary-600 transition-colors"
           >
             맨 위로 <ArrowUp size={16} />

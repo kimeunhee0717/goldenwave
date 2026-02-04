@@ -27,35 +27,35 @@ export default function BlogListPage() {
   }, [filteredPosts, featuredPosts])
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-cream-100">
       {/* Hero 섹션 */}
-      <section className="relative bg-gradient-to-br from-indigo-900 via-primary-700 to-purple-800 text-white py-20 md:py-28 overflow-hidden">
-        {/* 배경 패턴 */}
+      <section className="relative bg-gradient-to-br from-soot-900 via-moss-600 to-sage-500 text-white py-20 md:py-28 overflow-hidden">
+        {/* 배경 패턴 - 자연스러운 잎 패턴 */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Cpath d='M40 40c0-11.046-8.954-20-20-20S0 28.954 0 40s8.954 20 20 20c-11.046 0-20 8.954-20 20h80c0-11.046-8.954-20-20-20 11.046 0 20-8.954 20-20s-8.954-20-20-20-20 8.954-20 20z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
         </div>
-        
+
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm mb-6 border border-white/20">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span className="w-2 h-2 bg-sage-400 rounded-full animate-pulse"></span>
               새로운 인사이트가 계속 업데이트됩니다
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
               인사이트 & 노하우
             </h1>
-            <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed font-light">
+            <p className="text-xl md:text-2xl text-sage-200 mb-10 leading-relaxed font-light">
               마케팅 전략, 디지털 트렌드, 성공 사례 등<br className="hidden md:block" />
               비즈니스 성장을 위한 전문 인사이트를 제공합니다.
             </p>
             <Search posts={posts} onSearch={setSearchQuery} />
           </div>
         </div>
-        
+
         {/* 하단 그라데이션 효과 */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-cream-100 to-transparent"></div>
       </section>
 
         {/* 추천 포스트 섹션 */}
@@ -63,8 +63,8 @@ export default function BlogListPage() {
           <section className="py-16 bg-white">
             <div className="container mx-auto px-6">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-1 h-8 bg-gradient-to-b from-primary-500 to-purple-500 rounded-full"></div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">추천 포스트</h2>
+                <div className="w-1 h-8 bg-gradient-to-b from-moss-500 to-sage-400 rounded-full"></div>
+                <h2 className="text-2xl md:text-3xl font-bold text-soot-900">추천 포스트</h2>
               </div>
               {isLoading ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -92,10 +92,10 @@ export default function BlogListPage() {
               <aside className="lg:w-72 flex-shrink-0">
                 <div className="sticky top-28">
                   <div className="flex items-center gap-2 mb-5">
-                    <svg className="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-moss-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
                     </svg>
-                    <h3 className="text-lg font-bold text-gray-900">카테고리</h3>
+                    <h3 className="text-lg font-bold text-soot-900">카테고리</h3>
                   </div>
                   <CategoryFilter
                     categories={categories}
@@ -104,10 +104,10 @@ export default function BlogListPage() {
                   />
                   
                   {/* 뉴스레터 구독 카드 */}
-                  <div className="mt-8 p-6 bg-gradient-to-br from-primary-50 to-purple-50 rounded-2xl border border-primary-100">
-                    <h4 className="font-bold text-gray-900 mb-2">뉴스레터 구독</h4>
-                    <p className="text-sm text-gray-600 mb-4">최신 인사이트를 이메일로 받아보세요</p>
-                    <button className="w-full py-2.5 px-4 bg-primary-600 text-white rounded-xl font-medium hover:bg-primary-700 transition-colors text-sm">
+                  <div className="mt-8 p-6 bg-gradient-to-br from-sage-50 to-mist-50 rounded-2xl border border-sage-200">
+                    <h4 className="font-bold text-soot-900 mb-2">뉴스레터 구독</h4>
+                    <p className="text-sm text-soot-600 mb-4">최신 인사이트를 이메일로 받아보세요</p>
+                    <button className="w-full py-2.5 px-4 bg-moss-600 text-white rounded-xl font-medium hover:bg-moss-700 transition-colors text-sm">
                       구독하기
                     </button>
                   </div>
@@ -117,14 +117,14 @@ export default function BlogListPage() {
               {/* 블로그 리스트 */}
               <main className="flex-1 min-w-0">
                 {selectedCategory && (
-                  <div className="mb-8 p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                  <div className="mb-8 p-6 bg-white rounded-2xl shadow-sm border border-sage-100">
                     <div className="flex items-center gap-3 mb-2">
-                      <div className="w-1 h-6 bg-gradient-to-b from-primary-500 to-purple-500 rounded-full"></div>
-                      <h2 className="text-2xl font-bold text-gray-900">
+                      <div className="w-1 h-6 bg-gradient-to-b from-moss-500 to-sage-400 rounded-full"></div>
+                      <h2 className="text-2xl font-bold text-soot-900">
                         {categories.find(c => c.slug === selectedCategory)?.title}
                       </h2>
                     </div>
-                    <p className="text-gray-600 ml-4">
+                    <p className="text-soot-600 ml-4">
                       {categories.find(c => c.slug === selectedCategory)?.description}
                     </p>
                   </div>
@@ -132,8 +132,8 @@ export default function BlogListPage() {
 
                 {!selectedCategory && !searchQuery && (
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="w-1 h-8 bg-gradient-to-b from-primary-500 to-purple-500 rounded-full"></div>
-                    <h2 className="text-2xl font-bold text-gray-900">최신 포스트</h2>
+                    <div className="w-1 h-8 bg-gradient-to-b from-moss-500 to-sage-400 rounded-full"></div>
+                    <h2 className="text-2xl font-bold text-soot-900">최신 포스트</h2>
                   </div>
                 )}
 

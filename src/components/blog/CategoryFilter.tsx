@@ -31,8 +31,8 @@ export default function CategoryFilter({
               className={cn(
                 'block py-2 px-3 rounded-lg transition',
                 !selectedCategory
-                  ? 'bg-primary-50 text-primary-700 font-medium'
-                  : 'text-gray-600 hover:bg-gray-50'
+                  ? 'bg-sage-50 text-moss-700 font-medium'
+                  : 'text-soot-600 hover:bg-cream-50'
               )}
             >
               전체 보기
@@ -45,8 +45,8 @@ export default function CategoryFilter({
                 className={cn(
                   'block py-2 px-3 rounded-lg transition',
                   selectedCategory === cat.slug
-                    ? 'bg-primary-50 text-primary-700 font-medium'
-                    : 'text-gray-600 hover:bg-gray-50'
+                    ? 'bg-sage-50 text-moss-700 font-medium'
+                    : 'text-soot-600 hover:bg-cream-50'
                 )}
               >
                 {cat.title}
@@ -59,7 +59,7 @@ export default function CategoryFilter({
   }
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+    <div className="bg-white rounded-2xl p-5 border border-sage-100 shadow-sm">
       <ul className="space-y-1.5">
         <li>
           <button
@@ -67,11 +67,11 @@ export default function CategoryFilter({
             className={cn(
               'w-full text-left py-3 px-4 rounded-xl transition-all duration-200 flex items-center gap-3',
               !selectedCategory
-                ? 'bg-gradient-to-r from-primary-50 to-purple-50 text-primary-700 font-semibold shadow-sm border border-primary-100'
-                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                ? 'bg-gradient-to-r from-sage-50 to-mist-50 text-moss-700 font-semibold shadow-sm border border-sage-200'
+                : 'text-soot-600 hover:bg-cream-50 hover:text-soot-900'
             )}
           >
-            <span className={`w-2 h-2 rounded-full ${!selectedCategory ? 'bg-primary-500' : 'bg-gray-300'}`}></span>
+            <span className={`w-2 h-2 rounded-full ${!selectedCategory ? 'bg-moss-500' : 'bg-sage-300'}`}></span>
             전체 보기
           </button>
         </li>
@@ -82,15 +82,15 @@ export default function CategoryFilter({
               className={cn(
                 'w-full text-left py-3 px-4 rounded-xl transition-all duration-200 flex items-center gap-3',
                 selectedCategory === cat.slug
-                  ? 'bg-gradient-to-r from-primary-50 to-purple-50 text-primary-700 font-semibold shadow-sm border border-primary-100'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-gradient-to-r from-sage-50 to-mist-50 text-moss-700 font-semibold shadow-sm border border-sage-200'
+                  : 'text-soot-600 hover:bg-cream-50 hover:text-soot-900'
               )}
             >
-              <span 
+              <span
                 className={`w-2 h-2 rounded-full ${
-                  selectedCategory === cat.slug 
-                    ? 'bg-primary-500' 
-                    : 'bg-gray-300 group-hover:bg-gray-400'
+                  selectedCategory === cat.slug
+                    ? 'bg-moss-500'
+                    : 'bg-sage-300 group-hover:bg-sage-400'
                 }`}
               ></span>
               {cat.title}

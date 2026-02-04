@@ -61,17 +61,23 @@ export default function TableOfContents({ content }: Props) {
   }
 
   return (
-    <nav className="bg-gray-50 rounded-xl p-6">
-      <h3 className="font-bold text-gray-900 mb-4">목차</h3>
+    <nav>
+      <h3 className="font-bold text-espresso-800 mb-4 flex items-center gap-2">
+        <span className="w-1 h-4 bg-gradient-to-b from-cocoa-500 to-sand-400 rounded-full"></span>
+        목차
+      </h3>
       <ul className="space-y-2">
         {headings.map((heading) => (
           <li key={heading.id}>
             <button
               onClick={() => scrollToHeading(heading.id)}
               className={`
-                block text-sm text-left w-full transition-colors hover:text-primary-600
-                ${heading.level === 3 ? 'pl-4' : ''}
-                ${activeId === heading.id ? 'text-primary-600 font-medium' : 'text-gray-600'}
+                block text-sm text-left w-full transition-all duration-200 rounded-lg px-3 py-2
+                ${heading.level === 3 ? 'pl-6' : ''}
+                ${activeId === heading.id
+                  ? 'text-cocoa-600 font-medium bg-golden-100 border-l-2 border-cocoa-500'
+                  : 'text-espresso-600 hover:text-cocoa-600 hover:bg-golden-50'
+                }
               `}
             >
               {heading.text}

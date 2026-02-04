@@ -14,8 +14,8 @@ export default function BlogCard({ post, featured = false }: Props) {
       <Link to={`/blog/${post.slug}`} className="block h-full">
         <div className={`
           h-full overflow-hidden rounded-2xl bg-white 
-          border border-gray-100 shadow-sm
-          hover:shadow-xl hover:shadow-gray-200/50 hover:border-gray-200
+          border border-sage-100 shadow-sm
+          hover:shadow-xl hover:shadow-sage-200/50 hover:border-sage-200
           hover:-translate-y-1
           transition-all duration-300 ease-out
           ${featured ? 'md:flex' : ''}
@@ -49,8 +49,8 @@ export default function BlogCard({ post, featured = false }: Props) {
               </Badge>
 
               <h3 className={`
-                font-bold text-gray-900 mb-3
-                group-hover:text-primary-600 
+                font-bold text-soot-900 mb-3
+                group-hover:text-moss-600
                 transition-colors duration-300
                 ${featured ? 'text-2xl md:text-3xl leading-tight' : 'text-lg leading-snug'}
                 line-clamp-2
@@ -63,8 +63,8 @@ export default function BlogCard({ post, featured = false }: Props) {
               </p>
             </div>
 
-            <div className="flex items-center text-sm text-gray-500 pt-4 border-t border-gray-50">
-              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary-100 to-purple-100 mr-2.5 overflow-hidden ring-2 ring-white shadow-sm">
+            <div className="flex items-center text-sm text-soot-500 pt-4 border-t border-sage-50">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-sage-100 to-mist-100 mr-2.5 overflow-hidden ring-2 ring-white shadow-sm">
                 <img
                   src={post.author.image}
                   alt={post.author.name}
@@ -74,13 +74,13 @@ export default function BlogCard({ post, featured = false }: Props) {
                   }}
                 />
               </div>
-              <span className="font-medium text-gray-700">{post.author.name}</span>
-              <span className="mx-2 text-gray-300">|</span>
-              <time className="text-gray-500">{formatDate(post.publishedAt)}</time>
+              <span className="font-medium text-soot-700">{post.author.name}</span>
+              <span className="mx-2 text-sage-300">|</span>
+              <time className="text-soot-500">{formatDate(post.publishedAt)}</time>
               {post.readingTime && (
                 <>
-                  <span className="mx-2 text-gray-300">|</span>
-                  <span className="text-gray-500">{post.readingTime}분</span>
+                  <span className="mx-2 text-sage-300">|</span>
+                  <span className="text-soot-500">{post.readingTime}분</span>
                 </>
               )}
             </div>
