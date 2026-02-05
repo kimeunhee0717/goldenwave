@@ -69,10 +69,10 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-slate-900 mb-6">문의</h4>
             <ul className="space-y-3 text-sm text-slate-500">
-              <li><a href="mailto:hello@bujatime.com" className="hover:text-moss-600 transition-colors">hello@bujatime.com</a></li>
-              <li><a href="tel:02-1234-5678" className="hover:text-moss-600 transition-colors">02-1234-5678</a></li>
+              <li><a href="support@bujatime.com" className="hover:text-moss-600 transition-colors">[EMAIL_ADDRESS]</a></li>
+              <li><a href="tel:010-6289-0101" className="hover:text-moss-600 transition-colors">010-6289-0101</a></li>
               <li><Link to="/about" className="hover:text-moss-600 transition-colors">소개</Link></li>
-              <li><Link to="/contact" className="hover:text-moss-600 transition-colors">문의하기</Link></li>
+              <li><Link to="/contact" className="hover:text-moss-600 transition-colors">제휴문의</Link></li>
               <li><Link to="/privacy" className="hover:text-moss-600 transition-colors">개인정보처리방침</Link></li>
               <li><Link to="/terms" className="hover:text-moss-600 transition-colors">이용약관</Link></li>
             </ul>
