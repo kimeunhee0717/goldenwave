@@ -49,7 +49,8 @@ const tools: Tool[] = [
     name: '적금·예금 이자 계산기',
     description: '적금과 예금의 만기 수령액, 세후 이자를 비교해보세요.',
     icon: <PiggyBank size={24} />,
-    ready: false,
+    href: '/tools/savings',
+    ready: true,
   },
   {
     name: '퇴직금 계산기',
