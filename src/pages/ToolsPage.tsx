@@ -89,9 +89,10 @@ const tools: Tool[] = [
   },
   {
     name: '환율 계산기',
-    description: '주요 통화 간 환율을 실시간으로 변환합니다.',
+    description: '주요 통화 간 환율을 빠르게 변환합니다.',
     icon: <ArrowLeftRight size={24} />,
-    ready: false,
+    href: '/tools/exchange-rate',
+    ready: true,
   },
 ];
 

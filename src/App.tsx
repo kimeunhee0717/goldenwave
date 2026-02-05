@@ -14,6 +14,7 @@ import PensionCalculator from '@/pages/tools/PensionCalculator'
 import RealEstateCalculator from '@/pages/tools/RealEstateCalculator'
 import BmiCalculator from '@/pages/tools/BmiCalculator'
 import AgeCalculator from '@/pages/tools/AgeCalculator'
+import ExchangeRateCalculator from '@/pages/tools/ExchangeRateCalculator'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -41,6 +42,7 @@ function App() {
           <Route path="tools/real-estate" element={<RealEstateCalculator />} />
           <Route path="tools/bmi" element={<BmiCalculator />} />
           <Route path="tools/age" element={<AgeCalculator />} />
+          <Route path="tools/exchange-rate" element={<ExchangeRateCalculator />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />
