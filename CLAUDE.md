@@ -64,5 +64,5 @@
 | 16 | 종합소득세 계산기 | 완성 | `/tools/income-tax` |
 | 17 | 자동차 유지비 계산기 | 완성 | `/tools/car-cost` |
 | 18 | 은퇴 자금 계산기 | 완성 | `/tools/retirement` |
-| 19 | 육아 비용 계산기 | 미구현 | `/tools/child-cost` |
+| 19 | 육아 비용 계산기 | 완성 | `/tools/child-cost` |
 | 20 | 부가세(VAT) 계산기 | 미구현 | `/tools/vat` |

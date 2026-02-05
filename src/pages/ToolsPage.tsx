@@ -164,7 +164,8 @@ const tools: Tool[] = [
     name: '육아 비용 계산기',
     description: '출산부터 대학까지 연차별 예상 육아 비용을 시뮬레이션합니다.',
     icon: <Baby size={24} />,
-    ready: false,
+    href: '/tools/child-cost',
+    ready: true,
   },
   {
     name: '부가세(VAT) 계산기',
