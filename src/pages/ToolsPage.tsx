@@ -77,7 +77,8 @@ const tools: Tool[] = [
     name: 'BMI 계산기',
     description: '키와 체중으로 체질량지수(BMI)를 계산하고 건강 상태를 확인하세요.',
     icon: <Heart size={24} />,
-    ready: false,
+    href: '/tools/bmi',
+    ready: true,
   },
   {
     name: '나이·만나이 계산기',

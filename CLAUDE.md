@@ -53,6 +53,6 @@
 | 5 | 퇴직금 계산기 | 완성 | `/tools/severance` |
 | 6 | 연금 수령액 계산기 | 완성 | `/tools/pension` |
 | 7 | 부동산 수익률 계산기 | 완성 | `/tools/real-estate` |
-| 8 | BMI 계산기 | 미구현 | `/tools/bmi` |
+| 8 | BMI 계산기 | 완성 | `/tools/bmi` |
 | 9 | 나이/만나이 계산기 | 미구현 | `/tools/age` |
 | 10 | 환율 계산기 | 미구현 | `/tools/exchange-rate` |
