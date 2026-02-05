@@ -151,7 +151,7 @@ const SeveranceCalculator: React.FC = () => {
 
           {/* 입력 패널 */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl shadow-lg shadow-espresso-900/5 border border-oatmeal-200 p-6 sticky top-24">
+            <div className="bg-white rounded-2xl shadow-lg shadow-espresso-900/5 border border-oatmeal-200 p-6">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-lg font-bold text-espresso-800">근무 정보 입력</h2>
                 <button

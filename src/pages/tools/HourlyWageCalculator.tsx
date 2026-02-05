@@ -144,7 +144,7 @@ const HourlyWageCalculator: React.FC = () => {
 
             {/* 입력 패널 */}
             <div className="lg:col-span-2">
-              <div className="lg:sticky lg:top-24 space-y-6">
+              <div className="space-y-6">
                 <div className="bg-white rounded-2xl border border-slate-200 p-6">
                   <h2 className="text-lg font-bold text-slate-800 mb-5">급여 입력</h2>
 
