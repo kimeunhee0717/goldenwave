@@ -1292,5 +1292,185 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-05",
     "featured": true
+  },
+  {
+    "id": "73",
+    "slug": "digital-skill-11-ai-video-editing",
+    "title": "AI 영상 편집 입문: Runway와 CapCut Pro로 3분 만에 완성하는 쇼츠 제작",
+    "excerpt": "전문가 없이도 3분 만에 고퀄리티 쇼츠를 만드는 법을 알려드립니다. Runway의 Gen-2와 CapCut Pro의 AI 기능을 활용한 영상 편집 기초부터 SNS에 올릴 완성도 높은 콘텐츠 제작까지 단계별로 배웁니다.",
+    "coverImage": "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI영상",
+      "Runway",
+      "CapCut",
+      "쇼츠",
+      "영상편집"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": true
+  },
+  {
+    "id": "74",
+    "slug": "digital-skill-12-ai-voice-podcast",
+    "title": "AI 음성 합성과 팟캐스트: ElevenLabs로 나만의 AI 성우 만들기",
+    "excerpt": "내 목소리를 복제하고 29개 언어로 말하게 만들 수 있습니다. ElevenLabs, Murf, Play.ht 등 AI TTS 도구를 활용해 유튜브 낭독, 팟캐스트, 오디오북을 제작하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI음성",
+      "TTS",
+      "ElevenLabs",
+      "팟캐스트",
+      "AI성우"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "75",
+    "slug": "digital-skill-13-ai-presentation",
+    "title": "AI 프레젠테이션 마스터: Gamma와 Beautiful.ai로 PPT 10분 완성",
+    "excerpt": "PPT 만들기가 힘드신가요? 텍스트만 입력하면 AI가 디자인까지 해주는 시대입니다. Gamma, Beautiful.ai, Tome을 활용해 전문가급 프레젠테이션을 10분 만에 만드는 방법을 배웁니다.",
+    "coverImage": "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI프레젠테이션",
+      "Gamma",
+      "Beautiful.ai",
+      "PPT",
+      "디자인"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "76",
+    "slug": "digital-skill-14-ai-research",
+    "title": "AI 연구 및 학술 도구 활용법: 논문 검색부터 요약까지",
+    "excerpt": "학술 논문을 찾고 읽는 데 시간이 너무 오래 걸리시나요? Perplexity, Elicit, Consensus 등 AI 도구를 활용해 효율적으로 연구 자료를 정리하고 핵심 포인트를 빠르게 파악하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI연구",
+      "Perplexity",
+      "Elicit",
+      "논문검색",
+      "학술"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "77",
+    "slug": "digital-skill-15-chatbot",
+    "title": "AI 챗봇 및 고객 응대 자동화: 24시간 고객 서비스 구축하기",
+    "excerpt": "고객 문의에 밤낮 없이 대응하고 싶으신가요? Chatbase, Voiceflow, Intercom Fin을 활용해 스마트한 챗봇을 만들고 반복적인 고객 응대 업무를 자동화하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI챗봇",
+      "Chatbase",
+      "Voiceflow",
+      "고객응대",
+      "자동화"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "78",
+    "slug": "digital-skill-16-finance",
+    "title": "AI 재무·회계 자동화: 영수증 정리부터 세무 신고까지",
+    "excerpt": "매달 영수증 정리가 번거로우신가요? Expensify, Dext, QuickBooks 등 AI 도구를 활용해 영수증 자동 처리, 회계 장부 기장, 세무 신고 준비까지 자동화하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI회계",
+      "Expensify",
+      "QuickBooks",
+      "재무자동화",
+      "영수증정리"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "79",
+    "slug": "digital-skill-17-hr-recruit",
+    "title": "AI 인사·채용 도구 활용법: 효율적인 인재 확보와 관리",
+    "excerpt": "채용 공고에 쏟아지는 이력서 처리가 어려우신가요? LinkedIn Recruiter, Greenhouse, HireVue 등 AI 도구를 활용해 공정하고 효율적인 채용 프로세스를 구축하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI채용",
+      "LinkedIn",
+      "Greenhouse",
+      "인사관리",
+      "채용자동화"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "80",
+    "slug": "digital-skill-18-legal",
+    "title": "AI 법률·계약 검토 도구: 비용 효율적인 법무 자동화",
+    "excerpt": "계약서 검토에 법무 비용이 부담스러우신가요? AI를 활용해 NDA, 근로계약서 등을 자동으로 검토하고 위험 요소를 파악하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI법률",
+      "계약서검토",
+      "LawGeex",
+      "법무자동화",
+      "LegalTech"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "81",
+    "slug": "digital-skill-19-translation",
+    "title": "AI 번역 및 글로벌 비즈니스 도구: 언어 장벽 없는 세상",
+    "excerpt": "해외 업무에서 언어 장벽을 느끼시나요? DeepL, Smartcat, Copy.ai 등 AI 번역 도구를 활용해 다국어 콘텐츠를 제작하고 글로벌 비즈니스를 효율적으로 운영하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1523730205978-59fd1b2965e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI번역",
+      "DeepL",
+      "Smartcat",
+      "글로벌",
+      "다국어"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "82",
+    "slug": "digital-skill-20-personal-branding",
+    "title": "AI 개인 브랜딩 및 포트폴리오 제작: 나만의 디지털 자산 만들기",
+    "excerpt": "이직이나 프리랜서 활동을 위해 개인 브랜드를 구축하고 싶으신가요? LinkedIn 최적화부터 Notion, Carrd를 활용한 포트폴리오 제작까지 나만의 디지털 자산을 만드는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "개인브랜딩",
+      "LinkedIn",
+      "포트폴리오",
+      "Notion",
+      "커리어"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": true
   }
 ]
