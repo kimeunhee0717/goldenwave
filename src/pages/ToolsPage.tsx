@@ -70,7 +70,8 @@ const tools: Tool[] = [
     name: '부동산 수익률 계산기',
     description: '매입가, 보유 비용, 임대 수익으로 실질 수익률을 분석합니다.',
     icon: <Building2 size={24} />,
-    ready: false,
+    href: '/tools/real-estate',
+    ready: true,
   },
   {
     name: 'BMI 계산기',
