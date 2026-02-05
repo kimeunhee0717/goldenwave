@@ -171,7 +171,8 @@ const tools: Tool[] = [
     name: '부가세(VAT) 계산기',
     description: '공급가↔부가세↔합계를 상호 변환합니다.',
     icon: <Receipt size={24} />,
-    ready: false,
+    href: '/tools/vat',
+    ready: true,
   },
 ];
 
