@@ -19,6 +19,7 @@ import JeonseWolseCalculator from '@/pages/tools/JeonseWolseCalculator'
 import StockReturnCalculator from '@/pages/tools/StockReturnCalculator'
 import LoanRefinanceCalculator from '@/pages/tools/LoanRefinanceCalculator'
 import ElectricityCalculator from '@/pages/tools/ElectricityCalculator'
+import HourlyWageCalculator from '@/pages/tools/HourlyWageCalculator'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -51,6 +52,7 @@ function App() {
           <Route path="tools/stock-return" element={<StockReturnCalculator />} />
           <Route path="tools/loan-refinance" element={<LoanRefinanceCalculator />} />
           <Route path="tools/electricity" element={<ElectricityCalculator />} />
+          <Route path="tools/hourly-wage" element={<HourlyWageCalculator />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />

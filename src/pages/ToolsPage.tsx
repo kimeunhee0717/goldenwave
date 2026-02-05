@@ -136,7 +136,8 @@ const tools: Tool[] = [
     name: '시급·일급 변환 계산기',
     description: '시급↔일급↔월급↔연봉을 상호 변환하고 최저시급과 비교합니다.',
     icon: <Timer size={24} />,
-    ready: false,
+    href: '/tools/hourly-wage',
+    ready: true,
   },
   {
     name: '종합소득세 계산기',
