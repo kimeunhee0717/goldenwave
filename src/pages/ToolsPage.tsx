@@ -13,6 +13,16 @@ import {
   ArrowLeftRight,
   ArrowRight,
   Wrench,
+  Home,
+  BarChart3,
+  RefreshCw,
+  Zap,
+  Timer,
+  FileText,
+  Car,
+  Umbrella,
+  Baby,
+  Receipt,
 } from 'lucide-react';
 
 interface Tool {
@@ -93,6 +103,67 @@ const tools: Tool[] = [
     icon: <ArrowLeftRight size={24} />,
     href: '/tools/exchange-rate',
     ready: true,
+  },
+  {
+    name: '전세↔월세 전환 계산기',
+    description: '전세금과 월세를 전환율로 상호 변환합니다.',
+    icon: <Home size={24} />,
+    href: '/tools/jeonse-wolse',
+    ready: true,
+  },
+  {
+    name: '주식 수익률 계산기',
+    description: '매수가·매도가·수수료·세금 반영 실질 수익률을 계산합니다.',
+    icon: <BarChart3 size={24} />,
+    ready: false,
+  },
+  {
+    name: '대출 갈아타기 비교기',
+    description: '기존 대출과 신규 대출 조건을 비교해 이자 절감액을 확인하세요.',
+    icon: <RefreshCw size={24} />,
+    ready: false,
+  },
+  {
+    name: '전기요금 계산기',
+    description: '사용량(kWh)을 입력하면 누진세 단계별 전기요금을 계산합니다.',
+    icon: <Zap size={24} />,
+    ready: false,
+  },
+  {
+    name: '시급·일급 변환 계산기',
+    description: '시급↔일급↔월급↔연봉을 상호 변환하고 최저시급과 비교합니다.',
+    icon: <Timer size={24} />,
+    ready: false,
+  },
+  {
+    name: '종합소득세 계산기',
+    description: '프리랜서·자영업자의 종합소득세를 간이 계산합니다.',
+    icon: <FileText size={24} />,
+    ready: false,
+  },
+  {
+    name: '자동차 유지비 계산기',
+    description: '유류비·보험·세금·감가상각 등 월/연 총 유지비를 계산합니다.',
+    icon: <Car size={24} />,
+    ready: false,
+  },
+  {
+    name: '은퇴 자금 계산기',
+    description: '목표 은퇴 나이와 월 생활비로 필요 자금을 역산합니다.',
+    icon: <Umbrella size={24} />,
+    ready: false,
+  },
+  {
+    name: '육아 비용 계산기',
+    description: '출산부터 대학까지 연차별 예상 육아 비용을 시뮬레이션합니다.',
+    icon: <Baby size={24} />,
+    ready: false,
+  },
+  {
+    name: '부가세(VAT) 계산기',
+    description: '공급가↔부가세↔합계를 상호 변환합니다.',
+    icon: <Receipt size={24} />,
+    ready: false,
   },
 ];
 
