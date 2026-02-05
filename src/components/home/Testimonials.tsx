@@ -9,13 +9,13 @@ const reviews = [
     avatar: "https://picsum.photos/id/64/100/100"
   },
   {
-    content: "3년간 4개사와 협업했는데, 골든웨이브만큼 성과를 만족스럽게 내준 곳은 없었어요. 데이터 기반으로 정확히 분석해줍니다.",
+    content: "3년간 4개사와 협업했는데, 부자타임만큼 실질적인 정보를 주는 곳은 없었어요. 데이터 기반으로 정확히 분석해줍니다.",
     author: "박OO",
     role: "쿡마스터 마케팅 팀장",
     avatar: "https://picsum.photos/id/65/100/100"
   },
   {
-    content: "투자 유치 PR이 생각보다 훨씬 쉽지 않았는데, 골든웨이브 덕분에 성공할 수 있었습니다. 전문성이 남달랐습니다.",
+    content: "재테크 공부가 막막했는데, 부자타임 덕분에 체계적으로 시작할 수 있었습니다. 콘텐츠 퀄리티가 남달랐습니다.",
     author: "이OO",
     role: "핏플레이스 CEO",
     avatar: "https://picsum.photos/id/91/100/100"
@@ -40,7 +40,7 @@ const Testimonials: React.FC = () => {
           <span className="inline-block text-sm font-bold tracking-widest text-skyblue-400 uppercase mb-4">Testimonials</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-steel-700 mb-6">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-steel-700 to-skyblue-300">200+</span> 프로젝트의 고객들이<br />
-            골든웨이브와 함께 성장하고 있습니다
+            부자타임과 함께 성장하고 있습니다
           </h2>
         </div>
 

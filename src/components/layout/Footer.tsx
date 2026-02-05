@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
             <div className="flex gap-4 pt-2">
               <a href="#" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Instagram size={18} /></a>
               <a href="#" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Youtube size={18} /></a>
-              <a href="mailto:hello@goldenwave.co.kr" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Mail size={18} /></a>
+              <a href="mailto:hello@bujatime.com" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Mail size={18} /></a>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="font-bold text-slate-900 mb-6">문의</h4>
             <ul className="space-y-3 text-sm text-slate-500">
-              <li><a href="mailto:hello@goldenwave.co.kr" className="hover:text-moss-600 transition-colors">hello@goldenwave.co.kr</a></li>
+              <li><a href="mailto:hello@bujatime.com" className="hover:text-moss-600 transition-colors">hello@bujatime.com</a></li>
               <li><a href="tel:02-1234-5678" className="hover:text-moss-600 transition-colors">02-1234-5678</a></li>
               <li><Link to="/about" className="hover:text-moss-600 transition-colors">소개</Link></li>
               <li><Link to="/contact" className="hover:text-moss-600 transition-colors">문의하기</Link></li>
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
 
         <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-400">
-            © {new Date().getFullYear()} 부자타임(BujaTime) by 골든웨이브 | All Rights Reserved.
+            © {new Date().getFullYear()} 부자타임(BujaTime) | All Rights Reserved.
           </p>
           <button
             onClick={scrollToTop}

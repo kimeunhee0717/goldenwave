@@ -22,7 +22,7 @@ export default function TermsPage() {
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-4">제2조 (정의)</h2>
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>"사이트"</strong>란 골든웨이브가 운영하는 부자타임(bujatime.com) 웹사이트를 말합니다.</li>
+              <li><strong>"사이트"</strong>란 부자타임(bujatime.com) 웹사이트를 말합니다.</li>
               <li><strong>"이용자"</strong>란 사이트에 접속하여 이 약관에 따라 사이트가 제공하는 서비스를 이용하는 자를 말합니다.</li>
               <li><strong>"콘텐츠"</strong>란 사이트에 게시된 글, 이미지, 영상, 파일 등 일체의 정보를 말합니다.</li>
             </ul>

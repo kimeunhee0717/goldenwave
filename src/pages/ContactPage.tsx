@@ -6,8 +6,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: '이메일',
-    value: 'hello@goldenwave.co.kr',
-    href: 'mailto:hello@goldenwave.co.kr',
+    value: 'hello@bujatime.com',
+    href: 'mailto:hello@bujatime.com',
   },
   {
     icon: Phone,

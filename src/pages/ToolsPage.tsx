@@ -35,7 +35,8 @@ const tools: Tool[] = [
     name: '대출 이자 계산기',
     description: '대출 원리금 상환 스케줄과 총 이자 비용을 한눈에 확인하세요.',
     icon: <Landmark size={24} />,
-    ready: false,
+    href: '/tools/loan-interest',
+    ready: true,
   },
   {
     name: '연봉 실수령액 계산기',

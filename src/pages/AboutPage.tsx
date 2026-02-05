@@ -69,7 +69,7 @@ export default function AboutPage() {
               <p><strong>대표:</strong> 김은희</p>
               <p><strong>사업자등록번호:</strong> 370-18-02799</p>
               <p><strong>주소:</strong> 부산광역시 부산진구 동평로 183번길 86-3</p>
-              <p><strong>이메일:</strong> hello@goldenwave.co.kr</p>
+              <p><strong>이메일:</strong> hello@bujatime.com</p>
               <p><strong>전화:</strong> 02-1234-5678</p>
             </div>
           </section>
