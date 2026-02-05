@@ -9,6 +9,7 @@ import CompoundInterestCalculator from '@/pages/tools/CompoundInterestCalculator
 import LoanCalculator from '@/pages/tools/LoanCalculator'
 import SalaryCalculator from '@/pages/tools/SalaryCalculator'
 import SavingsCalculator from '@/pages/tools/SavingsCalculator'
+import SeveranceCalculator from '@/pages/tools/SeveranceCalculator'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -31,6 +32,7 @@ function App() {
           <Route path="tools/loan-interest" element={<LoanCalculator />} />
           <Route path="tools/salary" element={<SalaryCalculator />} />
           <Route path="tools/savings" element={<SavingsCalculator />} />
+          <Route path="tools/severance" element={<SeveranceCalculator />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />

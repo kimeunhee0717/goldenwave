@@ -56,7 +56,8 @@ const tools: Tool[] = [
     name: '퇴직금 계산기',
     description: '근속 기간과 평균 임금으로 예상 퇴직금을 계산합니다.',
     icon: <Briefcase size={24} />,
-    ready: false,
+    href: '/tools/severance',
+    ready: true,
   },
   {
     name: '연금 수령액 계산기',
