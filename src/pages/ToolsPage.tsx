@@ -84,7 +84,8 @@ const tools: Tool[] = [
     name: '나이·만나이 계산기',
     description: '생년월일로 한국식 나이와 만나이를 동시에 계산합니다.',
     icon: <Calendar size={24} />,
-    ready: false,
+    href: '/tools/age',
+    ready: true,
   },
   {
     name: '환율 계산기',
