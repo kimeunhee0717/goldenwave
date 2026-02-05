@@ -7,6 +7,10 @@ import CategoryPage from '@/pages/CategoryPage'
 import ToolsPage from '@/pages/ToolsPage'
 import CompoundInterestCalculator from '@/pages/tools/CompoundInterestCalculator'
 import CompanyPage from '@/pages/CompanyPage'
+import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
+import TermsPage from '@/pages/TermsPage'
+import AboutPage from '@/pages/AboutPage'
+import ContactPage from '@/pages/ContactPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 function App() {
@@ -21,6 +25,10 @@ function App() {
           <Route path="company" element={<CompanyPage />} />
           <Route path="tools" element={<ToolsPage />} />
           <Route path="tools/compound-interest" element={<CompoundInterestCalculator />} />
+          <Route path="privacy" element={<PrivacyPolicyPage />} />
+          <Route path="terms" element={<TermsPage />} />
+          <Route path="about" element={<AboutPage />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

@@ -71,8 +71,10 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm text-slate-500">
               <li><a href="mailto:hello@goldenwave.co.kr" className="hover:text-moss-600 transition-colors">hello@goldenwave.co.kr</a></li>
               <li><a href="tel:02-1234-5678" className="hover:text-moss-600 transition-colors">02-1234-5678</a></li>
-              <li><Link to="/company" className="hover:text-moss-600 transition-colors">운영사: 골든웨이브</Link></li>
-              <li><a href="#" className="hover:text-moss-600 transition-colors">개인정보처리방침</a></li>
+              <li><Link to="/about" className="hover:text-moss-600 transition-colors">소개</Link></li>
+              <li><Link to="/contact" className="hover:text-moss-600 transition-colors">문의하기</Link></li>
+              <li><Link to="/privacy" className="hover:text-moss-600 transition-colors">개인정보처리방침</Link></li>
+              <li><Link to="/terms" className="hover:text-moss-600 transition-colors">이용약관</Link></li>
             </ul>
           </div>
         </div>
