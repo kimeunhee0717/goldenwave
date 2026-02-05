@@ -42,7 +42,8 @@ const tools: Tool[] = [
     name: '연봉 실수령액 계산기',
     description: '세금과 4대 보험료를 제외한 실제 수령액을 계산합니다.',
     icon: <Wallet size={24} />,
-    ready: false,
+    href: '/tools/salary',
+    ready: true,
   },
   {
     name: '적금·예금 이자 계산기',

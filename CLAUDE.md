@@ -48,7 +48,7 @@
 |---|------|------|------|
 | 1 | 복리 계산기 | 완성 | `/tools/compound-interest` |
 | 2 | 대출 이자 계산기 | 완성 | `/tools/loan-interest` |
-| 3 | 연봉 실수령액 계산기 | 미구현 | `/tools/salary` |
+| 3 | 연봉 실수령액 계산기 | 완성 | `/tools/salary` |
 | 4 | 적금/예금 이자 계산기 | 미구현 | `/tools/savings` |
 | 5 | 퇴직금 계산기 | 미구현 | `/tools/severance` |
 | 6 | 연금 수령액 계산기 | 미구현 | `/tools/pension` |
