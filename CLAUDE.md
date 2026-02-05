@@ -51,7 +51,7 @@
 | 3 | 연봉 실수령액 계산기 | 완성 | `/tools/salary` |
 | 4 | 적금/예금 이자 계산기 | 완성 | `/tools/savings` |
 | 5 | 퇴직금 계산기 | 완성 | `/tools/severance` |
-| 6 | 연금 수령액 계산기 | 미구현 | `/tools/pension` |
+| 6 | 연금 수령액 계산기 | 완성 | `/tools/pension` |
 | 7 | 부동산 수익률 계산기 | 미구현 | `/tools/real-estate` |
 | 8 | BMI 계산기 | 미구현 | `/tools/bmi` |
 | 9 | 나이/만나이 계산기 | 미구현 | `/tools/age` |

@@ -63,7 +63,8 @@ const tools: Tool[] = [
     name: '연금 수령액 계산기',
     description: '국민연금 예상 수령액과 개인연금 시뮬레이션을 제공합니다.',
     icon: <Clock size={24} />,
-    ready: false,
+    href: '/tools/pension',
+    ready: true,
   },
   {
     name: '부동산 수익률 계산기',
