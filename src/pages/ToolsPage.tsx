@@ -150,7 +150,8 @@ const tools: Tool[] = [
     name: '자동차 유지비 계산기',
     description: '유류비·보험·세금·감가상각 등 월/연 총 유지비를 계산합니다.',
     icon: <Car size={24} />,
-    ready: false,
+    href: '/tools/car-cost',
+    ready: true,
   },
   {
     name: '은퇴 자금 계산기',

@@ -21,6 +21,7 @@ import LoanRefinanceCalculator from '@/pages/tools/LoanRefinanceCalculator'
 import ElectricityCalculator from '@/pages/tools/ElectricityCalculator'
 import HourlyWageCalculator from '@/pages/tools/HourlyWageCalculator'
 import IncomeTaxCalculator from '@/pages/tools/IncomeTaxCalculator'
+import CarCostCalculator from '@/pages/tools/CarCostCalculator'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -55,6 +56,7 @@ function App() {
           <Route path="tools/electricity" element={<ElectricityCalculator />} />
           <Route path="tools/hourly-wage" element={<HourlyWageCalculator />} />
           <Route path="tools/income-tax" element={<IncomeTaxCalculator />} />
+          <Route path="tools/car-cost" element={<CarCostCalculator />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />
