@@ -115,7 +115,8 @@ const tools: Tool[] = [
     name: '주식 수익률 계산기',
     description: '매수가·매도가·수수료·세금 반영 실질 수익률을 계산합니다.',
     icon: <BarChart3 size={24} />,
-    ready: false,
+    href: '/tools/stock-return',
+    ready: true,
   },
   {
     name: '대출 갈아타기 비교기',

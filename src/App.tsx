@@ -16,6 +16,7 @@ import BmiCalculator from '@/pages/tools/BmiCalculator'
 import AgeCalculator from '@/pages/tools/AgeCalculator'
 import ExchangeRateCalculator from '@/pages/tools/ExchangeRateCalculator'
 import JeonseWolseCalculator from '@/pages/tools/JeonseWolseCalculator'
+import StockReturnCalculator from '@/pages/tools/StockReturnCalculator'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -45,6 +46,7 @@ function App() {
           <Route path="tools/age" element={<AgeCalculator />} />
           <Route path="tools/exchange-rate" element={<ExchangeRateCalculator />} />
           <Route path="tools/jeonse-wolse" element={<JeonseWolseCalculator />} />
+          <Route path="tools/stock-return" element={<StockReturnCalculator />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />
