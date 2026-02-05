@@ -129,7 +129,8 @@ const tools: Tool[] = [
     name: '전기요금 계산기',
     description: '사용량(kWh)을 입력하면 누진세 단계별 전기요금을 계산합니다.',
     icon: <Zap size={24} />,
-    ready: false,
+    href: '/tools/electricity',
+    ready: true,
   },
   {
     name: '시급·일급 변환 계산기',

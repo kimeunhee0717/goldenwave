@@ -59,7 +59,7 @@
 | 11 | 전세↔월세 전환 계산기 | 완성 | `/tools/jeonse-wolse` |
 | 12 | 주식 수익률 계산기 | 완성 | `/tools/stock-return` |
 | 13 | 대출 갈아타기 비교기 | 완성 | `/tools/loan-refinance` |
-| 14 | 전기요금 계산기 | 미구현 | `/tools/electricity` |
+| 14 | 전기요금 계산기 | 완성 | `/tools/electricity` |
 | 15 | 시급·일급 변환 계산기 | 미구현 | `/tools/hourly-wage` |
 | 16 | 종합소득세 계산기 | 미구현 | `/tools/income-tax` |
 | 17 | 자동차 유지비 계산기 | 미구현 | `/tools/car-cost` |
