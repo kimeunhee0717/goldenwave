@@ -1472,5 +1472,185 @@
     "authorId": "marketing-lead",
     "publishedAt": "2024-02-06",
     "featured": true
+  },
+  {
+    "id": "83",
+    "slug": "digital-skill-beginner-11-productivity",
+    "title": "디지털 라이프 해킹: 스마트폰으로 생산성 2배 높이기",
+    "excerpt": "스마트폰을 더 똑똑하게 사용하고 싶으신가요? Google 캘린더, Todoist, Forest, Notion 등 생산성 앱을 활용해 생산성을 높이는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "생산성",
+      "스마트폰",
+      "앱추천",
+      "시간관리",
+      "초보자"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": true
+  },
+  {
+    "id": "84",
+    "slug": "digital-skill-beginner-12-google-ecosystem",
+    "title": "구글 생태계 완벽 활용: 하나의 계정으로 모든 것 연동하기",
+    "excerpt": "Gmail, Google Drive, 캘린더를 따로따로 쓰고 계신가요? 구글 서비스를 효율적으로 연동해 생산성을 높이는 방법과 클라우드에 파일을 안전하게 보관하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "구글",
+      "Gmail",
+      "GoogleDrive",
+      "클우드",
+      "생산성"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "85",
+    "slug": "digital-skill-beginner-13-youtube-learning",
+    "title": "유튜브로 무엇이든 배우기: 나만의 묶은 대학 만들기",
+    "excerpt": "새로운 것을 배우고 싶으신가요? 유튜브를 활용해 영어, 프로그래밍, 디자인 등 무엇이든 배울 수 있습니다. 효과적인 유튜브 학습법과 주제별 추천 채널을 소개합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브",
+      "온라인학습",
+      "자기계발",
+      "묶은교육",
+      "초보자"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": true
+  },
+  {
+    "id": "86",
+    "slug": "digital-skill-beginner-14-smart-shopping",
+    "title": "온라인 쇼핑 고수되기: 돈 버는 소비 습관",
+    "excerpt": "온라인 쇼핑을 더 현명하게 하고 싶으신가요? 가격 비교, 쿠폰 활용, 리뷰 분석 등 현명한 소비 전략과 구독 서비스 관리법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "온라인쇼핑",
+      "할인",
+      "쿠폰",
+      "가계부",
+      "소비습관"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "87",
+    "slug": "digital-skill-beginner-15-sns-management",
+    "title": "SNS 현명하게 사용하기: 디지털 인맥 관리법",
+    "excerpt": "SNS를 더 효과적으로 쓰고 싶으신가요? 디지털 인맥 관리, 시간 제한, 디지털 디톡스 등 SNS와 건강한 관계를 만드는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "SNS",
+      "인맥관리",
+      "디지털디톡스",
+      "스크린타임",
+      "초보자"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "88",
+    "slug": "digital-skill-beginner-16-subscription",
+    "title": "구독 서비스 똑똑하게 관리하기: 월 정기 지출 줄이기",
+    "excerpt": "매달 나가는 구독료가 얼마인지 모르시나요? Netflix, Spotify 등 구독 서비스를 효율적으로 관리하고 불필요한 지출을 줄이는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "구독서비스",
+      "Netflix",
+      "가계부",
+      "지출관리",
+      "절약"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "89",
+    "slug": "digital-skill-beginner-17-security",
+    "title": "온라인 보안 기초: 디지털 자산 지키기",
+    "excerpt": "비밀번호 관리가 어려우신가요? 비밀번호 관리자, 2단계 인증, 피싱 방어 등 온라인에서 개인정보를 안전하게 보호하는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "보안",
+      "비밀번호",
+      "2FA",
+      "피싱",
+      "개인정보보호"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": true
+  },
+  {
+    "id": "90",
+    "slug": "digital-skill-beginner-18-digital-wellbeing",
+    "title": "디지털 웰빙: 기술과 건강한 균형 찾기",
+    "excerpt": "스마트폰 중독을 극복하고 싶으신가요? 디지털 디톡스, 스크린 타임 관리, 눈 건강 등 기술과 삶의 건강한 균형을 찾는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털웰빙",
+      "스마트폰중독",
+      "디지털디톡스",
+      "건강",
+      "라이프밸런스"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "91",
+    "slug": "digital-skill-beginner-19-online-learning",
+    "title": "온라인 학습 플랫폼 활용: 나만의 묶은 대학 만들기",
+    "excerpt": "새로운 기술을 배우고 싶으신가요? Coursera, Udemy, Class101, Inflearn 등 온라인 학습 플랫폼을 활용해 나만의 묶은 대학을 만드는 방법을 알려드립니다.",
+    "coverImage": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "온라인학습",
+      "Coursera",
+      "Udemy",
+      "자기계발",
+      "평생교육"
+    ],
+    "authorId": "tech-lead",
+    "publishedAt": "2024-02-06",
+    "featured": false
+  },
+  {
+    "id": "92",
+    "slug": "digital-skill-beginner-20-hobby",
+    "title": "디지털 도구로 취미 키우기: 재미있는 디지털 라이프",
+    "excerpt": "새로운 취미를 찾고 계신가요? 스마트폰 사진, 디지털 드로잉, 브이로그 등 디지털 도구로 즐기는 다양한 취미 활동을 소개합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "취미",
+      "디지털드로잉",
+      "브이로그",
+      "사진",
+      "창작활동"
+    ],
+    "authorId": "marketing-lead",
+    "publishedAt": "2024-02-06",
+    "featured": true
   }
 ]

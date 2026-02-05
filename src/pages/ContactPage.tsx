@@ -6,14 +6,14 @@ const contactInfo = [
   {
     icon: Mail,
     label: '이메일',
-    value: 'hello@bujatime.com',
-    href: 'mailto:hello@bujatime.com',
+    value: 'kimeunhee0717@gmail.com',
+    href: 'mailto:kimeunhee0717@gmail.com',
   },
   {
     icon: Phone,
     label: '전화',
-    value: '02-1234-5678',
-    href: 'tel:02-1234-5678',
+    value: '010-6289-0101',
+    href: 'tel:010-6289-0101',
   },
   {
     icon: MapPin,

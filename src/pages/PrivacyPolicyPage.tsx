@@ -110,8 +110,8 @@ export default function PrivacyPolicyPage() {
             <div className="bg-slate-50 rounded-xl p-6 text-sm space-y-2">
               <p><strong>성명:</strong> 김은희</p>
               <p><strong>직위:</strong> 대표</p>
-              <p><strong>이메일:</strong> hello@bujatime.com</p>
-              <p><strong>전화:</strong> 02-1234-5678</p>
+              <p><strong>이메일:</strong> kimeunhee0717@gmail.com</p>
+              <p><strong>전화:</strong> 010-6289-0101</p>
             </div>
           </section>
 
