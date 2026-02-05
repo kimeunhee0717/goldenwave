@@ -122,7 +122,8 @@ const tools: Tool[] = [
     name: '대출 갈아타기 비교기',
     description: '기존 대출과 신규 대출 조건을 비교해 이자 절감액을 확인하세요.',
     icon: <RefreshCw size={24} />,
-    ready: false,
+    href: '/tools/loan-refinance',
+    ready: true,
   },
   {
     name: '전기요금 계산기',
