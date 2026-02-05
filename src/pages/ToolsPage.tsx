@@ -157,7 +157,8 @@ const tools: Tool[] = [
     name: '은퇴 자금 계산기',
     description: '목표 은퇴 나이와 월 생활비로 필요 자금을 역산합니다.',
     icon: <Umbrella size={24} />,
-    ready: false,
+    href: '/tools/retirement',
+    ready: true,
   },
   {
     name: '육아 비용 계산기',
