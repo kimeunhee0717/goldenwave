@@ -31,7 +31,56 @@ interface Tool {
   icon: React.ReactNode;
   href?: string;
   ready: boolean;
+  color: 'blush' | 'rose' | 'champagne' | 'thyme' | 'bisque';
 }
+
+const colorStyles = {
+  blush: {
+    iconBg: 'bg-blush-200/60',
+    iconText: 'text-blush-700',
+    iconHover: 'group-hover:bg-blush-200',
+    border: 'hover:border-blush-300',
+    shadow: 'hover:shadow-blush-100/60',
+    cta: 'text-blush-600',
+    accent: 'bg-blush-200',
+  },
+  rose: {
+    iconBg: 'bg-rose-100',
+    iconText: 'text-rose-400',
+    iconHover: 'group-hover:bg-rose-200',
+    border: 'hover:border-rose-300',
+    shadow: 'hover:shadow-rose-100/60',
+    cta: 'text-rose-400',
+    accent: 'bg-rose-400',
+  },
+  champagne: {
+    iconBg: 'bg-champagne-100',
+    iconText: 'text-champagne-700',
+    iconHover: 'group-hover:bg-champagne-200',
+    border: 'hover:border-champagne-300',
+    shadow: 'hover:shadow-champagne-100/60',
+    cta: 'text-champagne-700',
+    accent: 'bg-champagne-100',
+  },
+  thyme: {
+    iconBg: 'bg-thyme-100',
+    iconText: 'text-thyme-500',
+    iconHover: 'group-hover:bg-thyme-200',
+    border: 'hover:border-thyme-300',
+    shadow: 'hover:shadow-thyme-100/60',
+    cta: 'text-thyme-500',
+    accent: 'bg-thyme-500',
+  },
+  bisque: {
+    iconBg: 'bg-bisque-100',
+    iconText: 'text-bisque-700',
+    iconHover: 'group-hover:bg-bisque-200',
+    border: 'hover:border-bisque-300',
+    shadow: 'hover:shadow-bisque-200/60',
+    cta: 'text-bisque-600',
+    accent: 'bg-bisque-200',
+  },
+};
 
 const tools: Tool[] = [
   {
@@ -40,6 +89,7 @@ const tools: Tool[] = [
     icon: <TrendingUp size={24} />,
     href: '/tools/compound-interest',
     ready: true,
+    color: 'thyme',
   },
   {
     name: '대출 이자 계산기',
@@ -47,6 +97,7 @@ const tools: Tool[] = [
     icon: <Landmark size={24} />,
     href: '/tools/loan-interest',
     ready: true,
+    color: 'rose',
   },
   {
     name: '연봉 실수령액 계산기',
@@ -54,6 +105,7 @@ const tools: Tool[] = [
     icon: <Wallet size={24} />,
     href: '/tools/salary',
     ready: true,
+    color: 'champagne',
   },
   {
     name: '적금·예금 이자 계산기',
@@ -61,6 +113,7 @@ const tools: Tool[] = [
     icon: <PiggyBank size={24} />,
     href: '/tools/savings',
     ready: true,
+    color: 'blush',
   },
   {
     name: '퇴직금 계산기',
@@ -68,6 +121,7 @@ const tools: Tool[] = [
     icon: <Briefcase size={24} />,
     href: '/tools/severance',
     ready: true,
+    color: 'bisque',
   },
   {
     name: '연금 수령액 계산기',
@@ -75,6 +129,7 @@ const tools: Tool[] = [
     icon: <Clock size={24} />,
     href: '/tools/pension',
     ready: true,
+    color: 'thyme',
   },
   {
     name: '부동산 수익률 계산기',
@@ -82,6 +137,7 @@ const tools: Tool[] = [
     icon: <Building2 size={24} />,
     href: '/tools/real-estate',
     ready: true,
+    color: 'rose',
   },
   {
     name: 'BMI 계산기',
@@ -89,6 +145,7 @@ const tools: Tool[] = [
     icon: <Heart size={24} />,
     href: '/tools/bmi',
     ready: true,
+    color: 'blush',
   },
   {
     name: '나이·만나이 계산기',
@@ -96,6 +153,7 @@ const tools: Tool[] = [
     icon: <Calendar size={24} />,
     href: '/tools/age',
     ready: true,
+    color: 'champagne',
   },
   {
     name: '환율 계산기',
@@ -103,6 +161,7 @@ const tools: Tool[] = [
     icon: <ArrowLeftRight size={24} />,
     href: '/tools/exchange-rate',
     ready: true,
+    color: 'bisque',
   },
   {
     name: '전세↔월세 전환 계산기',
@@ -110,6 +169,7 @@ const tools: Tool[] = [
     icon: <Home size={24} />,
     href: '/tools/jeonse-wolse',
     ready: true,
+    color: 'thyme',
   },
   {
     name: '주식 수익률 계산기',
@@ -117,6 +177,7 @@ const tools: Tool[] = [
     icon: <BarChart3 size={24} />,
     href: '/tools/stock-return',
     ready: true,
+    color: 'rose',
   },
   {
     name: '대출 갈아타기 비교기',
@@ -124,6 +185,7 @@ const tools: Tool[] = [
     icon: <RefreshCw size={24} />,
     href: '/tools/loan-refinance',
     ready: true,
+    color: 'blush',
   },
   {
     name: '전기요금 계산기',
@@ -131,6 +193,7 @@ const tools: Tool[] = [
     icon: <Zap size={24} />,
     href: '/tools/electricity',
     ready: true,
+    color: 'champagne',
   },
   {
     name: '시급·일급 변환 계산기',
@@ -138,6 +201,7 @@ const tools: Tool[] = [
     icon: <Timer size={24} />,
     href: '/tools/hourly-wage',
     ready: true,
+    color: 'bisque',
   },
   {
     name: '종합소득세 계산기',
@@ -145,6 +209,7 @@ const tools: Tool[] = [
     icon: <FileText size={24} />,
     href: '/tools/income-tax',
     ready: true,
+    color: 'thyme',
   },
   {
     name: '자동차 유지비 계산기',
@@ -152,6 +217,7 @@ const tools: Tool[] = [
     icon: <Car size={24} />,
     href: '/tools/car-cost',
     ready: true,
+    color: 'rose',
   },
   {
     name: '은퇴 자금 계산기',
@@ -159,6 +225,7 @@ const tools: Tool[] = [
     icon: <Umbrella size={24} />,
     href: '/tools/retirement',
     ready: true,
+    color: 'champagne',
   },
   {
     name: '육아 비용 계산기',
@@ -166,6 +233,7 @@ const tools: Tool[] = [
     icon: <Baby size={24} />,
     href: '/tools/child-cost',
     ready: true,
+    color: 'blush',
   },
   {
     name: '부가세(VAT) 계산기',
@@ -173,26 +241,39 @@ const tools: Tool[] = [
     icon: <Receipt size={24} />,
     href: '/tools/vat',
     ready: true,
+    color: 'bisque',
   },
 ];
 
 const ToolsPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #FBEAD6 0%, #fdf6f7 30%, #FFFFFF 100%)' }}>
       {/* Hero */}
-      <section className="pt-32 pb-12 px-6 lg:px-12">
+      <section className="pt-32 pb-16 px-6 lg:px-12">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 bg-moss-50 text-moss-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold mb-8"
+            style={{ backgroundColor: '#F0C4CB', color: '#9c3f56' }}
+          >
             <Wrench size={16} />
             부자타임 도구 모음
           </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-            유용한 도구
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-5 leading-tight" style={{ color: '#6B7556' }}>
+            스마트한 계산, 현명한 선택
           </h1>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+          <p className="text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: '#9c3f56' }}>
             재테크와 일상에 필요한 계산기를 한 곳에 모았습니다.<br className="hidden sm:block" />
-            복리, 대출, 연봉, 연금까지 — 스마트한 의사결정을 도와드립니다.
+            복리, 대출, 연봉, 연금까지 — 더 나은 의사결정을 도와드립니다.
           </p>
+
+          {/* Color dots decoration */}
+          <div className="flex items-center justify-center gap-3 mt-8">
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#F0C4CB' }} />
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#C87D87' }} />
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#FBEAD6' }} />
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#6B7556' }} />
+            <span className="w-3 h-3 rounded-full" style={{ backgroundColor: '#E5BCA9' }} />
+          </div>
         </div>
       </section>
 
@@ -201,14 +282,19 @@ const ToolsPage: React.FC = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {tools.map((tool) => {
+              const styles = colorStyles[tool.color];
+
               const Card = (
                 <div
-                  className={`relative bg-white rounded-2xl border p-6 transition-all duration-200 ${
+                  className={`relative bg-white/80 backdrop-blur-sm rounded-2xl border p-6 transition-all duration-300 ${
                     tool.ready
-                      ? 'border-slate-200 hover:border-moss-300 hover:shadow-lg hover:shadow-moss-100/50 cursor-pointer group'
+                      ? `border-slate-200/60 ${styles.border} hover:shadow-xl ${styles.shadow} cursor-pointer group hover:-translate-y-1`
                       : 'border-slate-100 opacity-75'
                   }`}
                 >
+                  {/* Top accent line */}
+                  <div className={`absolute top-0 left-6 right-6 h-0.5 rounded-full ${styles.accent} opacity-60`} />
+
                   {/* Status Badge */}
                   {!tool.ready && (
                     <span className="absolute top-4 right-4 bg-slate-100 text-slate-400 text-xs font-medium px-2.5 py-1 rounded-full">
@@ -218,9 +304,9 @@ const ToolsPage: React.FC = () => {
 
                   {/* Icon */}
                   <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-colors duration-200 ${
                       tool.ready
-                        ? 'bg-moss-50 text-moss-600 group-hover:bg-moss-100'
+                        ? `${styles.iconBg} ${styles.iconText} ${styles.iconHover}`
                         : 'bg-slate-50 text-slate-400'
                     }`}
                   >
@@ -230,7 +316,7 @@ const ToolsPage: React.FC = () => {
                   {/* Content */}
                   <h3
                     className={`text-lg font-semibold mb-2 ${
-                      tool.ready ? 'text-slate-900' : 'text-slate-500'
+                      tool.ready ? 'text-slate-800' : 'text-slate-500'
                     }`}
                   >
                     {tool.name}
@@ -241,7 +327,7 @@ const ToolsPage: React.FC = () => {
 
                   {/* CTA */}
                   {tool.ready && (
-                    <span className="inline-flex items-center gap-1 text-sm font-medium text-moss-600 group-hover:gap-2 transition-all">
+                    <span className={`inline-flex items-center gap-1 text-sm font-medium ${styles.cta} group-hover:gap-2 transition-all`}>
                       사용하기 <ArrowRight size={14} />
                     </span>
                   )}
