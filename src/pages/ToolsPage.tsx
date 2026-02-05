@@ -143,7 +143,8 @@ const tools: Tool[] = [
     name: '종합소득세 계산기',
     description: '프리랜서·자영업자의 종합소득세를 간이 계산합니다.',
     icon: <FileText size={24} />,
-    ready: false,
+    href: '/tools/income-tax',
+    ready: true,
   },
   {
     name: '자동차 유지비 계산기',
