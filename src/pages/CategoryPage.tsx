@@ -50,6 +50,7 @@ export default function CategoryPage() {
     purple: 'from-purple-600 to-purple-800',
     orange: 'from-orange-500 to-orange-700',
     red: 'from-red-600 to-red-800',
+    teal: 'from-teal-600 to-teal-800',
   }
 
   return (

@@ -1,37 +1,44 @@
 [
   {
-    "id": "marketing",
-    "title": "마케팅 전략",
-    "slug": "marketing",
-    "description": "효과적인 마케팅 전략과 최신 트렌드",
-    "color": "blue"
-  },
-  {
-    "id": "ai",
-    "title": "AI & 자동화",
-    "slug": "ai",
-    "description": "AI 기술을 활용한 비즈니스 혁신",
+    "id": "ai-money",
+    "title": "AI 머니",
+    "slug": "ai-money",
+    "description": "AI로 돈 벌고, 시간 아끼는 모든 것",
     "color": "purple"
   },
   {
-    "id": "seo",
-    "title": "SEO & 검색",
-    "slug": "seo",
-    "description": "검색 엔진 최적화 전략 가이드",
+    "id": "finance",
+    "title": "재테크",
+    "slug": "finance",
+    "description": "복리, 투자, 절약, 자산 관리",
+    "color": "blue"
+  },
+  {
+    "id": "side-hustle",
+    "title": "부업·N잡",
+    "slug": "side-hustle",
+    "description": "추가 수입, 부업, 수익화 전략",
     "color": "green"
   },
   {
-    "id": "case-study",
-    "title": "성공 사례",
-    "slug": "case-study",
-    "description": "실제 고객사 성공 스토리",
+    "id": "mindset",
+    "title": "부자마인드",
+    "slug": "mindset",
+    "description": "성공 습관, 시간 관리, 마인드셋",
     "color": "orange"
   },
   {
-    "id": "tips",
-    "title": "실무 팁",
-    "slug": "tips",
-    "description": "바로 적용 가능한 실무 노하우",
+    "id": "digital-skill",
+    "title": "디지털스킬",
+    "slug": "digital-skill",
+    "description": "디지털 도구, 생산성, 실무 활용",
     "color": "red"
+  },
+  {
+    "id": "business",
+    "title": "비즈니스",
+    "slug": "business",
+    "description": "마케팅, SEO, 사업 성장, 성공 사례",
+    "color": "teal"
   }
 ]

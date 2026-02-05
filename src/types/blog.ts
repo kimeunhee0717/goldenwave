@@ -4,7 +4,7 @@ export interface Category {
   title: string
   slug: string
   description?: string
-  color: 'blue' | 'green' | 'purple' | 'orange' | 'red'
+  color: 'blue' | 'green' | 'purple' | 'orange' | 'red' | 'teal'
 }
 
 // 작성자 타입

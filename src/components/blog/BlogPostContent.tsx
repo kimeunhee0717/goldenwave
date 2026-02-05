@@ -113,7 +113,7 @@ export default function BlogPostContent({ content }: Props) {
                 <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
                 <span className="ml-3 text-xs text-oatmeal-300 font-mono">code</span>
               </div>
-              <pre className="!mt-0 !rounded-t-none bg-espresso-800 text-golden-100 p-5 overflow-x-auto text-sm leading-relaxed">
+              <pre className="!mt-0 !rounded-t-none bg-espresso-800 text-golden-100 p-5 overflow-x-auto text-sm leading-relaxed font-bold">
                 {children}
               </pre>
             </div>
@@ -128,12 +128,12 @@ export default function BlogPostContent({ content }: Props) {
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-gradient-to-r from-cocoa-500 to-cocoa-600 text-white">
+            <thead className="bg-gradient-to-r from-golden-100 to-oatmeal-200">
               {children}
             </thead>
           ),
           th: ({ children }) => (
-            <th className="px-6 py-4 font-semibold text-sm uppercase tracking-wide border-b border-cocoa-400">
+            <th className="px-6 py-4 font-bold text-sm uppercase tracking-wide text-espresso-800 border-b-2 border-cocoa-300">
               {children}
             </th>
           ),

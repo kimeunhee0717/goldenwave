@@ -3,8 +3,8 @@
     "id": "ceo",
     "name": "김대표",
     "image": "/images/authors/ceo.jpg",
-    "role": "대표이사",
-    "bio": "10년간 디지털 마케팅 분야에서 활동하며 수백 개 기업의 성장을 도왔습니다. 데이터 기반 마케팅과 AI 활용에 대한 전문성을 보유하고 있습니다.",
+    "role": "편집장",
+    "bio": "10년간 디지털 비즈니스와 AI 분야에서 활동하며 경제적 자유를 위한 인사이트를 전합니다. 부자타임의 AI 머니, 재테크 콘텐츠를 총괄합니다.",
     "social": {
       "linkedin": "https://linkedin.com/in/example",
       "email": "ceo@goldenwave.com"
@@ -14,8 +14,8 @@
     "id": "marketing-lead",
     "name": "이마케터",
     "image": "/images/authors/marketing-lead.jpg",
-    "role": "마케팅 리드",
-    "bio": "콘텐츠 마케팅과 브랜딩 전문가입니다. 스타트업부터 대기업까지 다양한 규모의 기업 마케팅을 담당했습니다.",
+    "role": "시니어 에디터",
+    "bio": "콘텐츠 전략과 디지털 마케팅 전문가입니다. 부자타임에서 부업, 비즈니스 성장 관련 콘텐츠를 담당합니다.",
     "social": {
       "twitter": "https://twitter.com/example",
       "email": "marketing@goldenwave.com"
@@ -25,8 +25,8 @@
     "id": "tech-lead",
     "name": "박개발",
     "image": "/images/authors/tech-lead.jpg",
-    "role": "기술 리드",
-    "bio": "풀스택 개발자로 마케팅 자동화 시스템과 데이터 분석 도구를 개발합니다.",
+    "role": "테크 에디터",
+    "bio": "풀스택 개발자 출신으로 AI 도구 활용법과 디지털 스킬 관련 콘텐츠를 집필합니다.",
     "social": {
       "email": "tech@goldenwave.com"
     }

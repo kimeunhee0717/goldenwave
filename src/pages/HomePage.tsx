@@ -1,17 +1,15 @@
-import Hero from '@/components/home/Hero'
-import Features from '@/components/home/Features'
-import ThemeGallery from '@/components/home/ThemeGallery'
-import Testimonials from '@/components/home/Testimonials'
-import CallToAction from '@/components/home/CallToAction'
+import BriefingHero from '@/components/home/BriefingHero'
+import BriefingFeed from '@/components/home/BriefingFeed'
+import PopularPosts from '@/components/home/PopularPosts'
+import NewsletterCTA from '@/components/home/NewsletterCTA'
 
 export default function HomePage() {
   return (
     <>
-      <Hero />
-      <Features />
-      <ThemeGallery />
-      <Testimonials />
-      <CallToAction />
+      <BriefingHero />
+      <BriefingFeed />
+      <PopularPosts />
+      <NewsletterCTA />
     </>
   )
 }

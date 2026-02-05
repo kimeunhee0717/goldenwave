@@ -4,6 +4,9 @@ import HomePage from '@/pages/HomePage'
 import BlogListPage from '@/pages/BlogListPage'
 import BlogPostPage from '@/pages/BlogPostPage'
 import CategoryPage from '@/pages/CategoryPage'
+import ToolsPage from '@/pages/ToolsPage'
+import CompoundInterestCalculator from '@/pages/tools/CompoundInterestCalculator'
+import CompanyPage from '@/pages/CompanyPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 function App() {
@@ -15,6 +18,9 @@ function App() {
           <Route path="blog" element={<BlogListPage />} />
           <Route path="blog/:slug" element={<BlogPostPage />} />
           <Route path="blog/category/:category" element={<CategoryPage />} />
+          <Route path="company" element={<CompanyPage />} />
+          <Route path="tools" element={<ToolsPage />} />
+          <Route path="tools/compound-interest" element={<CompoundInterestCalculator />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

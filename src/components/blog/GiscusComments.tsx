@@ -6,9 +6,9 @@ export default function GiscusComments() {
   return (
     <Giscus
       repo="kimeunhee0717/goldenwave"
-      repoId="R_kgDONwz_RQ"
+      repoId="R_kgDORD7FZA"
       category="General"
-      categoryId="DIC_kwDONwz_Rc4Cm7AC"
+      categoryId="DIC_kwDORD7FZM4C1u2k"
       mapping="pathname"
       strict="0"
       reactionsEnabled="1"

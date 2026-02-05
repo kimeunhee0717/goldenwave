@@ -44,11 +44,11 @@ export default function BlogListPage() {
               새로운 인사이트가 계속 업데이트됩니다
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
-              인사이트 & 노하우
+              부자타임 뉴스
             </h1>
             <p className="text-xl md:text-2xl text-sage-200 mb-10 leading-relaxed font-light">
-              마케팅 전략, 디지털 트렌드, 성공 사례 등<br className="hidden md:block" />
-              비즈니스 성장을 위한 전문 인사이트를 제공합니다.
+              AI, 재테크, 부업, 마인드셋, 디지털 스킬<br className="hidden md:block" />
+              경제적 자유를 위한 인사이트를 제공합니다.
             </p>
             <Search posts={posts} onSearch={setSearchQuery} />
           </div>
