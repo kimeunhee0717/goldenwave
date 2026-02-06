@@ -24,6 +24,7 @@ import {
   Baby,
   Receipt,
   Crown,
+  Target,
 } from 'lucide-react';
 
 interface Tool {
@@ -246,11 +247,19 @@ const tools: Tool[] = [
   },
   {
     name: '체스 게임',
-    description: '무료로 즐기는 온라인 체스. AI와 대전하거나 친구와 함께 플레이하세요.',
+    description: '묵�료로 즐기는 온라인 체스. AI와 대전하거나 친구와 함께 플레이하세요.',
     icon: <Crown size={24} />,
     href: '/tools/chess',
     ready: true,
     color: 'champagne',
+  },
+  {
+    name: '페그 솔리테어',
+    description: '클�식한 두뇌 게임! 페그를 뛰어넘어 마지막까지 최소한의 페그만 남기세요.',
+    icon: <Target size={24} />,
+    href: '/tools/peg-solitaire',
+    ready: true,
+    color: 'thyme',
   },
 ];
 
