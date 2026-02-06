@@ -1,0 +1,51 @@
+name: Daily Briefing Newsletter
+
+on:
+  schedule:
+    # 매일 한국시간 오전 7시 (UTC 전날 22시) 실행
+    - cron: '0 22 * * *'
+  workflow_dispatch: # 수동 실행 가능
+
+env:
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+  RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+
+jobs:
+  send-briefing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Create temp directory
+        run: mkdir -p scripts/temp
+
+      # Step 1: 뉴스/시장 데이터 수집
+      - name: Collect news and market data
+        run: node scripts/collect-news.mjs
+
+      # Step 2: AI 브리핑 생성 (Gemini)
+      - name: Generate briefing with Gemini
+        run: node scripts/generate-briefing.mjs
+
+      # Step 3: 이메일 HTML 생성
+      - name: Generate email HTML template
+        run: node scripts/generate-email-html.mjs
+
+      # Step 4: 구독자에게 이메일 발송
+      - name: Send briefing emails via Resend
+        run: node scripts/send-briefing.mjs
+
+      # 정리
+      - name: Cleanup temp files
+        if: always()
+        run: rm -rf scripts/temp

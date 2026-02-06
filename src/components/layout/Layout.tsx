@@ -12,14 +12,17 @@ function ScrollToTop() {
 }
 
 export default function Layout() {
+  const { pathname } = useLocation()
+  const isAdminPage = pathname.startsWith('/admin')
+
   return (
     <div className="font-sans antialiased text-slate-800 bg-white min-h-screen selection:bg-primary-100 selection:text-primary-700">
       <ScrollToTop />
-      <Navbar />
+      {!isAdminPage && <Navbar />}
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {!isAdminPage && <Footer />}
     </div>
   )
 }

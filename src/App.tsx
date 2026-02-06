@@ -31,6 +31,9 @@ import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
 import AboutPage from '@/pages/AboutPage'
 import ContactPage from '@/pages/ContactPage'
+import UnsubscribePage from '@/pages/UnsubscribePage'
+import AdminPage from '@/pages/admin/AdminPage'
+import SubscribersPage from '@/pages/admin/SubscribersPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 function App() {
@@ -69,6 +72,9 @@ function App() {
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
+          <Route path="unsubscribe" element={<UnsubscribePage />} />
+          <Route path="admin" element={<AdminPage />} />
+          <Route path="admin/subscribers" element={<SubscribersPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
