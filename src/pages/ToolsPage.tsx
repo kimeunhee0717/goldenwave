@@ -25,6 +25,7 @@ import {
   Receipt,
   Crown,
   Target,
+  Grid3X3,
 } from 'lucide-react';
 
 interface Tool {
@@ -247,7 +248,7 @@ const tools: Tool[] = [
   },
   {
     name: '체스 게임',
-    description: '묵�료로 즐기는 온라인 체스. AI와 대전하거나 친구와 함께 플레이하세요.',
+    description: '무료로 즐기는 온라인 체스. AI와 대전하거나 친구와 함께 플레이하세요.',
     icon: <Crown size={24} />,
     href: '/tools/chess',
     ready: true,
@@ -260,6 +261,14 @@ const tools: Tool[] = [
     href: '/tools/peg-solitaire',
     ready: true,
     color: 'thyme',
+  },
+  {
+    name: '한국 장기',
+    description: '전통 한국 장기를 온라인에서 즐기세요. AI와 대전하거나 친구와 함께 플레이할 수 있습니다.',
+    icon: <Grid3X3 size={24} />,
+    href: '/tools/janggi',
+    ready: true,
+    color: 'rose',
   },
 ];
 

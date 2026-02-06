@@ -27,6 +27,7 @@ import ChildCostCalculator from '@/pages/tools/ChildCostCalculator'
 import VatCalculator from '@/pages/tools/VatCalculator'
 import ChessGame from '@/pages/tools/ChessGame'
 import PegSolitaireGame from '@/pages/tools/PegSolitaireGame'
+import JanggiGame from '@/pages/tools/JanggiGame'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -70,6 +71,7 @@ function App() {
           <Route path="tools/vat" element={<VatCalculator />} />
 <Route path="tools/chess" element={<ChessGame />} />
           <Route path="tools/peg-solitaire" element={<PegSolitaireGame />} />
+          <Route path="tools/janggi" element={<JanggiGame />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />
