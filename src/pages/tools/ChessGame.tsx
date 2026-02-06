@@ -8,6 +8,7 @@ type PieceType = 'king' | 'queen' | 'rook' | 'bishop' | 'knight' | 'pawn';
 type PieceColor = 'white' | 'black';
 type GameStatus = 'playing' | 'check' | 'checkmate' | 'stalemate';
 type GameMode = 'pvp' | 'ai';
+type AiLevel = 'easy' | 'normal' | 'hard';
 
 interface Piece {
   type: PieceType;
@@ -369,9 +370,18 @@ function evaluate(board: Board): number {
   return score;
 }
 
-function getAiMove(board: Board, color: PieceColor, ep: [number, number] | null, cr: CastlingRights) {
+function getAiMove(board: Board, color: PieceColor, ep: [number, number] | null, cr: CastlingRights, level: AiLevel = 'normal') {
   const moves = allLegalMoves(board, color, ep, cr);
   if (moves.length === 0) return null;
+
+  // Easy: random move
+  if (level === 'easy') {
+    const pick = moves[Math.floor(Math.random() * moves.length)];
+    const piece = board[pick.from[0]][pick.from[1]]!;
+    const promoRow = color === 'white' ? 0 : 7;
+    const promo = piece.type === 'pawn' && pick.to[0] === promoRow ? 'queen' as PieceType : null;
+    return { move: pick, score: 0, promo };
+  }
 
   const scored = moves.map(move => {
     const piece = board[move.from[0]][move.from[1]]!;
@@ -379,31 +389,36 @@ function getAiMove(board: Board, color: PieceColor, ep: [number, number] | null,
     const promo = piece.type === 'pawn' && move.to[0] === promoRow ? 'queen' as PieceType : null;
     const result = applyMove(board, move.from, move.to, color, ep, cr, promo);
 
-    // Depth 2: consider opponent's best response
+    // Normal: depth 1 (greedy)
+    if (level === 'normal') {
+      return { move, score: evaluate(result.board), promo };
+    }
+
+    // Hard: depth 2 — consider opponent's best response
     const oppMoves = allLegalMoves(result.board, opp(color), result.enPassant, result.castling);
     let score: number;
     if (oppMoves.length === 0) {
       score = inCheck(result.board, opp(color))
-        ? (color === 'white' ? 100000 : -100000) // checkmate
-        : 0; // stalemate
+        ? (color === 'white' ? 100000 : -100000)
+        : 0;
     } else {
       const oppScores = oppMoves.map(om => {
-        const op = board[om.from[0]]?.[om.from[1]]; // use result.board
-        const oppPromoRow = opp(color) === 'white' ? 0 : 7;
         const rp = result.board[om.from[0]][om.from[1]];
+        const oppPromoRow = opp(color) === 'white' ? 0 : 7;
         const oppPromo = rp?.type === 'pawn' && om.to[0] === oppPromoRow ? 'queen' as PieceType : null;
         const r2 = applyMove(result.board, om.from, om.to, opp(color), result.enPassant, result.castling, oppPromo);
         return evaluate(r2.board);
       });
       score = color === 'black'
-        ? Math.max(...oppScores) // opponent (white) maximizes
-        : Math.min(...oppScores); // opponent (black) minimizes
+        ? Math.max(...oppScores)
+        : Math.min(...oppScores);
     }
     return { move, score, promo };
   });
 
   scored.sort((a, b) => color === 'black' ? a.score - b.score : b.score - a.score);
-  const topN = Math.min(3, scored.length);
+  // Hard: always pick the best, Normal: pick from top 3
+  const topN = level === 'hard' ? 1 : Math.min(3, scored.length);
   return scored[Math.floor(Math.random() * topN)];
 }
 
@@ -422,6 +437,7 @@ export default function ChessGame() {
   const [captured, setCaptured] = useState<{ white: Piece[]; black: Piece[] }>({ white: [], black: [] });
   const [lastMove, setLastMove] = useState<{ from: [number, number]; to: [number, number] } | null>(null);
   const [mode, setMode] = useState<GameMode>('ai');
+  const [aiLevel, setAiLevel] = useState<AiLevel>('normal');
   const [promoPending, setPromoPending] = useState<{ from: [number, number]; to: [number, number] } | null>(null);
   const [undoStack, setUndoStack] = useState<Snapshot[]>([]);
   const [aiThinking, setAiThinking] = useState(false);
@@ -561,7 +577,7 @@ export default function ChessGame() {
 
     setAiThinking(true);
     const timer = setTimeout(() => {
-      const result = getAiMove(board, 'black', enPassant, castling);
+      const result = getAiMove(board, 'black', enPassant, castling, aiLevel);
       if (result) {
         executeMove(result.move.from[0], result.move.from[1], result.move.to[0], result.move.to[1], result.promo);
       }
@@ -625,6 +641,28 @@ export default function ChessGame() {
                   <Bot size={16} /> AI 대전
                 </button>
               </div>
+
+              {/* AI Difficulty */}
+              {mode === 'ai' && (
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-xs text-white/50">난이도</span>
+                  {([['easy', '쉬움'], ['normal', '보통'], ['hard', '어려움']] as [AiLevel, string][]).map(([lv, label]) => (
+                    <button
+                      key={lv}
+                      onClick={() => { setAiLevel(lv); resetGame(); }}
+                      className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${
+                        aiLevel === lv
+                          ? lv === 'easy' ? 'bg-thyme-500 text-white shadow' :
+                            lv === 'normal' ? 'bg-golden-100 text-espresso-800 shadow' :
+                            'bg-red-500 text-white shadow'
+                          : 'bg-white/10 text-white/60 hover:bg-white/20'
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              )}
 
               {/* Captured by white (black's pieces) — shown on top */}
               <CapturedRow pieces={captured.white} label="흑" advantage={materialScore > 0 ? materialScore : 0} />
@@ -767,7 +805,7 @@ export default function ChessGame() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-espresso-500">모드</span>
-                    <span className="font-medium text-espresso-800">{mode === 'ai' ? 'AI 대전' : '2인 플레이'}</span>
+                    <span className="font-medium text-espresso-800">{mode === 'ai' ? `AI 대전 (${aiLevel === 'easy' ? '쉬움' : aiLevel === 'normal' ? '보통' : '어려움'})` : '2인 플레이'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-espresso-500">현재 차례</span>
