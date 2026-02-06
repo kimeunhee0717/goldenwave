@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(npx vite build:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: 애드센스 필수 페이지 4종 추가 및 사업자 정보 반영\n\n개인정보처리방침, 이용약관, 소개, 문의하기 페이지 생성 및\n골든웨이브 사업자 정보\\(대표: 김은희\\) 전체 반영. Footer 링크 업데이트.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr create:*)",
+      "Bash(winget install:*)",
+      "Bash(gh auth status:*)",
+      "Bash(cmd /c \"where gh\")",
+      "Bash(cmd /c \"gh --version\")",
+      "Bash(\"/c/Program Files \\(x86\\)/GitHub CLI/gh.exe\" auth status)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" auth status)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:bujatime.com)",
+      "Bash(curl:*)",
+      "Bash(dir:*)",
+      "Bash(git checkout:*)",
+      "Bash(git merge:*)",
+      "Bash(git pull:*)"
+    ]
+  }
+}
