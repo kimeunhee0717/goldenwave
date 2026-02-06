@@ -25,6 +25,7 @@ import CarCostCalculator from '@/pages/tools/CarCostCalculator'
 import RetirementCalculator from '@/pages/tools/RetirementCalculator'
 import ChildCostCalculator from '@/pages/tools/ChildCostCalculator'
 import VatCalculator from '@/pages/tools/VatCalculator'
+import ChessGame from '@/pages/tools/ChessGame'
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
@@ -63,6 +64,7 @@ function App() {
           <Route path="tools/retirement" element={<RetirementCalculator />} />
           <Route path="tools/child-cost" element={<ChildCostCalculator />} />
           <Route path="tools/vat" element={<VatCalculator />} />
+          <Route path="tools/chess" element={<ChessGame />} />
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
           <Route path="about" element={<AboutPage />} />

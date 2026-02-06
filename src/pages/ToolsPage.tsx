@@ -23,6 +23,7 @@ import {
   Umbrella,
   Baby,
   Receipt,
+  Crown,
 } from 'lucide-react';
 
 interface Tool {
@@ -242,6 +243,14 @@ const tools: Tool[] = [
     href: '/tools/vat',
     ready: true,
     color: 'bisque',
+  },
+  {
+    name: '체스 게임',
+    description: '무료로 즐기는 온라인 체스. AI와 대전하거나 친구와 함께 플레이하세요.',
+    icon: <Crown size={24} />,
+    href: '/tools/chess',
+    ready: true,
+    color: 'champagne',
   },
 ];
 
