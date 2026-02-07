@@ -270,6 +270,14 @@ const tools: Tool[] = [
     ready: true,
     color: 'rose',
   },
+  {
+    name: '오목',
+    description: '15×15 보드에서 펼쳐지는 전략 게임. 3-3 금수 규칙을 준수하며 AI와 대전필 수 있습니다.',
+    icon: <Grid3X3 size={24} />,
+    href: '/tools/gomoku',
+    ready: true,
+    color: 'bisque',
+  },
 ];
 
 const ToolsPage: React.FC = () => {
