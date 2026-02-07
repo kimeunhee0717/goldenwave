@@ -1,10 +1,109 @@
-import { useState, useCallback, useEffect, useMemo } from 'react';
-import { ChevronLeft, RotateCcw, Undo2, Trophy, Settings, User, Bot } from 'lucide-react';
+import { useState, useCallback, useEffect, useMemo, useRef } from 'react';
+import { ChevronLeft, RotateCcw, Undo2, Trophy, Settings, User, Bot, Volume2, VolumeX } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // ============================================================================
 // 한국장기 - 완전 재설계 v3 (세련된 디자인 + 위치교환)
 // ============================================================================
+
+// 나무 위에 기물 놓는 "탁" 소리 (Web Audio API)
+let audioCtx: AudioContext | null = null;
+function playMoveSound(isCapture = false) {
+  try {
+    if (!audioCtx) audioCtx = new AudioContext();
+    const ctx = audioCtx;
+    const now = ctx.currentTime;
+
+    // 짧은 임팩트 톤 (나무 두드리는 소리)
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(isCapture ? 220 : 300, now);
+    osc.frequency.exponentialRampToValueAtTime(80, now + 0.08);
+    gain.gain.setValueAtTime(isCapture ? 0.4 : 0.25, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.12);
+
+    // 노이즈 버스트 (나무 질감)
+    const bufLen = Math.floor(ctx.sampleRate * 0.06);
+    const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufLen);
+    const noise = ctx.createBufferSource();
+    const noiseGain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    noise.buffer = buf;
+    filter.type = 'bandpass';
+    filter.frequency.value = isCapture ? 1500 : 2000;
+    filter.Q.value = 1;
+    noiseGain.gain.setValueAtTime(isCapture ? 0.3 : 0.15, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noise.start(now);
+    noise.stop(now + 0.08);
+  } catch { /* 오디오 미지원 시 무시 */ }
+}
+
+// 고가치 기물(차) 잡을 때 "텅" 소리
+function playHeavyCaptureSound() {
+  try {
+    if (!audioCtx) audioCtx = new AudioContext();
+    const ctx = audioCtx;
+    const now = ctx.currentTime;
+
+    // 낮은 임팩트 (텅)
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(120, now);
+    osc.frequency.exponentialRampToValueAtTime(40, now + 0.25);
+    gain.gain.setValueAtTime(0.5, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+
+    // 무거운 노이즈
+    const bufLen = Math.floor(ctx.sampleRate * 0.1);
+    const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufLen);
+    const noise = ctx.createBufferSource();
+    const noiseGain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    noise.buffer = buf;
+    filter.type = 'lowpass';
+    filter.frequency.value = 800;
+    noiseGain.gain.setValueAtTime(0.35, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noise.start(now);
+    noise.stop(now + 0.15);
+  } catch { /* 오디오 미지원 시 무시 */ }
+}
+
+// "장군!" TTS 사운드
+function playCheckSound() {
+  try {
+    if ('speechSynthesis' in window) {
+      const u = new SpeechSynthesisUtterance('장군');
+      u.lang = 'ko-KR';
+      u.rate = 1.3;
+      u.pitch = 1.1;
+      u.volume = 0.7;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
+    }
+  } catch { /* TTS 미지원 시 무시 */ }
+}
 
 type PieceType = 'king' | 'advisor' | 'elephant' | 'horse' | 'chariot' | 'cannon' | 'soldier';
 type Team = 'cho' | 'han';
@@ -530,7 +629,10 @@ export default function JanggiGame() {
   const [showSettings, setShowSettings] = useState(false);
   const [isThinking, setIsThinking] = useState(false);
   const [lastMove, setLastMove] = useState<{f:Position,t:Position}|null>(null);
-  
+  const [soundOn, setSoundOn] = useState(true);
+  const soundRef = useRef(true);
+  useEffect(() => { soundRef.current = soundOn; }, [soundOn]);
+
   const aiTeam = perspective === 'cho' ? 'han' : 'cho';
   const ai = useMemo(() => new AIPlayer(difficulty, aiTeam), [difficulty, aiTeam]);
 
@@ -572,6 +674,17 @@ export default function JanggiGame() {
 
     const nc = { cho: [...captured.cho], han: [...captured.han] };
     if (cap) nc[p.team].push(cap);
+
+    // 사운드 재생
+    if (soundRef.current) {
+      if (cap?.type === 'chariot') playHeavyCaptureSound();
+      else playMoveSound(!!cap);
+      // 장군 체크
+      const nextTurn = turn === 'cho' ? 'han' : 'cho';
+      if (Rules.check(nb, nextTurn)) {
+        setTimeout(() => { if (soundRef.current) playCheckSound(); }, 150);
+      }
+    }
 
     setBoard(nb);
     setCaptured(nc);
@@ -731,6 +844,13 @@ export default function JanggiGame() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                     </svg>
                     위아래
+                  </button>
+                  <button
+                    onClick={() => setSoundOn(s => !s)}
+                    className="px-2 py-1 sm:px-3 sm:py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-600 rounded-lg text-xs sm:text-sm font-medium transition flex items-center gap-1"
+                    title={soundOn ? '소리 끄기' : '소리 켜기'}
+                  >
+                    {soundOn ? <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
                   </button>
 
                   {Rules.check(board, turn) && !winner && (
