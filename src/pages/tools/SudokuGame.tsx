@@ -274,6 +274,23 @@ export default function SudokuGame() {
         newBoard[row][col].isValid = true;
       }
 
+      // 숫자 입력 시 같은 행/열/3×3 박스의 메모에서 해당 숫자 자동 제거
+      if (num !== null) {
+        const boxRow = Math.floor(row / BOX_SIZE) * BOX_SIZE;
+        const boxCol = Math.floor(col / BOX_SIZE) * BOX_SIZE;
+        for (let r = 0; r < BOARD_SIZE; r++) {
+          for (let c = 0; c < BOARD_SIZE; c++) {
+            if (r === row && c === col) continue;
+            const sameRow = r === row;
+            const sameCol = c === col;
+            const sameBox = r >= boxRow && r < boxRow + BOX_SIZE && c >= boxCol && c < boxCol + BOX_SIZE;
+            if ((sameRow || sameCol || sameBox) && newBoard[r][c].notes.includes(num)) {
+              newBoard[r][c].notes = newBoard[r][c].notes.filter(n => n !== num);
+            }
+          }
+        }
+      }
+
       // 전체 보드 재검증 (버그 4, 10)
       SudokuGenerator.validateBoard(newBoard);
     }
@@ -479,11 +496,12 @@ export default function SudokuGame() {
                           
                           {/* 메모 노트 */}
                           {!cell.value && cell.notes.length > 0 && (
-                            <div className="absolute inset-0 grid grid-cols-3 gap-0 p-0.5">
+                            <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 gap-0 p-0.5" style={{ lineHeight: 1, alignContent: 'center' }}>
                               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
-                                <div 
-                                  key={n} 
-                                  className={`text-[8px] flex items-center justify-center ${cell.notes.includes(n) ? 'text-gray-400' : 'text-transparent'}`}
+                                <div
+                                  key={n}
+                                  className={`text-[8px] flex items-center justify-center ${cell.notes.includes(n) ? 'text-gray-500' : 'text-transparent'}`}
+                                  style={{ height: '12px' }}
                                 >
                                   {n}
                                 </div>
