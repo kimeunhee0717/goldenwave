@@ -8,10 +8,19 @@ import { Link } from 'react-router-dom';
 
 // 나무 위에 기물 놓는 "탁" 소리 (Web Audio API)
 let audioCtx: AudioContext | null = null;
+function getAudioCtx(): AudioContext {
+  if (!audioCtx) audioCtx = new AudioContext();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+// 첫 클릭 시 AudioContext 활성화 (브라우저 정책 대응)
+function initAudio() {
+  try { getAudioCtx(); } catch { /* ignore */ }
+}
+
 function playMoveSound(isCapture = false) {
   try {
-    if (!audioCtx) audioCtx = new AudioContext();
-    const ctx = audioCtx;
+    const ctx = getAudioCtx();
     const now = ctx.currentTime;
 
     // 짧은 임팩트 톤 (나무 두드리는 소리)
@@ -52,8 +61,7 @@ function playMoveSound(isCapture = false) {
 // 고가치 기물(차) 잡을 때 "텅" 소리
 function playHeavyCaptureSound() {
   try {
-    if (!audioCtx) audioCtx = new AudioContext();
-    const ctx = audioCtx;
+    const ctx = getAudioCtx();
     const now = ctx.currentTime;
 
     // 낮은 임팩트 (텅)
@@ -696,6 +704,7 @@ export default function JanggiGame() {
   }, [board, captured, turn, lastMove]);
 
   const handleIntersectionClick = (visualRow: number, col: number) => {
+    initAudio(); // 첫 클릭에서 오디오 활성화
     if (isThinking || winner) return;
     if (gameMode === 'ai' && turn === aiTeam) return;
     
