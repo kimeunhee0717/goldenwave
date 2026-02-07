@@ -286,14 +286,6 @@ const tools: Tool[] = [
     ready: true,
     color: 'blush',
   },
-  {
-    name: '주사위 윷놀이',
-    description: '한국 전통 윷놀이를 디지털로 즐기세요. 도개걸윷모!',
-    icon: <Grid3X3 size={24} />,
-    href: '/tools/yutnori',
-    ready: true,
-    color: 'rose',
-  },
 ];
 
 const ToolsPage: React.FC = () => {
