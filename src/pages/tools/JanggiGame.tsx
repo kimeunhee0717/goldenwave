@@ -728,8 +728,8 @@ export default function JanggiGame() {
   const ai = useMemo(() => new AIPlayer(difficulty, aiTeam), [difficulty, aiTeam]);
 
   // 시점 변환 함수
-  const toVisual = (r: number) => perspective === 'cho' ? r : 9 - r;
-  const toLogical = (r: number) => perspective === 'cho' ? r : 9 - r;
+  const toVisual = (r: number) => perspective === 'cho' ? 9 - r : r;
+  const toLogical = (r: number) => perspective === 'cho' ? 9 - r : r;
 
   useEffect(() => {
     if (gamePhase === 'playing' && Rules.checkmate(board, turn)) {
@@ -852,10 +852,7 @@ export default function JanggiGame() {
   };
 
   const startGame = () => {
-    const allF: Formation[] = ['msms', 'mssm', 'smms', 'smsm'];
-    const cF = (gameMode === 'ai' && perspective !== 'cho') ? allF[Math.floor(Math.random() * 4)] : choFormation;
-    const hF = (gameMode === 'ai' && perspective !== 'han') ? allF[Math.floor(Math.random() * 4)] : hanFormation;
-    setBoard(createBoard(cF, hF));
+    setBoard(createBoard(choFormation, hanFormation));
     setGamePhase('playing');
     setSelected(null);
     setValidMoves([]);
@@ -952,16 +949,9 @@ export default function JanggiGame() {
                 <div className="flex items-center justify-center gap-2 mb-3 pb-2 border-b-2 border-blue-200">
                   <span className="text-sm font-bold text-blue-700">초 (藍)</span>
                   {gameMode === 'ai' && perspective === 'cho' && <span className="text-[10px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded">내 팀</span>}
+                  {gameMode === 'ai' && perspective !== 'cho' && <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">AI</span>}
                 </div>
-                {gameMode === 'ai' && perspective !== 'cho' ? (
-                  <div className="flex items-center justify-center h-48 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                    <div className="text-center">
-                      <Bot className="w-8 h-8 mx-auto text-gray-300 mb-2" />
-                      <p className="text-sm text-gray-400 font-medium">AI 랜덤 배치</p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-2">
+                <div className="space-y-2">
                     {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
                       const pieces = FORMATIONS[f];
                       const isSelected = choFormation === f;
@@ -988,8 +978,7 @@ export default function JanggiGame() {
                         </button>
                       );
                     })}
-                  </div>
-                )}
+                </div>
               </div>
 
               {/* 한(赤) 배치 */}
@@ -997,16 +986,9 @@ export default function JanggiGame() {
                 <div className="flex items-center justify-center gap-2 mb-3 pb-2 border-b-2 border-red-200">
                   <span className="text-sm font-bold text-red-700">한 (赤)</span>
                   {gameMode === 'ai' && perspective === 'han' && <span className="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded">내 팀</span>}
+                  {gameMode === 'ai' && perspective !== 'han' && <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">AI</span>}
                 </div>
-                {gameMode === 'ai' && perspective !== 'han' ? (
-                  <div className="flex items-center justify-center h-48 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-                    <div className="text-center">
-                      <Bot className="w-8 h-8 mx-auto text-gray-300 mb-2" />
-                      <p className="text-sm text-gray-400 font-medium">AI 랜덤 배치</p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-2">
+                <div className="space-y-2">
                     {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
                       const pieces = FORMATIONS[f];
                       const isSelected = hanFormation === f;
@@ -1033,8 +1015,7 @@ export default function JanggiGame() {
                         </button>
                       );
                     })}
-                  </div>
-                )}
+                </div>
               </div>
             </div>
 
@@ -1111,7 +1092,7 @@ export default function JanggiGame() {
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                     </svg>
-                    {perspective === 'cho' ? '한으로' : '초으로'}
+                    {perspective === 'cho' ? '한으로' : '초로'}
                   </button>
                   <button
                     onClick={() => setSoundOn(s => !s)}
@@ -1162,7 +1143,7 @@ export default function JanggiGame() {
 
               {/* SVG 보드 */}
               <div className="flex justify-center">
-                <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full max-w-[500px] select-none">
+                <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full max-w-[550px] select-none">
                   {/* 나무 배경 */}
                   <defs>
                     <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1204,7 +1185,7 @@ export default function JanggiGame() {
                         r="20"
                         fill="transparent"
                         className="cursor-pointer"
-                        onClick={() => handleIntersectionClick(r, c)}
+                        onClick={() => handleIntersectionClick(toVisual(r), c)}
                       />
                     ))
                   )}
