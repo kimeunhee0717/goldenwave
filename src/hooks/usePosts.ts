@@ -6,7 +6,7 @@ import categoriesData from '@/data/categories.json'
 import authorsData from '@/data/authors.json'
 
 // 마크다운 파일들을 동적으로 import
-const markdownModules = import.meta.glob('@/data/posts/*.md', {
+const markdownModules = import.meta.glob('@/data/posts/**/*.md', {
   eager: true,
   query: '?raw',
   import: 'default'
@@ -23,9 +23,10 @@ export function usePosts() {
     function loadPosts() {
       try {
         const loadedPosts = (postsData as PostMeta[]).map((postMeta) => {
-          // 마크다운 파일 경로 생성
-          const mdPath = `/src/data/posts/${postMeta.slug}.md`
-          const content = markdownModules[mdPath] || ''
+          // slug로 마크다운 파일 탐색 (하위 폴더 무관)
+          const mdEntry = Object.entries(markdownModules)
+            .find(([path]) => path.endsWith(`/${postMeta.slug}.md`))
+          const content = mdEntry ? mdEntry[1] : ''
 
           const category = categories.find(c => c.id === postMeta.categoryId)!
           const author = authors.find(a => a.id === postMeta.authorId)!
