@@ -914,19 +914,44 @@ export default function JanggiGame() {
               })()}
 
               {/* 컨트롤 */}
-              <div className="flex justify-center gap-3 mt-6">
-                <button onClick={reset} className="flex items-center gap-2 px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-medium transition">
-                  <RotateCcw className="w-4 h-4" />
-                  새 게임
-                </button>
-                <button
-                  onClick={undo}
-                  disabled={history.length === 0 || isThinking || !!winner}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
-                >
-                  <Undo2 className="w-4 h-4" />
-                  무르기
-                </button>
+              <div className="flex flex-col items-center gap-3 mt-6">
+                <div className="flex justify-center gap-3">
+                  <button onClick={reset} className="flex items-center gap-2 px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-medium transition">
+                    <RotateCcw className="w-4 h-4" />
+                    새 게임
+                  </button>
+                  <button
+                    onClick={undo}
+                    disabled={history.length === 0 || isThinking || !!winner}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    <Undo2 className="w-4 h-4" />
+                    무르기
+                  </button>
+                </div>
+
+                {/* AI 난이도 - 게임 중 바로 조절 */}
+                {gameMode === 'ai' && (
+                  <div className="flex items-center gap-1.5 bg-stone-50 rounded-xl p-1">
+                    {([1,2,3,4] as Difficulty[]).map(lv => {
+                      const labels = ['초급','중급','고급','마스터'];
+                      const isActive = difficulty === lv;
+                      return (
+                        <button
+                          key={lv}
+                          onClick={() => setDifficulty(lv)}
+                          className={`px-3 py-1.5 text-xs sm:text-sm font-medium rounded-lg transition ${
+                            isActive
+                              ? 'bg-stone-800 text-white shadow'
+                              : 'text-stone-500 hover:bg-stone-200'
+                          }`}
+                        >
+                          {labels[lv-1]}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
           </div>
