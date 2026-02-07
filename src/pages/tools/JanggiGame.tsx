@@ -288,46 +288,231 @@ class Rules {
   }
 }
 
+// 위치별 가중치 테이블 (초 기준, 한은 상하 반전)
+const PST: Partial<Record<PieceType, number[][]>> = {
+  soldier: [
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0.2,0,0.4,0,0.2,0,0],
+    [0.2,0,0.4,0.2,0.5,0.2,0.4,0,0.2],
+    [0.3,0.3,0.5,0.5,0.8,0.5,0.5,0.3,0.3],
+    [0.5,0.5,0.7,0.8,1.0,0.8,0.7,0.5,0.5],
+    [0.6,0.6,0.8,1.0,1.2,1.0,0.8,0.6,0.6],
+    [0.7,0.7,1.0,1.2,1.5,1.2,1.0,0.7,0.7],
+    [0.8,0.8,1.0,1.2,1.5,1.2,1.0,0.8,0.8],
+  ],
+  horse: [
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0.2,0.3,0,0.3,0.2,0,0],
+    [0,0.2,0.4,0.5,0.4,0.5,0.4,0.2,0],
+    [0,0.3,0.5,0.6,0.6,0.6,0.5,0.3,0],
+    [0,0.3,0.5,0.7,0.8,0.7,0.5,0.3,0],
+    [0,0.3,0.5,0.7,0.8,0.7,0.5,0.3,0],
+    [0,0.3,0.5,0.6,0.6,0.6,0.5,0.3,0],
+    [0,0.2,0.4,0.5,0.4,0.5,0.4,0.2,0],
+    [0,0,0.2,0.3,0,0.3,0.2,0,0],
+    [0,0,0,0,0,0,0,0,0],
+  ],
+  chariot: [
+    [0.2,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0.2],
+    [0.2,0.3,0.3,0.4,0.5,0.4,0.3,0.3,0.2],
+    [0.2,0.3,0.3,0.4,0.5,0.4,0.3,0.3,0.2],
+    [0.3,0.3,0.4,0.5,0.5,0.5,0.4,0.3,0.3],
+    [0.3,0.4,0.5,0.5,0.6,0.5,0.5,0.4,0.3],
+    [0.3,0.4,0.5,0.5,0.6,0.5,0.5,0.4,0.3],
+    [0.3,0.3,0.4,0.5,0.5,0.5,0.4,0.3,0.3],
+    [0.2,0.3,0.3,0.4,0.5,0.4,0.3,0.3,0.2],
+    [0.2,0.3,0.3,0.4,0.5,0.4,0.3,0.3,0.2],
+    [0.2,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0.2],
+  ],
+  cannon: [
+    [0,0,0.2,0.2,0.3,0.2,0.2,0,0],
+    [0,0,0.2,0.3,0.4,0.3,0.2,0,0],
+    [0,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0],
+    [0,0.2,0.3,0.5,0.6,0.5,0.3,0.2,0],
+    [0,0.3,0.4,0.5,0.6,0.5,0.4,0.3,0],
+    [0,0.3,0.4,0.5,0.6,0.5,0.4,0.3,0],
+    [0,0.2,0.3,0.5,0.6,0.5,0.3,0.2,0],
+    [0,0.2,0.3,0.4,0.5,0.4,0.3,0.2,0],
+    [0,0,0.2,0.3,0.4,0.3,0.2,0,0],
+    [0,0,0.2,0.2,0.3,0.2,0.2,0,0],
+  ],
+};
+
+function getPST(type: PieceType, r: number, c: number, team: Team): number {
+  const table = PST[type];
+  if (!table) return 0;
+  const row = team === 'cho' ? r : 9 - r;
+  return table[row][c];
+}
+
 class AIPlayer {
   private d: Difficulty; private t: Team;
   constructor(d: Difficulty, t: Team) { this.d=d; this.t=t; }
+
   getMove(b: (Piece | null)[][]) {
-    const all=this.allMoves(b,this.t); if (all.length===0) return null;
-    const depth=[2,3,4,5][this.d-1], rand=[0.3,0.15,0,0][this.d-1];
-    let best=all[0], bestSc=-Infinity;
+    const all = this.allMoves(b, this.t);
+    if (all.length === 0) return null;
+    const depth = [2, 3, 4, 5][this.d - 1];
+    const rand = [0.25, 0.08, 0, 0][this.d - 1];
+
+    // 수 정렬: 포획 > 장군 > 일반 (알파-베타 효율 향상)
+    this.orderMoves(b, all);
+
+    let best = all[0], bestSc = -Infinity;
     for (const m of all) {
-      const sc=this.minimax(this.sim(b,m.f,m.t),depth,-Infinity,Infinity,false);
-      if (sc>bestSc) { bestSc=sc; best=m; }
+      const sc = this.minimax(this.sim(b, m.f, m.t), depth, -Infinity, Infinity, false);
+      if (sc > bestSc) { bestSc = sc; best = m; }
     }
-    if (Math.random()<rand) return all[Math.floor(Math.random()*all.length)];
+    if (Math.random() < rand) {
+      // 약한 난이도: 상위 30% 중 랜덤 선택 (완전 랜덤 X)
+      const scored = all.map(m => ({ m, sc: this.minimax(this.sim(b, m.f, m.t), 1, -Infinity, Infinity, false) }));
+      scored.sort((a, b) => b.sc - a.sc);
+      const pool = scored.slice(0, Math.max(3, Math.ceil(scored.length * 0.3)));
+      return pool[Math.floor(Math.random() * pool.length)].m;
+    }
     return best;
   }
+
+  private orderMoves(b: (Piece | null)[][], moves: { f: Position; t: Position }[]) {
+    moves.sort((a, mv2) => {
+      const capA = b[a.t.row][a.t.col];
+      const capB = b[mv2.t.row][mv2.t.col];
+      const scoreA = capA ? VALUES[capA.type] * 10 - VALUES[b[a.f.row][a.f.col]!.type] : 0;
+      const scoreB = capB ? VALUES[capB.type] * 10 - VALUES[b[mv2.f.row][mv2.f.col]!.type] : 0;
+      return scoreB - scoreA;
+    });
+  }
+
   private minimax(b: (Piece | null)[][], d: number, a: number, B: number, mx: boolean): number {
-    if (d===0) return this.eval(b);
-    const t=mx?this.t:(this.t==='cho'?'han':'cho');
-    const ms=this.allMoves(b,t);
-    if (Rules.checkmate(b,t)) return mx?-99999:99999;
+    if (d === 0) return this.quiesce(b, a, B, mx, 4);
+    const t = mx ? this.t : (this.t === 'cho' ? 'han' : 'cho');
+    const ms = this.allMoves(b, t);
+    if (ms.length === 0) return mx ? -99999 : 99999;
+    if (Rules.checkmate(b, t)) return mx ? -99999 : 99999;
+
+    this.orderMoves(b, ms);
+
     if (mx) {
-      let s=-Infinity;
-      for (const m of ms) { s=Math.max(s,this.minimax(this.sim(b,m.f,m.t),d-1,a,B,false)); a=Math.max(a,s); if (B<=a) break; }
+      let s = -Infinity;
+      for (const m of ms) {
+        s = Math.max(s, this.minimax(this.sim(b, m.f, m.t), d - 1, a, B, false));
+        a = Math.max(a, s); if (B <= a) break;
+      }
       return s;
     } else {
-      let s=Infinity;
-      for (const m of ms) { s=Math.min(s,this.minimax(this.sim(b,m.f,m.t),d-1,a,B,true)); B=Math.min(B,s); if (B<=a) break; }
+      let s = Infinity;
+      for (const m of ms) {
+        s = Math.min(s, this.minimax(this.sim(b, m.f, m.t), d - 1, a, B, true));
+        B = Math.min(B, s); if (B <= a) break;
+      }
       return s;
     }
   }
-  private eval(b: (Piece | null)[][]) {
-    let s=0;
-    for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) {
-      const p=b[r][c]; if (p) { let v=VALUES[p.type]; if (p.type==='soldier') v+=(p.team==='cho'?r:(9-r))*0.2; if (c>=3&&c<=5) v+=0.3; s+=(p.team===this.t?1:-1)*v; }
+
+  // 포획 연장 탐색 (Quiescence Search) - 교환 상황에서 정확한 판단
+  private quiesce(b: (Piece | null)[][], a: number, B: number, mx: boolean, depth: number): number {
+    const standPat = this.eval(b);
+    if (depth === 0) return standPat;
+
+    if (mx) {
+      if (standPat >= B) return standPat;
+      a = Math.max(a, standPat);
+      const t = this.t;
+      const captures = this.allMoves(b, t).filter(m => b[m.t.row][m.t.col] !== null);
+      this.orderMoves(b, captures);
+      for (const m of captures) {
+        const sc = this.quiesce(this.sim(b, m.f, m.t), a, B, false, depth - 1);
+        a = Math.max(a, sc); if (B <= a) return B;
+      }
+      return a;
+    } else {
+      if (standPat <= a) return standPat;
+      B = Math.min(B, standPat);
+      const t = this.t === 'cho' ? 'han' : 'cho';
+      const captures = this.allMoves(b, t).filter(m => b[m.t.row][m.t.col] !== null);
+      this.orderMoves(b, captures);
+      for (const m of captures) {
+        const sc = this.quiesce(this.sim(b, m.f, m.t), a, B, true, depth - 1);
+        B = Math.min(B, sc); if (B <= a) return a;
+      }
+      return B;
     }
-    if (Rules.check(b,this.t==='cho'?'han':'cho')) s+=3;
-    if (Rules.check(b,this.t)) s-=3;
+  }
+
+  private eval(b: (Piece | null)[][]) {
+    let s = 0;
+    const opp = this.t === 'cho' ? 'han' : 'cho';
+
+    for (let r = 0; r < BOARD_ROWS; r++) for (let c = 0; c < BOARD_COLS; c++) {
+      const p = b[r][c];
+      if (!p) continue;
+      const sign = p.team === this.t ? 1 : -1;
+
+      // 기물 기본 가치
+      let v = VALUES[p.type];
+
+      // 위치 가중치 (Piece-Square Table)
+      v += getPST(p.type, r, c, p.team);
+
+      // 졸/병 전진 보너스
+      if (p.type === 'soldier') {
+        const advance = p.team === 'cho' ? r : (9 - r);
+        v += advance * 0.15;
+      }
+
+      // 궁 안전: 궁성 중심에 있으면 보너스
+      if (p.type === 'king') {
+        const centerR = p.team === 'cho' ? 1 : 8;
+        if (r === centerR && c === 4) v += 1.5;
+      }
+
+      // 차: 열린 줄(같은 열에 아군 없음) 보너스
+      if (p.type === 'chariot') {
+        let open = true;
+        for (let rr = 0; rr < BOARD_ROWS; rr++) {
+          if (rr !== r && b[rr][c]?.team === p.team) { open = false; break; }
+        }
+        if (open) v += 1.0;
+      }
+
+      s += sign * v;
+    }
+
+    // 장군 보너스/패널티
+    if (Rules.check(b, opp)) s += 4;
+    if (Rules.check(b, this.t)) s -= 4;
+
+    // 기동력 (이동 가능 수) - 고급 이상에서만 계산 (성능)
+    if (this.d >= 3) {
+      let myMobility = 0, oppMobility = 0;
+      for (let r = 0; r < BOARD_ROWS; r++) for (let c = 0; c < BOARD_COLS; c++) {
+        const p = b[r][c];
+        if (p) {
+          const cnt = Rules.moves(b, { row: r, col: c }).length;
+          if (p.team === this.t) myMobility += cnt;
+          else oppMobility += cnt;
+        }
+      }
+      s += (myMobility - oppMobility) * 0.05;
+    }
+
     return s;
   }
-  private allMoves(b: (Piece | null)[][], t: Team) { const m: {f:Position,t:Position}[]=[]; for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) if (b[r][c]?.team===t) Rules.moves(b,{row:r,col:c}).forEach(x=>m.push({f:{row:r,col:c},t:x})); return m; }
-  private sim(b: (Piece | null)[][], f: Position, t: Position) { const nb=b.map(r=>[...r]); nb[t.row][t.col]=nb[f.row][f.col]; nb[f.row][f.col]=null; return nb; }
+
+  private allMoves(b: (Piece | null)[][], t: Team) {
+    const m: { f: Position; t: Position }[] = [];
+    for (let r = 0; r < BOARD_ROWS; r++) for (let c = 0; c < BOARD_COLS; c++)
+      if (b[r][c]?.team === t) Rules.moves(b, { row: r, col: c }).forEach(x => m.push({ f: { row: r, col: c }, t: x }));
+    return m;
+  }
+
+  private sim(b: (Piece | null)[][], f: Position, t: Position) {
+    const nb = b.map(r => [...r]);
+    nb[t.row][t.col] = nb[f.row][f.col]; nb[f.row][f.col] = null;
+    return nb;
+  }
 }
 
 export default function JanggiGame() {
@@ -364,7 +549,7 @@ export default function JanggiGame() {
         const m = ai.getMove(board);
         if (m) executeMove(m.f, m.t);
         setIsThinking(false);
-      }, 600);
+      }, 300);
     }
   }, [turn, gameMode, board, winner, ai, aiTeam]);
 
