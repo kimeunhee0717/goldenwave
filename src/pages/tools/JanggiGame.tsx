@@ -975,24 +975,38 @@ export default function JanggiGame() {
                           onClick={(e) => { e.stopPropagation(); handleIntersectionClick(toVisual(r), c); }}
                           style={{ filter: 'url(#shadow)' }}
                         >
-                          {/* 기물 배경 (팔각형) */}
+                          {/* 기물 배경 (정팔각형) */}
                           <polygon
                             points={(() => {
-                              const cx = getX(c), cy = getY(r), sz = 21;
-                              return [
-                                [cx, cy - sz],
-                                [cx + sz * 0.7, cy - sz * 0.7],
-                                [cx + sz, cy],
-                                [cx + sz * 0.7, cy + sz * 0.7],
-                                [cx, cy + sz],
-                                [cx - sz * 0.7, cy + sz * 0.7],
-                                [cx - sz, cy],
-                                [cx - sz * 0.7, cy - sz * 0.7]
-                              ].map(pt => pt.join(',')).join(' ');
+                              const cx = getX(c), cy = getY(r);
+                              const sz = p.type === 'king' ? 24 : 20;
+                              // 정팔각형: 22.5도부터 45도 간격
+                              const pts: [number,number][] = [];
+                              for (let i = 0; i < 8; i++) {
+                                const angle = (22.5 + 45 * i) * Math.PI / 180;
+                                pts.push([cx + sz * Math.sin(angle), cy - sz * Math.cos(angle)]);
+                              }
+                              return pts.map(pt => pt.join(',')).join(' ');
                             })()}
-                            fill={p.team === 'cho' ? '#f8fafc' : '#fef2f2'}
+                            fill={p.team === 'cho' ? '#f0f5ff' : '#fff5f5'}
                             stroke={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
-                            strokeWidth={isSelected ? 3 : 2}
+                            strokeWidth={isSelected ? 3 : p.type === 'king' ? 2.5 : 1.8}
+                          />
+                          {/* 안쪽 테두리 (이중선 효과) */}
+                          <polygon
+                            points={(() => {
+                              const cx = getX(c), cy = getY(r);
+                              const sz = (p.type === 'king' ? 24 : 20) - 3;
+                              const pts: [number,number][] = [];
+                              for (let i = 0; i < 8; i++) {
+                                const angle = (22.5 + 45 * i) * Math.PI / 180;
+                                pts.push([cx + sz * Math.sin(angle), cy - sz * Math.cos(angle)]);
+                              }
+                              return pts.map(pt => pt.join(',')).join(' ');
+                            })()}
+                            fill="none"
+                            stroke={p.team === 'cho' ? '#93b4f8' : '#f8a0a0'}
+                            strokeWidth="0.8"
                           />
                           {/* 한자 */}
                           <text
@@ -1000,7 +1014,7 @@ export default function JanggiGame() {
                             y={getY(r)}
                             textAnchor="middle"
                             dominantBaseline="central"
-                            fontSize="18"
+                            fontSize={p.type === 'king' ? '21' : '17'}
                             fontWeight="bold"
                             fill={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
                             style={{ fontFamily: 'serif', pointerEvents: 'none' }}
@@ -1009,7 +1023,7 @@ export default function JanggiGame() {
                           </text>
                           {/* 선택 효과 */}
                           {isSelected && (
-                            <circle cx={getX(c)} cy={getY(r)} r="26" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.6" />
+                            <circle cx={getX(c)} cy={getY(r)} r={p.type === 'king' ? 29 : 25} fill="none" stroke="#fbbf24" strokeWidth="2.5" opacity="0.7" />
                           )}
                         </g>
                       );
