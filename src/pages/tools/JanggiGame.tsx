@@ -704,7 +704,7 @@ export default function JanggiGame() {
         const m = ai.getMove(board);
         if (m) executeMoveRef.current(m.f, m.t);
         setIsThinking(false);
-      }, 300);
+      }, 50);
       return () => clearTimeout(timer);
     }
   }, [turn, gameMode, board, winner, ai, aiTeam]);
