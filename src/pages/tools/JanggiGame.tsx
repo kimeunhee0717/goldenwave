@@ -1217,7 +1217,7 @@ export default function JanggiGame() {
                   {selected && validMoves.map((m, i) => {
                     const isCapture = board[m.row][m.col] !== null;
                     return (
-                      <g key={`vm${i}`}>
+                      <g key={`vm${i}`} pointerEvents="none">
                         {isCapture ? (
                           <circle cx={getX(m.col)} cy={getY(m.row)} r="18" fill="none" stroke="#ef4444" strokeWidth="3" opacity="0.8" />
                         ) : (
@@ -1243,7 +1243,7 @@ export default function JanggiGame() {
                           <polygon
                             points={(() => {
                               const cx = getX(c), cy = getY(r);
-                              const sz = p.type === 'king' ? 24 : 20;
+                              const sz = p.type === 'king' ? 24 : (p.type === 'soldier' || p.type === 'advisor') ? 18 : 20;
                               // 정팔각형: 22.5도부터 45도 간격
                               const pts: [number,number][] = [];
                               for (let i = 0; i < 8; i++) {
@@ -1260,7 +1260,7 @@ export default function JanggiGame() {
                           <polygon
                             points={(() => {
                               const cx = getX(c), cy = getY(r);
-                              const sz = (p.type === 'king' ? 24 : 20) - 3;
+                              const sz = (p.type === 'king' ? 24 : (p.type === 'soldier' || p.type === 'advisor') ? 18 : 20) - 3;
                               const pts: [number,number][] = [];
                               for (let i = 0; i < 8; i++) {
                                 const angle = (22.5 + 45 * i) * Math.PI / 180;
@@ -1278,7 +1278,7 @@ export default function JanggiGame() {
                             y={getY(r)}
                             textAnchor="middle"
                             dominantBaseline="central"
-                            fontSize={p.type === 'king' ? '21' : '17'}
+                            fontSize={p.type === 'king' ? '21' : (p.type === 'soldier' || p.type === 'advisor') ? '15' : '17'}
                             fontWeight="bold"
                             fill={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
                             style={{ fontFamily: 'serif', pointerEvents: 'none' }}
