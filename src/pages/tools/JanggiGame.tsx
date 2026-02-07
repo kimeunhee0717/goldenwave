@@ -98,6 +98,62 @@ function playHeavyCaptureSound() {
   } catch { /* 오디오 미지원 시 무시 */ }
 }
 
+// 승리 빵빠레 (Victory Fanfare)
+function playVictoryFanfare() {
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+
+    // 빵빠레 멜로디: C-E-G-C(높은) 아르페지오
+    const notes = [
+      { freq: 523.25, start: 0, dur: 0.15 },     // C5
+      { freq: 659.25, start: 0.12, dur: 0.15 },   // E5
+      { freq: 783.99, start: 0.24, dur: 0.15 },   // G5
+      { freq: 1046.50, start: 0.36, dur: 0.4 },   // C6 (길게)
+      // 화음 (최종)
+      { freq: 523.25, start: 0.5, dur: 0.5 },     // C5
+      { freq: 659.25, start: 0.5, dur: 0.5 },     // E5
+      { freq: 783.99, start: 0.5, dur: 0.5 },     // G5
+      { freq: 1046.50, start: 0.5, dur: 0.6 },    // C6
+    ];
+
+    notes.forEach(({ freq, start, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(freq, now + start);
+      gain.gain.setValueAtTime(0, now + start);
+      gain.gain.linearRampToValueAtTime(0.2, now + start + 0.03);
+      gain.gain.setValueAtTime(0.2, now + start + dur * 0.7);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + start + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + start);
+      osc.stop(now + start + dur + 0.05);
+    });
+
+    // 심벌 느낌 노이즈
+    const bufLen = Math.floor(ctx.sampleRate * 0.3);
+    const buf = ctx.createBuffer(1, bufLen, ctx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i = 0; i < bufLen; i++) data[i] = (Math.random() * 2 - 1) * (1 - i / bufLen) * 0.5;
+    const noise = ctx.createBufferSource();
+    const nGain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    noise.buffer = buf;
+    filter.type = 'highpass';
+    filter.frequency.value = 6000;
+    nGain.gain.setValueAtTime(0, now + 0.5);
+    nGain.gain.linearRampToValueAtTime(0.08, now + 0.53);
+    nGain.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+    noise.connect(filter);
+    filter.connect(nGain);
+    nGain.connect(ctx.destination);
+    noise.start(now + 0.5);
+    noise.stop(now + 1.0);
+  } catch { /* 오디오 미지원 시 무시 */ }
+}
+
 // "장군!" TTS 사운드
 function playCheckSound() {
   try {
@@ -117,6 +173,28 @@ type PieceType = 'king' | 'advisor' | 'elephant' | 'horse' | 'chariot' | 'cannon
 type Team = 'cho' | 'han';
 type Difficulty = 1 | 2 | 3 | 4;
 type GameMode = 'pvp' | 'ai';
+type Formation = 'msms' | 'mssm' | 'smms' | 'smsm';
+
+const FORMATIONS: Record<Formation, [PieceType, PieceType, PieceType, PieceType]> = {
+  msms: ['horse', 'elephant', 'horse', 'elephant'],
+  mssm: ['horse', 'elephant', 'elephant', 'horse'],
+  smms: ['elephant', 'horse', 'horse', 'elephant'],
+  smsm: ['elephant', 'horse', 'elephant', 'horse'],
+};
+
+const FORMATION_NAMES: Record<Formation, string> = {
+  msms: '마상마상',
+  mssm: '마상상마',
+  smms: '상마마상',
+  smsm: '상마상마',
+};
+
+const FORMATION_DESC: Record<Formation, string> = {
+  msms: '바깥 마, 안쪽 상',
+  mssm: '왼쪽 마상, 오른쪽 상마',
+  smms: '왼쪽 상마, 오른쪽 마상',
+  smsm: '바깥 상, 안쪽 마',
+};
 
 interface Piece {
   type: PieceType;
@@ -141,23 +219,25 @@ const VALUES: Record<PieceType, number> = {
   king: 99999, chariot: 13, cannon: 7, horse: 5, elephant: 3, advisor: 3, soldier: 2,
 };
 
-function createBoard(): (Piece | null)[][] {
+function createBoard(choFormation: Formation = 'mssm', hanFormation: Formation = 'mssm'): (Piece | null)[][] {
   const b = Array(BOARD_ROWS).fill(null).map(() => Array(BOARD_COLS).fill(null));
   let id = 0;
   const p = (t: PieceType, tm: Team): Piece => ({ type: t, team: tm, label: LABELS[tm][t], id: `${tm}_${t}_${id++}` });
-  
-  // 초나라 (위쪽) - 궁은 궁성 중심 (1,4)
-  b[0] = [p('chariot','cho'), p('horse','cho'), p('elephant','cho'), p('advisor','cho'), null, p('advisor','cho'), p('elephant','cho'), p('horse','cho'), p('chariot','cho')];
-  b[1][4] = p('king','cho'); // 궁성 중심
+
+  // 초나라 (위쪽)
+  const cF = FORMATIONS[choFormation];
+  b[0] = [p('chariot','cho'), p(cF[0],'cho'), p(cF[1],'cho'), p('advisor','cho'), null, p('advisor','cho'), p(cF[2],'cho'), p(cF[3],'cho'), p('chariot','cho')];
+  b[1][4] = p('king','cho');
   b[2][1] = p('cannon','cho'); b[2][7] = p('cannon','cho');
   [0,2,4,6,8].forEach(c => b[3][c] = p('soldier','cho'));
-  
-  // 한나라 (아래쪽) - 궁은 궁성 중심 (8,4)
-  b[9] = [p('chariot','han'), p('horse','han'), p('elephant','han'), p('advisor','han'), null, p('advisor','han'), p('elephant','han'), p('horse','han'), p('chariot','han')];
-  b[8][4] = p('king','han'); // 궁성 중심
+
+  // 한나라 (아래쪽)
+  const hF = FORMATIONS[hanFormation];
+  b[9] = [p('chariot','han'), p(hF[0],'han'), p(hF[1],'han'), p('advisor','han'), null, p('advisor','han'), p(hF[2],'han'), p(hF[3],'han'), p('chariot','han')];
+  b[8][4] = p('king','han');
   b[7][1] = p('cannon','han'); b[7][7] = p('cannon','han');
   [0,2,4,6,8].forEach(c => b[6][c] = p('soldier','han'));
-  
+
   return b;
 }
 
@@ -640,6 +720,9 @@ export default function JanggiGame() {
   const [soundOn, setSoundOn] = useState(true);
   const soundRef = useRef(true);
   useEffect(() => { soundRef.current = soundOn; }, [soundOn]);
+  const [gamePhase, setGamePhase] = useState<'setup' | 'playing'>('setup');
+  const [playerFormation, setPlayerFormation] = useState<Formation>('mssm');
+  const [opponentFormation, setOpponentFormation] = useState<Formation>('mssm');
 
   const aiTeam = perspective === 'cho' ? 'han' : 'cho';
   const ai = useMemo(() => new AIPlayer(difficulty, aiTeam), [difficulty, aiTeam]);
@@ -649,8 +732,11 @@ export default function JanggiGame() {
   const toLogical = (r: number) => perspective === 'cho' ? r : 9 - r;
 
   useEffect(() => {
-    if (Rules.checkmate(board, turn)) setWinner(turn === 'cho' ? 'han' : 'cho');
-  }, [board, turn]);
+    if (gamePhase === 'playing' && Rules.checkmate(board, turn)) {
+      setWinner(turn === 'cho' ? 'han' : 'cho');
+      if (soundRef.current) setTimeout(() => playVictoryFanfare(), 200);
+    }
+  }, [board, turn, gamePhase]);
 
   const executeMove = useCallback((f: Position, t: Position) => {
     const p = board[f.row][f.col];
@@ -698,7 +784,7 @@ export default function JanggiGame() {
 
   // AI 턴 처리
   useEffect(() => {
-    if (gameMode === 'ai' && turn === aiTeam && !winner) {
+    if (gameMode === 'ai' && turn === aiTeam && !winner && gamePhase === 'playing') {
       setIsThinking(true);
       const timer = setTimeout(() => {
         const m = ai.getMove(board);
@@ -707,11 +793,11 @@ export default function JanggiGame() {
       }, 50);
       return () => clearTimeout(timer);
     }
-  }, [turn, gameMode, board, winner, ai, aiTeam]);
+  }, [turn, gameMode, board, winner, ai, aiTeam, gamePhase]);
 
   const handleIntersectionClick = (visualRow: number, col: number) => {
     initAudio(); // 첫 클릭에서 오디오 활성화
-    if (isThinking || winner) return;
+    if (gamePhase !== 'playing' || isThinking || winner) return;
     if (gameMode === 'ai' && turn === aiTeam) return;
     
     const logicalRow = toLogical(visualRow);
@@ -754,7 +840,29 @@ export default function JanggiGame() {
   }, [history, gameMode, isThinking, winner]);
 
   const reset = () => {
-    setBoard(createBoard());
+    setGamePhase('setup');
+    setSelected(null);
+    setValidMoves([]);
+    setTurn('cho');
+    setMoves([]);
+    setCaptured({ cho: [], han: [] });
+    setWinner(null);
+    setLastMove(null);
+    setHistory([]);
+  };
+
+  const startGame = () => {
+    const allF: Formation[] = ['msms', 'mssm', 'smms', 'smsm'];
+    let choF: Formation, hanF: Formation;
+    if (perspective === 'cho') {
+      choF = playerFormation;
+      hanF = gameMode === 'ai' ? allF[Math.floor(Math.random() * 4)] : opponentFormation;
+    } else {
+      hanF = playerFormation;
+      choF = gameMode === 'ai' ? allF[Math.floor(Math.random() * 4)] : opponentFormation;
+    }
+    setBoard(createBoard(choF, hanF));
+    setGamePhase('playing');
     setSelected(null);
     setValidMoves([]);
     setTurn('cho');
@@ -836,7 +944,146 @@ export default function JanggiGame() {
         </div>
       )}
 
+      {/* 배치 선택 화면 */}
+      {gamePhase === 'setup' && (
+        <div className="max-w-2xl mx-auto px-4 py-8">
+          <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-8">
+            <h2 className="text-xl sm:text-2xl font-bold text-stone-800 text-center mb-1">기물 배치 선택</h2>
+            <p className="text-sm text-stone-500 text-center mb-6">상(象)과 마(馬)의 초기 배치를 선택하세요</p>
+
+            {/* 게임 모드 & 팀 선택 */}
+            <div className="grid grid-cols-2 gap-3 mb-6">
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">게임 모드</label>
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button onClick={() => setGameMode('ai')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${gameMode === 'ai' ? 'bg-white shadow text-stone-800' : 'text-gray-600'}`}>
+                    <Bot className="w-3.5 h-3.5 inline mr-1" />AI
+                  </button>
+                  <button onClick={() => setGameMode('pvp')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${gameMode === 'pvp' ? 'bg-white shadow text-stone-800' : 'text-gray-600'}`}>
+                    <User className="w-3.5 h-3.5 inline mr-1" />2인
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">내 팀</label>
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button onClick={() => setPerspective('cho')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${perspective === 'cho' ? 'bg-blue-50 shadow text-blue-700' : 'text-gray-600'}`}>
+                    초(藍)
+                  </button>
+                  <button onClick={() => setPerspective('han')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${perspective === 'han' ? 'bg-red-50 shadow text-red-700' : 'text-gray-600'}`}>
+                    한(赤)
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* 내 배치 선택 */}
+            <div className="mb-5">
+              <h3 className="text-sm font-semibold text-stone-600 mb-3 flex items-center gap-2">
+                <User className="w-4 h-4" />
+                내 배치 <span className={perspective === 'cho' ? 'text-blue-600' : 'text-red-600'}>({perspective === 'cho' ? '초' : '한'})</span>
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
+                {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
+                  const pieces = FORMATIONS[f];
+                  const isSelected = playerFormation === f;
+                  const team = perspective;
+                  return (
+                    <button key={f} onClick={() => setPlayerFormation(f)}
+                      className={`p-3 rounded-xl border-2 transition ${isSelected ? 'border-amber-400 bg-amber-50 shadow-md' : 'border-stone-200 hover:border-stone-300 bg-white'}`}>
+                      <div className="text-sm font-bold text-stone-800 mb-0.5">{FORMATION_NAMES[f]}</div>
+                      <div className="text-[10px] text-stone-400 mb-2">{FORMATION_DESC[f]}</div>
+                      <div className="flex justify-center gap-0.5">
+                        {([
+                          'chariot' as PieceType, pieces[0], pieces[1], 'advisor' as PieceType,
+                          null,
+                          'advisor' as PieceType, pieces[2], pieces[3], 'chariot' as PieceType,
+                        ] as (PieceType | null)[]).map((type, i) => type ? (
+                          <div key={i} className={`w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center text-[10px] sm:text-xs font-bold ${
+                            team === 'cho' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200'
+                          } ${(i===1||i===2||i===6||i===7) ? (isSelected ? 'ring-2 ring-amber-400' : '') : ''}`}>
+                            {LABELS[team][type]}
+                          </div>
+                        ) : (
+                          <div key={i} className="w-3 h-6 sm:w-4 sm:h-7" />
+                        ))}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 상대 배치 - PvP만 */}
+            {gameMode === 'pvp' && (
+              <div className="mb-5">
+                <h3 className="text-sm font-semibold text-stone-600 mb-3 flex items-center gap-2">
+                  <User className="w-4 h-4" />
+                  상대 배치 <span className={perspective !== 'cho' ? 'text-blue-600' : 'text-red-600'}>({perspective !== 'cho' ? '초' : '한'})</span>
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
+                    const pieces = FORMATIONS[f];
+                    const isSelected = opponentFormation === f;
+                    const team: Team = perspective === 'cho' ? 'han' : 'cho';
+                    return (
+                      <button key={f} onClick={() => setOpponentFormation(f)}
+                        className={`p-3 rounded-xl border-2 transition ${isSelected ? 'border-amber-400 bg-amber-50 shadow-md' : 'border-stone-200 hover:border-stone-300 bg-white'}`}>
+                        <div className="text-sm font-bold text-stone-800 mb-0.5">{FORMATION_NAMES[f]}</div>
+                        <div className="text-[10px] text-stone-400 mb-2">{FORMATION_DESC[f]}</div>
+                        <div className="flex justify-center gap-0.5">
+                          {([
+                            'chariot' as PieceType, pieces[0], pieces[1], 'advisor' as PieceType,
+                            null,
+                            'advisor' as PieceType, pieces[2], pieces[3], 'chariot' as PieceType,
+                          ] as (PieceType | null)[]).map((type, i) => type ? (
+                            <div key={i} className={`w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center text-[10px] sm:text-xs font-bold ${
+                              team === 'cho' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200'
+                            } ${(i===1||i===2||i===6||i===7) ? (isSelected ? 'ring-2 ring-amber-400' : '') : ''}`}>
+                              {LABELS[team][type]}
+                            </div>
+                          ) : (
+                            <div key={i} className="w-3 h-6 sm:w-4 sm:h-7" />
+                          ))}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {gameMode === 'ai' && (
+              <div className="flex items-center gap-3 mb-5">
+                <label className="text-sm font-medium text-stone-600">AI 난이도</label>
+                <div className="flex bg-gray-100 rounded-lg p-1 flex-1">
+                  {([1,2,3,4] as Difficulty[]).map(lv => {
+                    const labels = ['초급','중급','고급','마스터'];
+                    return (
+                      <button key={lv} onClick={() => setDifficulty(lv)}
+                        className={`flex-1 py-1.5 text-xs sm:text-sm font-medium rounded-md transition ${difficulty === lv ? 'bg-white shadow text-stone-800' : 'text-gray-500'}`}>
+                        {labels[lv-1]}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {gameMode === 'ai' && (
+              <p className="text-xs text-stone-400 text-center mb-4">AI는 랜덤 배치를 사용합니다</p>
+            )}
+
+            <button onClick={startGame}
+              className="w-full py-3 bg-gradient-to-r from-stone-800 to-stone-950 text-white rounded-xl font-bold text-lg hover:from-stone-700 hover:to-stone-900 transition shadow-lg">
+              게임 시작
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* 메인 게임 */}
+      {gamePhase === 'playing' && (
       <div className="max-w-5xl mx-auto px-4 py-6">
         <div className="grid lg:grid-cols-3 gap-6">
           {/* 게임 보드 */}
@@ -1182,6 +1429,7 @@ export default function JanggiGame() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }
