@@ -721,8 +721,8 @@ export default function JanggiGame() {
   const soundRef = useRef(true);
   useEffect(() => { soundRef.current = soundOn; }, [soundOn]);
   const [gamePhase, setGamePhase] = useState<'setup' | 'playing'>('setup');
-  const [playerFormation, setPlayerFormation] = useState<Formation>('mssm');
-  const [opponentFormation, setOpponentFormation] = useState<Formation>('mssm');
+  const [choFormation, setChoFormation] = useState<Formation>('mssm');
+  const [hanFormation, setHanFormation] = useState<Formation>('mssm');
 
   const aiTeam = perspective === 'cho' ? 'han' : 'cho';
   const ai = useMemo(() => new AIPlayer(difficulty, aiTeam), [difficulty, aiTeam]);
@@ -853,15 +853,9 @@ export default function JanggiGame() {
 
   const startGame = () => {
     const allF: Formation[] = ['msms', 'mssm', 'smms', 'smsm'];
-    let choF: Formation, hanF: Formation;
-    if (perspective === 'cho') {
-      choF = playerFormation;
-      hanF = gameMode === 'ai' ? allF[Math.floor(Math.random() * 4)] : opponentFormation;
-    } else {
-      hanF = playerFormation;
-      choF = gameMode === 'ai' ? allF[Math.floor(Math.random() * 4)] : opponentFormation;
-    }
-    setBoard(createBoard(choF, hanF));
+    const cF = (gameMode === 'ai' && perspective !== 'cho') ? allF[Math.floor(Math.random() * 4)] : choFormation;
+    const hF = (gameMode === 'ai' && perspective !== 'han') ? allF[Math.floor(Math.random() * 4)] : hanFormation;
+    setBoard(createBoard(cF, hF));
     setGamePhase('playing');
     setSelected(null);
     setValidMoves([]);
@@ -946,133 +940,145 @@ export default function JanggiGame() {
 
       {/* 배치 선택 화면 */}
       {gamePhase === 'setup' && (
-        <div className="max-w-2xl mx-auto px-4 py-8">
-          <div className="bg-white rounded-2xl shadow-xl p-5 sm:p-8">
-            <h2 className="text-xl sm:text-2xl font-bold text-stone-800 text-center mb-1">기물 배치 선택</h2>
-            <p className="text-sm text-stone-500 text-center mb-6">상(象)과 마(馬)의 초기 배치를 선택하세요</p>
+        <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+          <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-8">
+            <h2 className="text-lg sm:text-2xl font-bold text-stone-800 text-center mb-1">기물 배치 선택</h2>
+            <p className="text-xs sm:text-sm text-stone-500 text-center mb-5">상(象)과 마(馬)의 초기 배치를 선택하세요</p>
 
-            {/* 게임 모드 & 팀 선택 */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            {/* 초/한 배치 - 2열 */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-5">
+              {/* 초(藍) 배치 */}
               <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">게임 모드</label>
-                <div className="flex bg-gray-100 rounded-lg p-1">
-                  <button onClick={() => setGameMode('ai')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${gameMode === 'ai' ? 'bg-white shadow text-stone-800' : 'text-gray-600'}`}>
-                    <Bot className="w-3.5 h-3.5 inline mr-1" />AI
-                  </button>
-                  <button onClick={() => setGameMode('pvp')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${gameMode === 'pvp' ? 'bg-white shadow text-stone-800' : 'text-gray-600'}`}>
-                    <User className="w-3.5 h-3.5 inline mr-1" />2인
-                  </button>
+                <div className="flex items-center justify-center gap-2 mb-3 pb-2 border-b-2 border-blue-200">
+                  <span className="text-sm font-bold text-blue-700">초 (藍)</span>
+                  {gameMode === 'ai' && perspective === 'cho' && <span className="text-[10px] bg-blue-100 text-blue-600 px-1.5 py-0.5 rounded">내 팀</span>}
                 </div>
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-gray-500 mb-1.5">내 팀</label>
-                <div className="flex bg-gray-100 rounded-lg p-1">
-                  <button onClick={() => setPerspective('cho')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${perspective === 'cho' ? 'bg-blue-50 shadow text-blue-700' : 'text-gray-600'}`}>
-                    초(藍)
-                  </button>
-                  <button onClick={() => setPerspective('han')} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${perspective === 'han' ? 'bg-red-50 shadow text-red-700' : 'text-gray-600'}`}>
-                    한(赤)
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* 내 배치 선택 */}
-            <div className="mb-5">
-              <h3 className="text-sm font-semibold text-stone-600 mb-3 flex items-center gap-2">
-                <User className="w-4 h-4" />
-                내 배치 <span className={perspective === 'cho' ? 'text-blue-600' : 'text-red-600'}>({perspective === 'cho' ? '초' : '한'})</span>
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
-                  const pieces = FORMATIONS[f];
-                  const isSelected = playerFormation === f;
-                  const team = perspective;
-                  return (
-                    <button key={f} onClick={() => setPlayerFormation(f)}
-                      className={`p-3 rounded-xl border-2 transition ${isSelected ? 'border-amber-400 bg-amber-50 shadow-md' : 'border-stone-200 hover:border-stone-300 bg-white'}`}>
-                      <div className="text-sm font-bold text-stone-800 mb-0.5">{FORMATION_NAMES[f]}</div>
-                      <div className="text-[10px] text-stone-400 mb-2">{FORMATION_DESC[f]}</div>
-                      <div className="flex justify-center gap-0.5">
-                        {([
-                          'chariot' as PieceType, pieces[0], pieces[1], 'advisor' as PieceType,
-                          null,
-                          'advisor' as PieceType, pieces[2], pieces[3], 'chariot' as PieceType,
-                        ] as (PieceType | null)[]).map((type, i) => type ? (
-                          <div key={i} className={`w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center text-[10px] sm:text-xs font-bold ${
-                            team === 'cho' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200'
-                          } ${(i===1||i===2||i===6||i===7) ? (isSelected ? 'ring-2 ring-amber-400' : '') : ''}`}>
-                            {LABELS[team][type]}
+                {gameMode === 'ai' && perspective !== 'cho' ? (
+                  <div className="flex items-center justify-center h-48 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                    <div className="text-center">
+                      <Bot className="w-8 h-8 mx-auto text-gray-300 mb-2" />
+                      <p className="text-sm text-gray-400 font-medium">AI 랜덤 배치</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
+                      const pieces = FORMATIONS[f];
+                      const isSelected = choFormation === f;
+                      return (
+                        <button key={f} onClick={() => setChoFormation(f)}
+                          className={`w-full p-2.5 rounded-xl border-2 transition ${isSelected ? 'border-blue-400 bg-blue-50 shadow-md' : 'border-stone-200 hover:border-blue-200 bg-white'}`}>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <span className="text-sm font-bold text-stone-800">{FORMATION_NAMES[f]}</span>
+                            <span className="text-[10px] text-stone-400">{FORMATION_DESC[f]}</span>
                           </div>
-                        ) : (
-                          <div key={i} className="w-3 h-6 sm:w-4 sm:h-7" />
-                        ))}
-                      </div>
-                    </button>
-                  );
-                })}
+                          <div className="flex justify-center gap-0.5">
+                            {([
+                              'chariot' as PieceType, pieces[0], pieces[1], 'advisor' as PieceType,
+                              null,
+                              'advisor' as PieceType, pieces[2], pieces[3], 'chariot' as PieceType,
+                            ] as (PieceType | null)[]).map((type, i) => type ? (
+                              <div key={i} className={`w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center text-[10px] sm:text-xs font-bold bg-blue-50 text-blue-700 border border-blue-200 ${(i===1||i===2||i===6||i===7) ? (isSelected ? 'ring-2 ring-blue-400' : '') : ''}`}>
+                                {LABELS.cho[type]}
+                              </div>
+                            ) : (
+                              <div key={i} className="w-3 h-6 sm:w-4 sm:h-7" />
+                            ))}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* 한(赤) 배치 */}
+              <div>
+                <div className="flex items-center justify-center gap-2 mb-3 pb-2 border-b-2 border-red-200">
+                  <span className="text-sm font-bold text-red-700">한 (赤)</span>
+                  {gameMode === 'ai' && perspective === 'han' && <span className="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded">내 팀</span>}
+                </div>
+                {gameMode === 'ai' && perspective !== 'han' ? (
+                  <div className="flex items-center justify-center h-48 bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+                    <div className="text-center">
+                      <Bot className="w-8 h-8 mx-auto text-gray-300 mb-2" />
+                      <p className="text-sm text-gray-400 font-medium">AI 랜덤 배치</p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
+                      const pieces = FORMATIONS[f];
+                      const isSelected = hanFormation === f;
+                      return (
+                        <button key={f} onClick={() => setHanFormation(f)}
+                          className={`w-full p-2.5 rounded-xl border-2 transition ${isSelected ? 'border-red-400 bg-red-50 shadow-md' : 'border-stone-200 hover:border-red-200 bg-white'}`}>
+                          <div className="flex items-center justify-between mb-1.5">
+                            <span className="text-sm font-bold text-stone-800">{FORMATION_NAMES[f]}</span>
+                            <span className="text-[10px] text-stone-400">{FORMATION_DESC[f]}</span>
+                          </div>
+                          <div className="flex justify-center gap-0.5">
+                            {([
+                              'chariot' as PieceType, pieces[0], pieces[1], 'advisor' as PieceType,
+                              null,
+                              'advisor' as PieceType, pieces[2], pieces[3], 'chariot' as PieceType,
+                            ] as (PieceType | null)[]).map((type, i) => type ? (
+                              <div key={i} className={`w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center text-[10px] sm:text-xs font-bold bg-red-50 text-red-700 border border-red-200 ${(i===1||i===2||i===6||i===7) ? (isSelected ? 'ring-2 ring-red-400' : '') : ''}`}>
+                                {LABELS.han[type]}
+                              </div>
+                            ) : (
+                              <div key={i} className="w-3 h-6 sm:w-4 sm:h-7" />
+                            ))}
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* 상대 배치 - PvP만 */}
-            {gameMode === 'pvp' && (
-              <div className="mb-5">
-                <h3 className="text-sm font-semibold text-stone-600 mb-3 flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  상대 배치 <span className={perspective !== 'cho' ? 'text-blue-600' : 'text-red-600'}>({perspective !== 'cho' ? '초' : '한'})</span>
-                </h3>
-                <div className="grid grid-cols-2 gap-3">
-                  {(['msms','mssm','smms','smsm'] as Formation[]).map(f => {
-                    const pieces = FORMATIONS[f];
-                    const isSelected = opponentFormation === f;
-                    const team: Team = perspective === 'cho' ? 'han' : 'cho';
-                    return (
-                      <button key={f} onClick={() => setOpponentFormation(f)}
-                        className={`p-3 rounded-xl border-2 transition ${isSelected ? 'border-amber-400 bg-amber-50 shadow-md' : 'border-stone-200 hover:border-stone-300 bg-white'}`}>
-                        <div className="text-sm font-bold text-stone-800 mb-0.5">{FORMATION_NAMES[f]}</div>
-                        <div className="text-[10px] text-stone-400 mb-2">{FORMATION_DESC[f]}</div>
-                        <div className="flex justify-center gap-0.5">
-                          {([
-                            'chariot' as PieceType, pieces[0], pieces[1], 'advisor' as PieceType,
-                            null,
-                            'advisor' as PieceType, pieces[2], pieces[3], 'chariot' as PieceType,
-                          ] as (PieceType | null)[]).map((type, i) => type ? (
-                            <div key={i} className={`w-6 h-6 sm:w-7 sm:h-7 rounded flex items-center justify-center text-[10px] sm:text-xs font-bold ${
-                              team === 'cho' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200'
-                            } ${(i===1||i===2||i===6||i===7) ? (isSelected ? 'ring-2 ring-amber-400' : '') : ''}`}>
-                              {LABELS[team][type]}
-                            </div>
-                          ) : (
-                            <div key={i} className="w-3 h-6 sm:w-4 sm:h-7" />
-                          ))}
-                        </div>
-                      </button>
-                    );
-                  })}
+            {/* 게임 설정 */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-5 p-3 bg-stone-50 rounded-xl">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-medium text-stone-500">모드</span>
+                <div className="flex bg-white rounded-lg p-0.5 shadow-sm">
+                  <button onClick={() => setGameMode('ai')} className={`px-3 py-1 text-xs font-medium rounded-md transition ${gameMode === 'ai' ? 'bg-stone-800 text-white' : 'text-gray-500'}`}>
+                    <Bot className="w-3 h-3 inline mr-0.5" />AI
+                  </button>
+                  <button onClick={() => setGameMode('pvp')} className={`px-3 py-1 text-xs font-medium rounded-md transition ${gameMode === 'pvp' ? 'bg-stone-800 text-white' : 'text-gray-500'}`}>
+                    <User className="w-3 h-3 inline mr-0.5" />2인
+                  </button>
                 </div>
               </div>
-            )}
-
-            {gameMode === 'ai' && (
-              <div className="flex items-center gap-3 mb-5">
-                <label className="text-sm font-medium text-stone-600">AI 난이도</label>
-                <div className="flex bg-gray-100 rounded-lg p-1 flex-1">
-                  {([1,2,3,4] as Difficulty[]).map(lv => {
-                    const labels = ['초급','중급','고급','마스터'];
-                    return (
-                      <button key={lv} onClick={() => setDifficulty(lv)}
-                        className={`flex-1 py-1.5 text-xs sm:text-sm font-medium rounded-md transition ${difficulty === lv ? 'bg-white shadow text-stone-800' : 'text-gray-500'}`}>
-                        {labels[lv-1]}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
-            {gameMode === 'ai' && (
-              <p className="text-xs text-stone-400 text-center mb-4">AI는 랜덤 배치를 사용합니다</p>
-            )}
+              {gameMode === 'ai' && (
+                <>
+                  <div className="w-px h-5 bg-stone-300 hidden sm:block" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium text-stone-500">내 팀</span>
+                    <div className="flex bg-white rounded-lg p-0.5 shadow-sm">
+                      <button onClick={() => setPerspective('cho')} className={`px-3 py-1 text-xs font-medium rounded-md transition ${perspective === 'cho' ? 'bg-blue-600 text-white' : 'text-gray-500'}`}>초</button>
+                      <button onClick={() => setPerspective('han')} className={`px-3 py-1 text-xs font-medium rounded-md transition ${perspective === 'han' ? 'bg-red-600 text-white' : 'text-gray-500'}`}>한</button>
+                    </div>
+                  </div>
+                  <div className="w-px h-5 bg-stone-300 hidden sm:block" />
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium text-stone-500">난이도</span>
+                    <div className="flex bg-white rounded-lg p-0.5 shadow-sm">
+                      {([1,2,3,4] as Difficulty[]).map(lv => {
+                        const labels = ['초급','중급','고급','마스터'];
+                        return (
+                          <button key={lv} onClick={() => setDifficulty(lv)}
+                            className={`px-2 py-1 text-xs font-medium rounded-md transition ${difficulty === lv ? 'bg-stone-800 text-white' : 'text-gray-500'}`}>
+                            {labels[lv-1]}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
 
             <button onClick={startGame}
               className="w-full py-3 bg-gradient-to-r from-stone-800 to-stone-950 text-white rounded-xl font-bold text-lg hover:from-stone-700 hover:to-stone-900 transition shadow-lg">
@@ -1156,7 +1162,7 @@ export default function JanggiGame() {
 
               {/* SVG 보드 */}
               <div className="flex justify-center">
-                <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full max-w-[420px] select-none">
+                <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full max-w-[500px] select-none">
                   {/* 나무 배경 */}
                   <defs>
                     <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
