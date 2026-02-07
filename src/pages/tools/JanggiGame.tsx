@@ -959,8 +959,23 @@ export default function JanggiGame() {
                   {/* 마지막 수 표시 */}
                   {lastMove && (
                     <g>
-                      <circle cx={getX(lastMove.f.col)} cy={getY(lastMove.f.row)} r="8" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.5" />
-                      <circle cx={getX(lastMove.t.col)} cy={getY(lastMove.t.row)} r="8" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.5" />
+                      {/* 출발점: 반투명 사각형 */}
+                      <rect
+                        x={getX(lastMove.f.col) - 22} y={getY(lastMove.f.row) - 22}
+                        width="44" height="44" rx="6"
+                        fill="#3b82f6" opacity="0.12"
+                      />
+                      {/* 도착점: 눈에 띄는 강조 */}
+                      <rect
+                        x={getX(lastMove.t.col) - 24} y={getY(lastMove.t.row) - 24}
+                        width="48" height="48" rx="7"
+                        fill="none" stroke="#f59e0b" strokeWidth="3" opacity="0.85"
+                      />
+                      <rect
+                        x={getX(lastMove.t.col) - 24} y={getY(lastMove.t.row) - 24}
+                        width="48" height="48" rx="7"
+                        fill="#f59e0b" opacity="0.08"
+                      />
                     </g>
                   )}
 
