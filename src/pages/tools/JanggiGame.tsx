@@ -1,0 +1,813 @@
+import { useState, useCallback, useEffect, useMemo } from 'react';
+import { ChevronLeft, RotateCcw, Undo2, Trophy, Settings, User, Bot } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+// ============================================================================
+// 한국장기 - 완전 재설계 v3 (세련된 디자인 + 위치교환)
+// ============================================================================
+
+type PieceType = 'king' | 'advisor' | 'elephant' | 'horse' | 'chariot' | 'cannon' | 'soldier';
+type Team = 'cho' | 'han';
+type Difficulty = 1 | 2 | 3 | 4;
+type GameMode = 'pvp' | 'ai';
+
+interface Piece {
+  type: PieceType;
+  team: Team;
+  label: string;
+  id: string;
+}
+
+interface Position { row: number; col: number; }
+
+const BOARD_ROWS = 10;
+const BOARD_COLS = 9;
+const CELL_SIZE = 48;
+const PADDING = 32;
+
+const LABELS: Record<Team, Record<PieceType, string>> = {
+  cho: { king: '楚', advisor: '士', elephant: '象', horse: '馬', chariot: '車', cannon: '包', soldier: '卒' },
+  han: { king: '漢', advisor: '士', elephant: '象', horse: '馬', chariot: '車', cannon: '包', soldier: '兵' },
+};
+
+const VALUES: Record<PieceType, number> = {
+  king: 99999, chariot: 13, cannon: 7, horse: 5, elephant: 3, advisor: 3, soldier: 2,
+};
+
+function createBoard(): (Piece | null)[][] {
+  const b = Array(BOARD_ROWS).fill(null).map(() => Array(BOARD_COLS).fill(null));
+  let id = 0;
+  const p = (t: PieceType, tm: Team): Piece => ({ type: t, team: tm, label: LABELS[tm][t], id: `${tm}_${t}_${id++}` });
+  
+  // 초나라 (위쪽) - 궁은 궁성 중심 (1,4)
+  b[0] = [p('chariot','cho'), p('horse','cho'), p('elephant','cho'), p('advisor','cho'), null, p('advisor','cho'), p('elephant','cho'), p('horse','cho'), p('chariot','cho')];
+  b[1][4] = p('king','cho'); // 궁성 중심
+  b[2][1] = p('cannon','cho'); b[2][7] = p('cannon','cho');
+  [0,2,4,6,8].forEach(c => b[3][c] = p('soldier','cho'));
+  
+  // 한나라 (아래쪽) - 궁은 궁성 중심 (8,4)
+  b[9] = [p('chariot','han'), p('horse','han'), p('elephant','han'), p('advisor','han'), null, p('advisor','han'), p('elephant','han'), p('horse','han'), p('chariot','han')];
+  b[8][4] = p('king','han'); // 궁성 중심
+  b[7][1] = p('cannon','han'); b[7][7] = p('cannon','han');
+  [0,2,4,6,8].forEach(c => b[6][c] = p('soldier','han'));
+  
+  return b;
+}
+
+class Rules {
+  static valid(r: number, c: number) { return r >= 0 && r < BOARD_ROWS && c >= 0 && c < BOARD_COLS; }
+  static palace(r: number, c: number, t: Team) { return t === 'cho' ? (r <= 2 && c >= 3 && c <= 5) : (r >= 7 && c >= 3 && c <= 5); }
+  static inAnyPalace(r: number, c: number) { return this.palace(r,c,'cho') || this.palace(r,c,'han'); }
+
+  // 궁성 내 대각선 연결 가능 여부 (꼭짓점↔중심만)
+  private static readonly PALACE_DIAG_PAIRS: [number,number,number,number][] = [
+    // 초 궁성
+    [0,3, 1,4], [1,4, 2,5], [0,5, 1,4], [1,4, 2,3],
+    // 한 궁성
+    [7,3, 8,4], [8,4, 9,5], [7,5, 8,4], [8,4, 9,3],
+  ];
+
+  static canPalaceDiagonal(r1: number, c1: number, r2: number, c2: number): boolean {
+    return this.PALACE_DIAG_PAIRS.some(([a,b,c,d]) =>
+      (r1===a && c1===b && r2===c && c2===d) || (r1===c && c1===d && r2===a && c2===b)
+    );
+  }
+
+  static moves(b: (Piece | null)[][], p: Position): Position[] {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    let m: Position[] = [];
+    switch (pc.type) {
+      case 'chariot': m = this.chariot(b, p); break;
+      case 'cannon': m = this.cannon(b, p); break;
+      case 'horse': m = this.horse(b, p); break;
+      case 'elephant': m = this.elephant(b, p); break;
+      case 'advisor': m = this.advisor(b, p); break;
+      case 'king': m = this.king(b, p); break;
+      case 'soldier': m = this.soldier(b, p); break;
+    }
+    return m.filter(t => !this.suicide(b, p, t, pc.team));
+  }
+
+  private static chariot(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[] = [], t = pc.team;
+    // 직선 방향
+    [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc]) => {
+      let r = p.row+dr, c = p.col+dc;
+      while (this.valid(r,c)) {
+        const x = b[r][c];
+        if (!x) m.push({row:r,col:c});
+        else { if (x.team!==t) m.push({row:r,col:c}); break; }
+        r+=dr; c+=dc;
+      }
+    });
+    // 궁성 내 대각선 방향
+    if (this.inAnyPalace(p.row, p.col)) {
+      [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr,dc]) => {
+        let r = p.row+dr, c = p.col+dc;
+        while (this.valid(r,c) && this.canPalaceDiagonal(r-dr,c-dc,r,c)) {
+          const x = b[r][c];
+          if (!x) m.push({row:r,col:c});
+          else { if (x.team!==t) m.push({row:r,col:c}); break; }
+          r+=dr; c+=dc;
+        }
+      });
+    }
+    return m;
+  }
+
+  private static cannon(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[] = [], t = pc.team;
+    // 직선 방향
+    [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc]) => {
+      let r = p.row+dr, c = p.col+dc, jmp = false;
+      while (this.valid(r,c)) {
+        const x = b[r][c];
+        if (!jmp) {
+          // 포는 기물을 반드시 하나 넘어야 이동 가능 (포는 넘을 수 없음)
+          if (x) { if (x.type === 'cannon') break; jmp = true; }
+        } else {
+          if (!x) m.push({row:r,col:c});
+          else { if (x.type !== 'cannon' && x.team !== t) m.push({row:r,col:c}); break; }
+        }
+        r+=dr; c+=dc;
+      }
+    });
+    // 궁성 내 대각선 방향
+    this.cannonPalaceDiag(b, p, t, m);
+    return m;
+  }
+
+  private static cannonPalaceDiag(b: (Piece | null)[][], p: Position, t: Team, m: Position[]) {
+    [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr,dc]) => {
+      let r = p.row+dr, c = p.col+dc, jmp = false;
+      while (this.valid(r,c) && this.canPalaceDiagonal(r-dr,c-dc,r,c)) {
+        const x = b[r][c];
+        if (!jmp) {
+          if (x) { if (x.type === 'cannon') break; jmp = true; }
+        } else {
+          if (!x) m.push({row:r,col:c});
+          else { if (x.type !== 'cannon' && x.team !== t) m.push({row:r,col:c}); break; }
+        }
+        r+=dr; c+=dc;
+      }
+    });
+  }
+
+  private static horse(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[] = [], t = pc.team;
+    [[[1,0],[2,1]],[[1,0],[2,-1]],[[-1,0],[-2,1]],[[-1,0],[-2,-1]],[[0,1],[1,2]],[[0,1],[-1,2]],[[0,-1],[1,-2]],[[0,-1],[-1,-2]]].forEach(([[br,bc],[lr,lc]]) => {
+      const brr=p.row+br, bcc=p.col+bc, lrr=p.row+lr, lcc=p.col+lc;
+      if (this.valid(brr,bcc) && !b[brr][bcc] && this.valid(lrr,lcc)) {
+        const x=b[lrr][lcc]; if (!x || x.team!==t) m.push({row:lrr,col:lcc});
+      }
+    });
+    return m;
+  }
+
+  private static elephant(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[]=[], t=pc.team;
+    // 8방향: [목적지dr,dc], [중간1 dr,dc], [중간2 dr,dc]
+    const moves: [number,number,number,number,number,number][] = [
+      [-3,-2, -1,0, -2,-1], [-3,+2, -1,0, -2,+1],
+      [+3,-2, +1,0, +2,-1], [+3,+2, +1,0, +2,+1],
+      [-2,-3, 0,-1, -1,-2], [-2,+3, 0,+1, -1,+2],
+      [+2,-3, 0,-1, +1,-2], [+2,+3, 0,+1, +1,+2],
+    ];
+    moves.forEach(([dr,dc, b1r,b1c, b2r,b2c]) => {
+      const mr=p.row+b1r, mc=p.col+b1c;
+      const mr2=p.row+b2r, mc2=p.col+b2c;
+      const tr=p.row+dr, tc=p.col+dc;
+      if (this.valid(mr,mc) && !b[mr][mc] && this.valid(mr2,mc2) && !b[mr2][mc2] && this.valid(tr,tc)) {
+        const x=b[tr][tc]; if (!x||x.team!==t) m.push({row:tr,col:tc});
+      }
+    });
+    return m;
+  }
+
+  private static advisor(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[]=[], t=pc.team;
+    // 직선 이동 (상하좌우) - 궁성 내
+    [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc])=>{
+      const r=p.row+dr,c=p.col+dc;
+      if (this.valid(r,c) && this.palace(r,c,t)) { const x=b[r][c]; if(!x||x.team!==t) m.push({row:r,col:c}); }
+    });
+    // 대각선 이동 - 궁성 내 대각선 연결된 위치만
+    [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr,dc])=>{
+      const r=p.row+dr,c=p.col+dc;
+      if (this.valid(r,c) && this.palace(r,c,t) && this.canPalaceDiagonal(p.row,p.col,r,c)) {
+        const x=b[r][c]; if(!x||x.team!==t) m.push({row:r,col:c});
+      }
+    });
+    return m;
+  }
+
+  private static king(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[]=[], t=pc.team;
+    // 직선 이동 (상하좌우) - 궁성 내
+    [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dr,dc])=>{
+      const r=p.row+dr,c=p.col+dc;
+      if (this.valid(r,c) && this.palace(r,c,t)) { const x=b[r][c]; if(!x||x.team!==t) m.push({row:r,col:c}); }
+    });
+    // 대각선 이동 - 궁성 내 대각선 연결된 위치만 (중심↔꼭짓점)
+    [[1,1],[1,-1],[-1,1],[-1,-1]].forEach(([dr,dc])=>{
+      const r=p.row+dr,c=p.col+dc;
+      if (this.valid(r,c) && this.palace(r,c,t) && this.canPalaceDiagonal(p.row,p.col,r,c)) {
+        const x=b[r][c]; if(!x||x.team!==t) m.push({row:r,col:c});
+      }
+    });
+    return m;
+  }
+
+  private static soldier(b: (Piece | null)[][], p: Position) {
+    const pc = b[p.row][p.col];
+    if (!pc) return [];
+    const m: Position[]=[], t=pc.team, f=t==='cho'?1:-1;
+    // 기본 이동: 전진 + 좌우
+    [[f,0],[0,1],[0,-1]].forEach(([dr,dc])=>{
+      const r=p.row+dr,c=p.col+dc;
+      if (this.valid(r,c)) { const x=b[r][c]; if(!x||x.team!==t) m.push({row:r,col:c}); }
+    });
+    // 적 궁성 내 전진 방향 대각선
+    const enemyTeam = t === 'cho' ? 'han' : 'cho';
+    if (this.palace(p.row, p.col, enemyTeam)) {
+      [[f,1],[f,-1]].forEach(([dr,dc])=>{
+        const r=p.row+dr,c=p.col+dc;
+        if (this.valid(r,c) && this.canPalaceDiagonal(p.row,p.col,r,c)) {
+          const x=b[r][c]; if(!x||x.team!==t) m.push({row:r,col:c});
+        }
+      });
+    }
+    return m;
+  }
+
+  private static suicide(b: (Piece | null)[][], f: Position, t: Position, tm: Team) {
+    const nb=b.map(r=>[...r]); nb[t.row][t.col]=nb[f.row][f.col]; nb[f.row][f.col]=null;
+    return this.check(nb,tm);
+  }
+
+  static findKing(b: (Piece | null)[][], t: Team) {
+    for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) if (b[r][c]?.type==='king' && b[r][c]?.team===t) return {row:r,col:c};
+    return null;
+  }
+
+  static check(b: (Piece | null)[][], t: Team) {
+    const k=this.findKing(b,t); if (!k) return false;
+    for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) {
+      const p=b[r][c];
+      if (p && p.team!==t) {
+        const a=this.rawAttacks(b,{row:r,col:c});
+        if (a.some(x=>x.row===k.row&&x.col===k.col)) return true;
+      }
+    }
+    return false;
+  }
+
+  private static rawAttacks(b: (Piece | null)[][], p: Position) {
+    const x=b[p.row][p.col]; if (!x) return [];
+    switch(x.type){case'chariot':return this.chariot(b,p);case'cannon':return this.cannon(b,p);case'horse':return this.horse(b,p);case'elephant':return this.elephant(b,p);case'advisor':return this.advisor(b,p);case'king':return this.king(b,p);case'soldier':return this.soldier(b,p);}
+    return [];
+  }
+
+  static checkmate(b: (Piece | null)[][], t: Team) {
+    if (!this.check(b,t)) return false;
+    for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) if (b[r][c]?.team===t && this.moves(b,{row:r,col:c}).length>0) return false;
+    return true;
+  }
+}
+
+class AIPlayer {
+  private d: Difficulty; private t: Team;
+  constructor(d: Difficulty, t: Team) { this.d=d; this.t=t; }
+  getMove(b: (Piece | null)[][]) {
+    const all=this.allMoves(b,this.t); if (all.length===0) return null;
+    const depth=[2,3,4,5][this.d-1], rand=[0.3,0.15,0,0][this.d-1];
+    let best=all[0], bestSc=-Infinity;
+    for (const m of all) {
+      const sc=this.minimax(this.sim(b,m.f,m.t),depth,-Infinity,Infinity,false);
+      if (sc>bestSc) { bestSc=sc; best=m; }
+    }
+    if (Math.random()<rand) return all[Math.floor(Math.random()*all.length)];
+    return best;
+  }
+  private minimax(b: (Piece | null)[][], d: number, a: number, B: number, mx: boolean): number {
+    if (d===0) return this.eval(b);
+    const t=mx?this.t:(this.t==='cho'?'han':'cho');
+    const ms=this.allMoves(b,t);
+    if (Rules.checkmate(b,t)) return mx?-99999:99999;
+    if (mx) {
+      let s=-Infinity;
+      for (const m of ms) { s=Math.max(s,this.minimax(this.sim(b,m.f,m.t),d-1,a,B,false)); a=Math.max(a,s); if (B<=a) break; }
+      return s;
+    } else {
+      let s=Infinity;
+      for (const m of ms) { s=Math.min(s,this.minimax(this.sim(b,m.f,m.t),d-1,a,B,true)); B=Math.min(B,s); if (B<=a) break; }
+      return s;
+    }
+  }
+  private eval(b: (Piece | null)[][]) {
+    let s=0;
+    for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) {
+      const p=b[r][c]; if (p) { let v=VALUES[p.type]; if (p.type==='soldier') v+=(p.team==='cho'?r:(9-r))*0.2; if (c>=3&&c<=5) v+=0.3; s+=(p.team===this.t?1:-1)*v; }
+    }
+    if (Rules.check(b,this.t==='cho'?'han':'cho')) s+=3;
+    if (Rules.check(b,this.t)) s-=3;
+    return s;
+  }
+  private allMoves(b: (Piece | null)[][], t: Team) { const m: {f:Position,t:Position}[]=[]; for (let r=0;r<BOARD_ROWS;r++) for (let c=0;c<BOARD_COLS;c++) if (b[r][c]?.team===t) Rules.moves(b,{row:r,col:c}).forEach(x=>m.push({f:{row:r,col:c},t:x})); return m; }
+  private sim(b: (Piece | null)[][], f: Position, t: Position) { const nb=b.map(r=>[...r]); nb[t.row][t.col]=nb[f.row][f.col]; nb[f.row][f.col]=null; return nb; }
+}
+
+export default function JanggiGame() {
+  const [board, setBoard] = useState(createBoard);
+  const [selected, setSelected] = useState<Position|null>(null);
+  const [validMoves, setValidMoves] = useState<Position[]>([]);
+  const [turn, setTurn] = useState<Team>('cho');
+  const [moves, setMoves] = useState<{f:Position,t:Position,cap:Piece|null}[]>([]);
+  const [captured, setCaptured] = useState<{cho:Piece[],han:Piece[]}>({cho:[],han:[]});
+  const [history, setHistory] = useState<{board:(Piece|null)[][],captured:{cho:Piece[],han:Piece[]},turn:Team,lastMove:{f:Position,t:Position}|null}[]>([]);
+  const [winner, setWinner] = useState<Team|null>(null);
+  const [gameMode, setGameMode] = useState<GameMode>('ai');
+  const [difficulty, setDifficulty] = useState<Difficulty>(2);
+  const [perspective, setPerspective] = useState<Team>('cho'); // 어떤 팀을 아래에 둘지
+  const [showSettings, setShowSettings] = useState(false);
+  const [isThinking, setIsThinking] = useState(false);
+  const [lastMove, setLastMove] = useState<{f:Position,t:Position}|null>(null);
+  
+  const aiTeam = perspective === 'cho' ? 'han' : 'cho';
+  const ai = useMemo(() => new AIPlayer(difficulty, aiTeam), [difficulty, aiTeam]);
+
+  // 시점 변환 함수
+  const toVisual = (r: number) => perspective === 'cho' ? r : 9 - r;
+  const toLogical = (r: number) => perspective === 'cho' ? r : 9 - r;
+
+  useEffect(() => {
+    if (Rules.checkmate(board, turn)) setWinner(turn === 'cho' ? 'han' : 'cho');
+  }, [board, turn]);
+
+  useEffect(() => {
+    if (gameMode === 'ai' && turn === aiTeam && !winner) {
+      setIsThinking(true);
+      setTimeout(() => {
+        const m = ai.getMove(board);
+        if (m) executeMove(m.f, m.t);
+        setIsThinking(false);
+      }, 600);
+    }
+  }, [turn, gameMode, board, winner, ai, aiTeam]);
+
+  const executeMove = useCallback((f: Position, t: Position) => {
+    const p = board[f.row][f.col];
+    if (!p) return;
+
+    // 이동 전 상태 저장 (무르기용)
+    setHistory(prev => [...prev, {
+      board: board.map(r => [...r]),
+      captured: { cho: [...captured.cho], han: [...captured.han] },
+      turn,
+      lastMove,
+    }]);
+
+    const nb = board.map(r => [...r]);
+    const cap = nb[t.row][t.col];
+    nb[t.row][t.col] = p;
+    nb[f.row][f.col] = null;
+
+    const nc = { cho: [...captured.cho], han: [...captured.han] };
+    if (cap) nc[p.team].push(cap);
+
+    setBoard(nb);
+    setCaptured(nc);
+    setMoves(prev => [...prev, { f, t, cap }]);
+    setLastMove({ f, t });
+    setTurn(x => x === 'cho' ? 'han' : 'cho');
+    setSelected(null);
+    setValidMoves([]);
+  }, [board, captured, turn, lastMove]);
+
+  const handleIntersectionClick = (visualRow: number, col: number) => {
+    if (isThinking || winner) return;
+    if (gameMode === 'ai' && turn === aiTeam) return;
+    
+    const logicalRow = toLogical(visualRow);
+    const pos = { row: logicalRow, col };
+    const p = board[logicalRow][col];
+    
+    if (selected) {
+      const isValid = validMoves.some(m => m.row === logicalRow && m.col === col);
+      if (isValid) {
+        executeMove(selected, pos);
+      } else if (p?.team === turn) {
+        setSelected(pos);
+        setValidMoves(Rules.moves(board, pos));
+      } else {
+        setSelected(null);
+        setValidMoves([]);
+      }
+    } else if (p?.team === turn) {
+      setSelected(pos);
+      setValidMoves(Rules.moves(board, pos));
+    }
+  };
+
+  const undo = useCallback(() => {
+    if (isThinking || winner) return;
+    // AI 모드에서는 AI 수 + 플레이어 수 2개 되돌리기
+    const count = gameMode === 'ai' && history.length >= 2 ? 2 : 1;
+    if (history.length < count) return;
+
+    const target = history[history.length - count];
+    setBoard(target.board);
+    setCaptured(target.captured);
+    setTurn(target.turn);
+    setLastMove(target.lastMove);
+    setHistory(prev => prev.slice(0, -count));
+    setMoves(prev => prev.slice(0, -count));
+    setSelected(null);
+    setValidMoves([]);
+    setWinner(null);
+  }, [history, gameMode, isThinking, winner]);
+
+  const reset = () => {
+    setBoard(createBoard());
+    setSelected(null);
+    setValidMoves([]);
+    setTurn('cho');
+    setMoves([]);
+    setCaptured({ cho: [], han: [] });
+    setWinner(null);
+    setLastMove(null);
+    setHistory([]);
+  };
+
+  const WIDTH = PADDING * 2 + (BOARD_COLS - 1) * CELL_SIZE;
+  const HEIGHT = PADDING * 2 + (BOARD_ROWS - 1) * CELL_SIZE;
+  const getX = (c: number) => PADDING + c * CELL_SIZE;
+  const getY = (r: number) => PADDING + toVisual(r) * CELL_SIZE;
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 to-amber-50">
+      {/* 헤더 */}
+      <div className="bg-gradient-to-r from-stone-800 to-stone-950 text-white shadow-lg">
+        <div className="max-w-5xl mx-auto px-4 py-5 sm:py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3 sm:gap-4">
+              <Link to="/tools" className="text-white/70 hover:text-white transition"><ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" /></Link>
+              <div>
+                <h1 className="text-xl sm:text-2xl font-bold tracking-tight">한국장기</h1>
+                <p className="text-xs sm:text-sm text-white/60 mt-0.5">Korean Chess (Janggi)</p>
+              </div>
+            </div>
+            <button onClick={() => setShowSettings(!showSettings)} className="flex items-center gap-2 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg transition">
+              <Settings className="w-4 h-4" />
+              <span className="text-sm hidden sm:inline">설정</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* 설정 패널 */}
+      {showSettings && (
+        <div className="bg-white border-b shadow-sm">
+          <div className="max-w-5xl mx-auto px-4 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">게임 모드</label>
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button onClick={() => { setGameMode('pvp'); reset(); }} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${gameMode === 'pvp' ? 'bg-white shadow text-stone-800' : 'text-gray-600'}`}>
+                    <User className="w-4 h-4 inline mr-1" />2인
+                  </button>
+                  <button onClick={() => { setGameMode('ai'); reset(); }} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${gameMode === 'ai' ? 'bg-white shadow text-stone-800' : 'text-gray-600'}`}>
+                    <Bot className="w-4 h-4 inline mr-1" />AI
+                  </button>
+                </div>
+              </div>
+              
+              <div>
+                <label className="block text-xs font-medium text-gray-500 mb-1.5">플레이어 위치</label>
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button onClick={() => { setPerspective('cho'); reset(); }} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${perspective === 'cho' ? 'bg-blue-50 shadow text-blue-700' : 'text-gray-600'}`}>
+                    초(藍) 아래
+                  </button>
+                  <button onClick={() => { setPerspective('han'); reset(); }} className={`flex-1 py-1.5 text-sm font-medium rounded-md transition ${perspective === 'han' ? 'bg-red-50 shadow text-red-700' : 'text-gray-600'}`}>
+                    한(赤) 아래
+                  </button>
+                </div>
+              </div>
+
+              {gameMode === 'ai' && (
+                <div>
+                  <label className="block text-xs font-medium text-gray-500 mb-1.5">AI 난이도</label>
+                  <select value={difficulty} onChange={(e) => setDifficulty(Number(e.target.value) as Difficulty)} className="w-full px-3 py-1.5 bg-white border rounded-lg text-sm">
+                    <option value={1}>초급</option>
+                    <option value={2}>중급</option>
+                    <option value={3}>고급</option>
+                    <option value={4}>마스터</option>
+                  </select>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 메인 게임 */}
+      <div className="max-w-5xl mx-auto px-4 py-6">
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* 게임 보드 */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-xl p-3 sm:p-6">
+              {/* 상단 상태바 */}
+              <div className="flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className={`w-3 h-3 rounded-full ${turn === 'cho' ? 'bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.6)]' : 'bg-gray-300'}`} />
+                  <span className={`text-sm sm:text-base font-semibold ${turn === 'cho' ? 'text-blue-700' : 'text-gray-500'}`}>초 (藍)</span>
+                </div>
+
+                <div className="flex items-center gap-2 order-3 sm:order-none w-full sm:w-auto justify-center">
+                  <button
+                    onClick={() => setPerspective(p => p === 'cho' ? 'han' : 'cho')}
+                    className="px-2 py-1 sm:px-3 sm:py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-600 rounded-lg text-xs sm:text-sm font-medium transition flex items-center gap-1"
+                    title="위아래 바꾸기"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                    </svg>
+                    위아래
+                  </button>
+
+                  {Rules.check(board, turn) && !winner && (
+                    <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-red-100 text-red-700 rounded-full text-xs sm:text-sm font-bold animate-pulse">장군!</span>
+                  )}
+                  {winner && (
+                    <div className="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-amber-100 text-amber-800 rounded-full font-bold text-sm">
+                      <Trophy className="w-4 h-4 sm:w-5 sm:h-5" />
+                      {winner === 'cho' ? '초' : '한'} 승리!
+                    </div>
+                  )}
+                  {isThinking && (
+                    <span className="text-sm text-gray-500 flex items-center gap-1">
+                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
+                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay:'75ms'}} />
+                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay:'150ms'}} />
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <span className={`text-sm sm:text-base font-semibold ${turn === 'han' ? 'text-red-700' : 'text-gray-500'}`}>한 (赤)</span>
+                  <div className={`w-3 h-3 rounded-full ${turn === 'han' ? 'bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)]' : 'bg-gray-300'}`} />
+                </div>
+              </div>
+
+              {/* 상대편(위)이 잡은 기물 표시 */}
+              {(() => {
+                const topTeam = perspective === 'cho' ? 'han' : 'cho';
+                const topCapturedPieces = captured[topTeam]; // 위쪽 팀이 잡은 기물들
+                return topCapturedPieces.length > 0 ? (
+                  <div className="flex flex-wrap gap-1 mb-2 px-1">
+                    {topCapturedPieces.map((cp, i) => (
+                      <span key={i} className={`inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded text-xs sm:text-sm font-bold ${cp.team === 'cho' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                        {cp.label}
+                      </span>
+                    ))}
+                  </div>
+                ) : null;
+              })()}
+
+              {/* SVG 보드 */}
+              <div className="flex justify-center">
+                <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full max-w-[420px] select-none">
+                  {/* 나무 배경 */}
+                  <defs>
+                    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#f5e6c8" />
+                      <stop offset="50%" stopColor="#e8d4a0" />
+                      <stop offset="100%" stopColor="#d4b896" />
+                    </linearGradient>
+                    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feDropShadow dx="1" dy="2" stdDeviation="2" floodOpacity="0.3"/>
+                    </filter>
+                  </defs>
+                  <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill="url(#woodGrad)" rx="12" />
+                  
+                  {/* 격자선 */}
+                  <g stroke="#5c3d1e" strokeWidth="1.2" opacity="0.85">
+                    {Array.from({ length: 10 }).map((_, i) => (
+                      <line key={`h${i}`} x1={getX(0)} y1={getY(i)} x2={getX(8)} y2={getY(i)} />
+                    ))}
+                    {Array.from({ length: 9 }).map((_, i) => (
+                      <line key={`v${i}`} x1={getX(i)} y1={getY(0)} x2={getX(i)} y2={getY(9)} />
+                    ))}
+                  </g>
+
+                  {/* 궁성 대각선 */}
+                  <g stroke="#5c3d1e" strokeWidth="1.2" opacity="0.85">
+                    <line x1={getX(3)} y1={getY(0)} x2={getX(5)} y2={getY(2)} />
+                    <line x1={getX(5)} y1={getY(0)} x2={getX(3)} y2={getY(2)} />
+                    <line x1={getX(3)} y1={getY(7)} x2={getX(5)} y2={getY(9)} />
+                    <line x1={getX(5)} y1={getY(7)} x2={getX(3)} y2={getY(9)} />
+                  </g>
+
+                  {/* 교차점 클릭 영역 (투명) */}
+                  {Array.from({ length: 10 }).map((_, r) =>
+                    Array.from({ length: 9 }).map((_, c) => (
+                      <circle
+                        key={`hit-${r}-${c}`}
+                        cx={getX(c)}
+                        cy={getY(r)}
+                        r="20"
+                        fill="transparent"
+                        className="cursor-pointer"
+                        onClick={() => handleIntersectionClick(r, c)}
+                      />
+                    ))
+                  )}
+
+                  {/* 마지막 수 표시 */}
+                  {lastMove && (
+                    <g>
+                      <circle cx={getX(lastMove.f.col)} cy={getY(lastMove.f.row)} r="8" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.5" />
+                      <circle cx={getX(lastMove.t.col)} cy={getY(lastMove.t.row)} r="8" fill="none" stroke="#3b82f6" strokeWidth="2" opacity="0.5" />
+                    </g>
+                  )}
+
+                  {/* 이동 가능 표시 */}
+                  {selected && validMoves.map((m, i) => {
+                    const isCapture = board[m.row][m.col] !== null;
+                    return (
+                      <g key={`vm${i}`}>
+                        {isCapture ? (
+                          <circle cx={getX(m.col)} cy={getY(m.row)} r="18" fill="none" stroke="#ef4444" strokeWidth="3" opacity="0.8" />
+                        ) : (
+                          <circle cx={getX(m.col)} cy={getY(m.row)} r="5" fill="#fbbf24" opacity="0.9" />
+                        )}
+                      </g>
+                    );
+                  })}
+
+                  {/* 기물 */}
+                  {board.map((row, r) =>
+                    row.map((p, c) => {
+                      if (!p) return null;
+                      const isSelected = selected?.row === r && selected?.col === c;
+                      return (
+                        <g
+                          key={p.id}
+                          className="cursor-pointer transition-transform duration-150"
+                          onClick={(e) => { e.stopPropagation(); handleIntersectionClick(toVisual(r), c); }}
+                          style={{ filter: 'url(#shadow)' }}
+                        >
+                          {/* 기물 배경 (팔각형) */}
+                          <polygon
+                            points={(() => {
+                              const cx = getX(c), cy = getY(r), sz = 21;
+                              return [
+                                [cx, cy - sz],
+                                [cx + sz * 0.7, cy - sz * 0.7],
+                                [cx + sz, cy],
+                                [cx + sz * 0.7, cy + sz * 0.7],
+                                [cx, cy + sz],
+                                [cx - sz * 0.7, cy + sz * 0.7],
+                                [cx - sz, cy],
+                                [cx - sz * 0.7, cy - sz * 0.7]
+                              ].map(pt => pt.join(',')).join(' ');
+                            })()}
+                            fill={p.team === 'cho' ? '#f8fafc' : '#fef2f2'}
+                            stroke={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
+                            strokeWidth={isSelected ? 3 : 2}
+                          />
+                          {/* 한자 */}
+                          <text
+                            x={getX(c)}
+                            y={getY(r)}
+                            textAnchor="middle"
+                            dominantBaseline="central"
+                            fontSize="18"
+                            fontWeight="bold"
+                            fill={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
+                            style={{ fontFamily: 'serif', pointerEvents: 'none' }}
+                          >
+                            {p.label}
+                          </text>
+                          {/* 선택 효과 */}
+                          {isSelected && (
+                            <circle cx={getX(c)} cy={getY(r)} r="26" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.6" />
+                          )}
+                        </g>
+                      );
+                    })
+                  )}
+                </svg>
+              </div>
+
+              {/* 아래편 잡힌 기물 (보드 아래) */}
+              {(() => {
+                const bottomTeam = perspective;
+                const bottomCaptured = captured[bottomTeam]; // 아래편이 잡은 기물
+                return bottomCaptured.length > 0 ? (
+                  <div className="flex flex-wrap gap-1 mt-2 px-1">
+                    {bottomCaptured.map((cp, i) => (
+                      <span key={i} className={`inline-flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 rounded text-xs sm:text-sm font-bold ${cp.team === 'cho' ? 'bg-blue-50 text-blue-700 border border-blue-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                        {cp.label}
+                      </span>
+                    ))}
+                  </div>
+                ) : null;
+              })()}
+
+              {/* 컨트롤 */}
+              <div className="flex justify-center gap-3 mt-6">
+                <button onClick={reset} className="flex items-center gap-2 px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-medium transition">
+                  <RotateCcw className="w-4 h-4" />
+                  새 게임
+                </button>
+                <button
+                  onClick={undo}
+                  disabled={history.length === 0 || isThinking || !!winner}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl font-medium transition disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <Undo2 className="w-4 h-4" />
+                  무르기
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* 사이드바 */}
+          <div className="space-y-4">
+            {/* 기물 점수 */}
+            <div className="bg-white rounded-xl shadow-md p-4">
+              <h3 className="font-bold text-stone-800 mb-3 text-sm">기물 점수</h3>
+              <div className="space-y-1.5 text-sm">
+                {[
+                  { label: '車 차', value: 13, color: 'text-stone-700' },
+                  { label: '包 포', value: 7, color: 'text-stone-700' },
+                  { label: '馬 마', value: 5, color: 'text-stone-700' },
+                  { label: '象 상', value: 3, color: 'text-stone-700' },
+                  { label: '士 사', value: 3, color: 'text-stone-700' },
+                  { label: '卒/兵', value: 2, color: 'text-stone-700' },
+                ].map(item => (
+                  <div key={item.label} className="flex justify-between items-center">
+                    <span className="text-stone-600">{item.label}</span>
+                    <span className={`font-bold ${item.color}`}>{item.value}점</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-stone-400 mt-3 pt-2 border-t">* 후수(한) 1.5점 덤</p>
+            </div>
+
+            {/* 수 기록 */}
+            <div className="bg-white rounded-xl shadow-md p-4">
+              <h3 className="font-bold text-stone-800 mb-3 text-sm">수 기록 ({moves.length})</h3>
+              <div className="max-h-48 overflow-y-auto space-y-1 text-sm">
+                {moves.length === 0 ? (
+                  <p className="text-stone-400 text-xs">아직 수가 없습니다</p>
+                ) : (
+                  moves.map((m, i) => (
+                    <div key={i} className={`flex items-center gap-2 p-1.5 rounded ${i % 2 === 0 ? 'bg-blue-50/50' : 'bg-red-50/50'}`}>
+                      <span className="text-xs text-stone-400 w-6">{i + 1}.</span>
+                      <span className="font-medium">
+                        {board[m.t.row][m.t.col]?.label} 
+                        {m.cap && <span className="text-red-500">×</span>}
+                      </span>
+                      <span className="text-xs text-stone-400 ml-auto">
+                        {String.fromCharCode(97 + m.f.col)}{10 - m.f.row}→{String.fromCharCode(97 + m.t.col)}{10 - m.t.row}
+                      </span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+
+            {/* 게임 규칙 */}
+            <div className="bg-gradient-to-br from-stone-50 to-amber-50 rounded-xl shadow-md p-4">
+              <h3 className="font-bold text-stone-800 mb-3 text-sm">기물 이동</h3>
+              <ul className="space-y-1.5 text-xs text-stone-600">
+                <li><strong className="text-stone-800">車(차):</strong> 직선 무제한, 궁성 대각선</li>
+                <li><strong className="text-stone-800">包(포):</strong> 기물 1개 넘어서 이동 (포는 넘지 못함)</li>
+                <li><strong className="text-stone-800">馬(마):</strong> 日자, 막힘 체크</li>
+                <li><strong className="text-stone-800">象(상):</strong> 1직선+2대각선, 막힘 체크</li>
+                <li><strong className="text-stone-800">士(사):</strong> 궁성 내 상하좌우+대각선</li>
+                <li><strong className="text-stone-800">楚/漢:</strong> 궁성 내 상하좌우+대각선</li>
+                <li><strong className="text-stone-800">卒/兵:</strong> 앞+좌우, 적 궁성 대각선</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
