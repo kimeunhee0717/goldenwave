@@ -1151,8 +1151,30 @@ export default function JanggiGame() {
                       <stop offset="50%" stopColor="#e8d4a0" />
                       <stop offset="100%" stopColor="#d4b896" />
                     </linearGradient>
+                    {/* 초(藍) 기물 돔 그라데이션 */}
+                    <radialGradient id="choPieceGrad" cx="40%" cy="35%">
+                      <stop offset="0%" stopColor="#ffffff" stopOpacity={0.9}/>
+                      <stop offset="35%" stopColor="#eef4ff"/>
+                      <stop offset="75%" stopColor="#dbeafe"/>
+                      <stop offset="100%" stopColor="#bfdbfe"/>
+                    </radialGradient>
+                    {/* 한(赤) 기물 돔 그라데이션 */}
+                    <radialGradient id="hanPieceGrad" cx="40%" cy="35%">
+                      <stop offset="0%" stopColor="#ffffff" stopOpacity={0.9}/>
+                      <stop offset="35%" stopColor="#fff5f5"/>
+                      <stop offset="75%" stopColor="#fee2e2"/>
+                      <stop offset="100%" stopColor="#fecaca"/>
+                    </radialGradient>
                     <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-                      <feDropShadow dx="1" dy="2" stdDeviation="2" floodOpacity="0.3"/>
+                      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5"/>
+                      <feOffset dx="1" dy="3" result="offsetblur"/>
+                      <feComponentTransfer>
+                        <feFuncA type="linear" slope="0.35"/>
+                      </feComponentTransfer>
+                      <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
                     </filter>
                   </defs>
                   <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill="url(#woodGrad)" rx="12" />
@@ -1232,6 +1254,17 @@ export default function JanggiGame() {
                     row.map((p, c) => {
                       if (!p) return null;
                       const isSelected = selected?.row === r && selected?.col === c;
+                      const cx = getX(c), cy = getY(r);
+                      const sz = p.type === 'king' ? 24 : (p.type === 'soldier' || p.type === 'advisor') ? 18 : 20;
+                      const innerSz = sz - 3;
+                      const octPoints = (s: number) => {
+                        const pts: [number,number][] = [];
+                        for (let i = 0; i < 8; i++) {
+                          const angle = (22.5 + 45 * i) * Math.PI / 180;
+                          pts.push([cx + s * Math.sin(angle), cy - s * Math.cos(angle)]);
+                        }
+                        return pts.map(pt => pt.join(',')).join(' ');
+                      };
                       return (
                         <g
                           key={p.id}
@@ -1239,55 +1272,56 @@ export default function JanggiGame() {
                           onClick={(e) => { e.stopPropagation(); handleIntersectionClick(toVisual(r), c); }}
                           style={{ filter: 'url(#shadow)' }}
                         >
-                          {/* 기물 배경 (정팔각형) */}
+                          {/* 기물 배경 (정팔각형) — 그라데이션 fill */}
                           <polygon
-                            points={(() => {
-                              const cx = getX(c), cy = getY(r);
-                              const sz = p.type === 'king' ? 24 : (p.type === 'soldier' || p.type === 'advisor') ? 18 : 20;
-                              // 정팔각형: 22.5도부터 45도 간격
-                              const pts: [number,number][] = [];
-                              for (let i = 0; i < 8; i++) {
-                                const angle = (22.5 + 45 * i) * Math.PI / 180;
-                                pts.push([cx + sz * Math.sin(angle), cy - sz * Math.cos(angle)]);
-                              }
-                              return pts.map(pt => pt.join(',')).join(' ');
-                            })()}
-                            fill={p.team === 'cho' ? '#f0f5ff' : '#fff5f5'}
+                            points={octPoints(sz)}
+                            fill={`url(#${p.team === 'cho' ? 'cho' : 'han'}PieceGrad)`}
                             stroke={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
                             strokeWidth={isSelected ? 3 : p.type === 'king' ? 2.5 : 1.8}
                           />
                           {/* 안쪽 테두리 (이중선 효과) */}
                           <polygon
-                            points={(() => {
-                              const cx = getX(c), cy = getY(r);
-                              const sz = (p.type === 'king' ? 24 : (p.type === 'soldier' || p.type === 'advisor') ? 18 : 20) - 3;
-                              const pts: [number,number][] = [];
-                              for (let i = 0; i < 8; i++) {
-                                const angle = (22.5 + 45 * i) * Math.PI / 180;
-                                pts.push([cx + sz * Math.sin(angle), cy - sz * Math.cos(angle)]);
-                              }
-                              return pts.map(pt => pt.join(',')).join(' ');
-                            })()}
+                            points={octPoints(innerSz)}
                             fill="none"
                             stroke={p.team === 'cho' ? '#93b4f8' : '#f8a0a0'}
-                            strokeWidth="0.8"
+                            strokeWidth="1"
+                            opacity={0.8}
                           />
-                          {/* 한자 */}
+                          {/* 상단 하이라이트 (빛 반사) */}
+                          <ellipse
+                            cx={cx} cy={cy - sz * 0.3}
+                            rx={sz * 0.5} ry={sz * 0.25}
+                            fill="#ffffff" opacity={0.3}
+                            pointerEvents="none"
+                          />
+                          {/* 하단 음영 */}
+                          <ellipse
+                            cx={cx} cy={cy + sz * 0.5}
+                            rx={sz * 0.55} ry={sz * 0.12}
+                            fill="#000000" opacity={0.06}
+                            pointerEvents="none"
+                          />
+                          {/* 한자 — 양각 효과 */}
                           <text
-                            x={getX(c)}
-                            y={getY(r)}
+                            x={cx}
+                            y={cy}
                             textAnchor="middle"
                             dominantBaseline="central"
                             fontSize={p.type === 'king' ? '21' : (p.type === 'soldier' || p.type === 'advisor') ? '15' : '17'}
                             fontWeight="bold"
                             fill={p.team === 'cho' ? '#1d4ed8' : '#dc2626'}
-                            style={{ fontFamily: 'serif', pointerEvents: 'none' }}
+                            style={{ fontFamily: 'serif', pointerEvents: 'none', filter: 'drop-shadow(0px 0.5px 0px rgba(255,255,255,0.6))' }}
                           >
                             {p.label}
                           </text>
-                          {/* 선택 효과 */}
+                          {/* 선택 효과 — 글로우 */}
                           {isSelected && (
-                            <circle cx={getX(c)} cy={getY(r)} r={p.type === 'king' ? 29 : 25} fill="none" stroke="#fbbf24" strokeWidth="2.5" opacity="0.7" />
+                            <circle
+                              cx={cx} cy={cy}
+                              r={p.type === 'king' ? 29 : 25}
+                              fill="none" stroke="#fbbf24" strokeWidth="2.5" opacity={0.7}
+                              style={{ filter: 'drop-shadow(0 0 4px rgba(251,191,36,0.6))' }}
+                            />
                           )}
                         </g>
                       );
