@@ -286,6 +286,14 @@ const tools: Tool[] = [
     ready: true,
     color: 'blush',
   },
+  {
+    name: '바둑 13×13',
+    description: 'MCTS AI와 대전하는 바둑. 4단계 난이도, 중국식 계가, 덤 6.5점.',
+    icon: <Grid3X3 size={24} />,
+    href: '/tools/baduk',
+    ready: true,
+    color: 'thyme',
+  },
 ];
 
 const ToolsPage: React.FC = () => {

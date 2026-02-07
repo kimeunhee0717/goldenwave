@@ -109,7 +109,9 @@ class GomokuRules {
         }
       }
 
-      if (count === 5) return true;
+      // 흑: 정확히 5목만 승리 (6목+ = 장목 금수)
+      // 백: 5목 이상이면 모두 승리
+      if (stone === 'black' ? count === 5 : count >= 5) return true;
     }
     return false;
   }
@@ -129,7 +131,8 @@ class GomokuRules {
         }
       }
 
-      if (line.length === 5) return line;
+      // 흑: 정확히 5, 백: 5 이상
+      if (stone === 'black' ? line.length === 5 : line.length >= 5) return line;
     }
     return null;
   }

@@ -536,24 +536,47 @@ function getPST(type: PieceType, r: number, c: number, team: Team): number {
 
 class AIPlayer {
   private d: Difficulty; private t: Team;
+  private deadline = 0; private stopped = false;
   constructor(d: Difficulty, t: Team) { this.d=d; this.t=t; }
 
   getMove(b: (Piece | null)[][]) {
     const all = this.allMoves(b, this.t);
     if (all.length === 0) return null;
-    const depth = [2, 3, 4, 5][this.d - 1];
     const rand = [0.25, 0.08, 0, 0][this.d - 1];
 
     // 수 정렬: 포획 > 장군 > 일반 (알파-베타 효율 향상)
     this.orderMoves(b, all);
 
-    let best = all[0], bestSc = -Infinity;
-    for (const m of all) {
-      const sc = this.minimax(this.sim(b, m.f, m.t), depth, -Infinity, Infinity, false);
-      if (sc > bestSc) { bestSc = sc; best = m; }
+    // 시간 제한 (초급 1초, 중급 2초, 고급 3초, 마스터 5초)
+    const TL = [1000, 2000, 3000, 5000][this.d - 1];
+    const maxDepth = [2, 3, 4, 6][this.d - 1];
+    const t0 = Date.now();
+    this.deadline = t0 + TL;
+
+    let best = all[0];
+
+    // 반복 심화: 얕은 깊이부터 시작, 시간 내에서 점점 깊게
+    for (let depth = 2; depth <= maxDepth; depth++) {
+      if (Date.now() - t0 > TL - 200) break;
+      this.stopped = false;
+
+      // 이전 최선수를 맨 앞으로 (알파-베타 효율)
+      const idx = all.findIndex(m => m.f.row === best.f.row && m.f.col === best.f.col && m.t.row === best.t.row && m.t.col === best.t.col);
+      if (idx > 0) { const tmp = all[0]; all[0] = all[idx]; all[idx] = tmp; }
+
+      let curBest = all[0], bestSc = -Infinity;
+      for (const m of all) {
+        if (Date.now() > this.deadline) break;
+        const sc = this.minimax(this.sim(b, m.f, m.t), depth - 1, bestSc, Infinity, false);
+        if (this.stopped) break;
+        if (sc > bestSc) { bestSc = sc; curBest = m; }
+      }
+      if (!this.stopped) best = curBest;
     }
+
     if (Math.random() < rand) {
-      // 약한 난이도: 상위 30% 중 랜덤 선택 (완전 랜덤 X)
+      this.stopped = false;
+      this.deadline = Date.now() + 500;
       const scored = all.map(m => ({ m, sc: this.minimax(this.sim(b, m.f, m.t), 1, -Infinity, Infinity, false) }));
       scored.sort((a, b) => b.sc - a.sc);
       const pool = scored.slice(0, Math.max(3, Math.ceil(scored.length * 0.3)));
@@ -573,6 +596,7 @@ class AIPlayer {
   }
 
   private minimax(b: (Piece | null)[][], d: number, a: number, B: number, mx: boolean): number {
+    if (Date.now() > this.deadline) { this.stopped = true; return 0; }
     if (d === 0) return this.quiesce(b, a, B, mx, 4);
     const t = mx ? this.t : (this.t === 'cho' ? 'han' : 'cho');
     const ms = this.allMoves(b, t);
@@ -585,6 +609,7 @@ class AIPlayer {
       let s = -Infinity;
       for (const m of ms) {
         s = Math.max(s, this.minimax(this.sim(b, m.f, m.t), d - 1, a, B, false));
+        if (this.stopped) return 0;
         a = Math.max(a, s); if (B <= a) break;
       }
       return s;
@@ -592,6 +617,7 @@ class AIPlayer {
       let s = Infinity;
       for (const m of ms) {
         s = Math.min(s, this.minimax(this.sim(b, m.f, m.t), d - 1, a, B, true));
+        if (this.stopped) return 0;
         B = Math.min(B, s); if (B <= a) break;
       }
       return s;
@@ -600,6 +626,7 @@ class AIPlayer {
 
   // 포획 연장 탐색 (Quiescence Search) - 교환 상황에서 정확한 판단
   private quiesce(b: (Piece | null)[][], a: number, B: number, mx: boolean, depth: number): number {
+    if (Date.now() > this.deadline) { this.stopped = true; return 0; }
     const standPat = this.eval(b);
     if (depth === 0) return standPat;
 
@@ -611,6 +638,7 @@ class AIPlayer {
       this.orderMoves(b, captures);
       for (const m of captures) {
         const sc = this.quiesce(this.sim(b, m.f, m.t), a, B, false, depth - 1);
+        if (this.stopped) return 0;
         a = Math.max(a, sc); if (B <= a) return B;
       }
       return a;
@@ -622,6 +650,7 @@ class AIPlayer {
       this.orderMoves(b, captures);
       for (const m of captures) {
         const sc = this.quiesce(this.sim(b, m.f, m.t), a, B, true, depth - 1);
+        if (this.stopped) return 0;
         B = Math.min(B, sc); if (B <= a) return a;
       }
       return B;
@@ -671,7 +700,7 @@ class AIPlayer {
     if (Rules.check(b, opp)) s += 4;
     if (Rules.check(b, this.t)) s -= 4;
 
-    // 기동력 (이동 가능 수) - 고급 이상에서만 계산 (성능)
+    // 기동력 (이동 가능 수) - 고급/마스터에서만 계산
     if (this.d >= 3) {
       let myMobility = 0, oppMobility = 0;
       for (let r = 0; r < BOARD_ROWS; r++) for (let c = 0; c < BOARD_COLS; c++) {

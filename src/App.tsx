@@ -30,6 +30,7 @@ import PegSolitaireGame from '@/pages/tools/PegSolitaireGame'
 import JanggiGame from '@/pages/tools/JanggiGame'
 import GomokuGame from '@/pages/tools/GomokuGame'
 import SudokuGame from '@/pages/tools/SudokuGame'
+import BadukGame from '@/pages/tools/BadukGame'
 
 import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
@@ -77,6 +78,7 @@ function App() {
           <Route path="tools/janggi" element={<JanggiGame />} />
           <Route path="tools/gomoku" element={<GomokuGame />} />
           <Route path="tools/sudoku" element={<SudokuGame />} />
+          <Route path="tools/baduk" element={<BadukGame />} />
 
           <Route path="privacy" element={<PrivacyPolicyPage />} />
           <Route path="terms" element={<TermsPage />} />
