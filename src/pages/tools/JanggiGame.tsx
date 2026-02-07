@@ -652,17 +652,6 @@ export default function JanggiGame() {
     if (Rules.checkmate(board, turn)) setWinner(turn === 'cho' ? 'han' : 'cho');
   }, [board, turn]);
 
-  useEffect(() => {
-    if (gameMode === 'ai' && turn === aiTeam && !winner) {
-      setIsThinking(true);
-      setTimeout(() => {
-        const m = ai.getMove(board);
-        if (m) executeMove(m.f, m.t);
-        setIsThinking(false);
-      }, 300);
-    }
-  }, [turn, gameMode, board, winner, ai, aiTeam]);
-
   const executeMove = useCallback((f: Position, t: Position) => {
     const p = board[f.row][f.col];
     if (!p) return;
@@ -702,6 +691,23 @@ export default function JanggiGame() {
     setSelected(null);
     setValidMoves([]);
   }, [board, captured, turn, lastMove]);
+
+  // executeMove를 ref로 유지 (AI useEffect에서 항상 최신 참조 사용)
+  const executeMoveRef = useRef(executeMove);
+  useEffect(() => { executeMoveRef.current = executeMove; }, [executeMove]);
+
+  // AI 턴 처리
+  useEffect(() => {
+    if (gameMode === 'ai' && turn === aiTeam && !winner) {
+      setIsThinking(true);
+      const timer = setTimeout(() => {
+        const m = ai.getMove(board);
+        if (m) executeMoveRef.current(m.f, m.t);
+        setIsThinking(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [turn, gameMode, board, winner, ai, aiTeam]);
 
   const handleIntersectionClick = (visualRow: number, col: number) => {
     initAudio(); // 첫 클릭에서 오디오 활성화
