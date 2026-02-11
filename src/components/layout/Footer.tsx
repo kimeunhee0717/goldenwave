@@ -82,6 +82,8 @@ const Footer: React.FC = () => {
         <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-400">
             © {new Date().getFullYear()} 부자타임(BujaTime) | All Rights Reserved.
+            <span className="mx-2">·</span>
+            <Link to="/admin" className="text-slate-400 hover:text-moss-600 transition-colors">관리자</Link>
           </p>
           <button
             onClick={scrollToTop}
