@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAdmin } from '@/contexts/AdminContext';
 import { Users, Home, Mail, BarChart3, Settings, Shield, Eye, EyeOff, Loader2, FileText } from 'lucide-react';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -46,36 +47,19 @@ const adminMenus = [
 ];
 
 export default function AdminPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAdmin, login } = useAdmin();
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const savedPassword = sessionStorage.getItem('admin_password');
-    if (savedPassword) {
-      verifyPassword(savedPassword);
-    }
-  }, []);
-
-  const verifyPassword = async (pwd: string) => {
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
     setLoading(true);
+    setError('');
     try {
-      const response = await fetch(`${SUPABASE_URL}/functions/v1/admin-subscribers`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-password': pwd,
-        },
-      });
-
-      if (response.ok) {
-        setIsAuthenticated(true);
-        sessionStorage.setItem('admin_password', pwd);
-        setError('');
-      } else {
-        sessionStorage.removeItem('admin_password');
+      const ok = await login(password);
+      if (!ok) {
         setError('비밀번호가 올바르지 않습니다.');
       }
     } catch {
@@ -85,13 +69,8 @@ export default function AdminPage() {
     }
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await verifyPassword(password);
-  };
-
   // 로그인 화면
-  if (!isAuthenticated) {
+  if (!isAdmin) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
         <div className="max-w-md w-full">
