@@ -36,6 +36,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.bujatime.com/company</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/unsubscribe</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
 
   <!-- 카테고리 페이지 -->
   <url>
@@ -169,6 +179,38 @@
     <loc>https://www.bujatime.com/tools/vat</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+
+  <!-- 게임 도구 -->
+  <url>
+    <loc>https://www.bujatime.com/tools/chess</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/tools/peg-solitaire</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/tools/janggi</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/tools/gomoku</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/tools/sudoku</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/tools/baduk</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <!-- 블로그 포스트 -->
@@ -629,6 +671,110 @@
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/digital-skill-beginner-20-hobby</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- easy-digital 시리즈 -->
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-01-phone-cleanup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-02-qr-code</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-03-kakao-master</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-04-map-navigation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-05-gov-apps</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-06-photo-edit</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-07-voice-assistant</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-08-health-apps</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-09-kiosk-unmanned</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/easy-digital-10-wifi-data</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- post 시리즈 (07~16) -->
+  <url>
+    <loc>https://www.bujatime.com/blog/post-07-ai-image-generation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-08-ai-excel-automation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-09-ai-translation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-10-ai-meeting-notes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-11-ai-blog-writing</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-12-ai-data-analysis</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-13-ai-chatbot</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-14-ai-presentation</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-15-ai-voice</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/post-16-ai-nocode</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

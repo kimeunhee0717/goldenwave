@@ -1840,7 +1840,13 @@
     "excerpt": "스마트폰 저장공간이 부족하다면? 사진 정리, 안 쓰는 앱 삭제, 알림 정리, 홈화면 꾸미기까지 5분이면 깔끔한 디지털 공간을 만들 수 있어요.",
     "coverImage": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["스마트폰", "정리", "저장공간", "디지털정리", "초보자"],
+    "tags": [
+      "스마트폰",
+      "정리",
+      "저장공간",
+      "디지털정리",
+      "초보자"
+    ],
     "authorId": "ceo",
     "publishedAt": "2026-02-05",
     "featured": true
@@ -1852,7 +1858,13 @@
     "excerpt": "QR코드 어렵지 않아요! 카메라로 스캔하는 법, 카카오페이·네이버페이 결제, 메뉴판 QR, 나만의 QR 만들기까지 완전정복 가이드.",
     "coverImage": "https://images.unsplash.com/photo-1595079676339-1534801ad6cf?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["QR코드", "결제", "카카오페이", "네이버페이", "초보자"],
+    "tags": [
+      "QR코드",
+      "결제",
+      "카카오페이",
+      "네이버페이",
+      "초보자"
+    ],
     "authorId": "marketing-lead",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1864,7 +1876,13 @@
     "excerpt": "예약 메시지, 카카오페이 송금, 투표, 캘린더 공유, 멀티프로필 등 카카오톡의 숨은 기능 10가지를 알려드립니다.",
     "coverImage": "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["카카오톡", "메신저", "숨은기능", "카카오페이", "초보자"],
+    "tags": [
+      "카카오톡",
+      "메신저",
+      "숨은기능",
+      "카카오페이",
+      "초보자"
+    ],
     "authorId": "ceo",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1876,7 +1894,13 @@
     "excerpt": "길찾기, 대중교통 경로, 맛집 검색, 리뷰 보기, 즐겨찾기 저장까지. 네이버 지도와 카카오맵을 완벽하게 활용하는 방법을 알려드려요.",
     "coverImage": "https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["지도앱", "내비게이션", "네이버지도", "카카오맵", "초보자"],
+    "tags": [
+      "지도앱",
+      "내비게이션",
+      "네이버지도",
+      "카카오맵",
+      "초보자"
+    ],
     "authorId": "marketing-lead",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1888,7 +1912,13 @@
     "excerpt": "정부24로 서류 발급, 홈택스로 연말정산, 건강보험 앱으로 검진 예약. 공공 앱만 잘 써도 민원실 갈 일이 줄어들어요.",
     "coverImage": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["정부앱", "홈택스", "정부24", "공공서비스", "초보자"],
+    "tags": [
+      "정부앱",
+      "홈택스",
+      "정부24",
+      "공공서비스",
+      "초보자"
+    ],
     "authorId": "tech-lead",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1900,7 +1930,13 @@
     "excerpt": "스냅시드, 캔바 등 무료 앱으로 밝기·필터·콜라주·배경 지우기까지. 스마트폰만으로 인생샷을 만드는 편집 꿀팁을 알려드려요.",
     "coverImage": "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["사진편집", "스냅시드", "캔바", "스마트폰", "초보자"],
+    "tags": [
+      "사진편집",
+      "스냅시드",
+      "캔바",
+      "스마트폰",
+      "초보자"
+    ],
     "authorId": "ceo",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1912,7 +1948,13 @@
     "excerpt": "알람, 날씨, 전화, 메모, 번역까지 말 한마디로! 시리, 구글 어시스턴트, 빅스비 설정부터 바로 써먹는 음성 명령 20가지.",
     "coverImage": "https://images.unsplash.com/photo-1543512214-318c7553f230?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["음성비서", "시리", "구글어시스턴트", "빅스비", "초보자"],
+    "tags": [
+      "음성비서",
+      "시리",
+      "구글어시스턴트",
+      "빅스비",
+      "초보자"
+    ],
     "authorId": "tech-lead",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1924,7 +1966,13 @@
     "excerpt": "삼성헬스·애플건강으로 만보기, 수면 추적, 식단 기록, 명상까지. 매일 5분 건강 루틴을 스마트폰으로 만들어보세요.",
     "coverImage": "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["건강관리", "만보기", "삼성헬스", "수면추적", "초보자"],
+    "tags": [
+      "건강관리",
+      "만보기",
+      "삼성헬스",
+      "수면추적",
+      "초보자"
+    ],
     "authorId": "marketing-lead",
     "publishedAt": "2026-02-05",
     "featured": false
@@ -1936,7 +1984,13 @@
     "excerpt": "패스트푸드점, 카페, 영화관, 편의점, 주유소, 공항까지. 키오스크 화면 단계별로 따라하면 누구나 쉽게 무인 주문할 수 있어요.",
     "coverImage": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["키오스크", "무인주문", "무인결제", "셀프서비스", "초보자"],
+    "tags": [
+      "키오스크",
+      "무인주문",
+      "무인결제",
+      "셀프서비스",
+      "초보자"
+    ],
     "authorId": "ceo",
     "publishedAt": "2026-02-05",
     "featured": true
@@ -1948,9 +2002,623 @@
     "excerpt": "WiFi 연결법, 데이터 사용량 확인, 백그라운드 제한, 알뜰폰 요금제까지. 매달 통신비를 아끼는 실전 팁을 알려드려요.",
     "coverImage": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1200&h=630&fit=crop",
     "categoryId": "digital-skill",
-    "tags": ["WiFi", "데이터절약", "통신비", "알뜰폰", "초보자"],
+    "tags": [
+      "WiFi",
+      "데이터절약",
+      "통신비",
+      "알뜰폰",
+      "초보자"
+    ],
     "authorId": "tech-lead",
     "publishedAt": "2026-02-05",
+    "featured": false
+  },
+  {
+    "id": "113",
+    "slug": "001-what-is-ai",
+    "title": "AI가 뭐예요? - 60대도 이해하는 인공지능 설명서",
+    "excerpt": "AI가 뭐예요? - 60대도 이해하는 인공지능 설명서",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "114",
+    "slug": "002-chatgpt-beginner",
+    "title": "제미나이(Gemini) 처음 사용하기 - 회원가입부터 첫 대화까지",
+    "excerpt": "제미나이(Gemini) 처음 사용하기 - 회원가입부터 첫 대화까지",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "115",
+    "slug": "003-ai-photo-edit",
+    "title": "AI로 사진 예쁘게 만들기 - 스마트폰으로 1분 완성",
+    "excerpt": "AI로 사진 예쁘게 만들기 - 스마트폰으로 1분 완성",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "116",
+    "slug": "004-kakao-ai",
+    "title": "카카오톡에서 AI 사용하는 법 - 아스크(AskUp) 활용",
+    "excerpt": "카카오톡에서 AI 사용하는 법 - 아스크(AskUp) 활용",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "117",
+    "slug": "004-voice-assistant",
+    "title": "음성 비서 200% 활용하기 - 시리, 빅스비, 구글",
+    "excerpt": "음성 비서 200% 활용하기 - 시리, 빅스비, 구글",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "118",
+    "slug": "005-ai-health",
+    "title": "AI 건강 관리 - 스마트폰으로 건강 챙기기",
+    "excerpt": "AI 건강 관리 - 스마트폰으로 건강 챙기기",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "119",
+    "slug": "005-ai-tts-guide",
+    "title": "AI가 대신 글 읽어주는 세상 - TTS 음성 서비스 활용법",
+    "excerpt": "AI가 대신 글 읽어주는 세상 - TTS 음성 서비스 활용법",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "120",
+    "slug": "006-ai-image-gen",
+    "title": "AI 이미지 생성 체험하기 - 내가 원하는 그림 AI가 그려줌",
+    "excerpt": "AI 이미지 생성 체험하기 - 내가 원하는 그림 AI가 그려줌",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "121",
+    "slug": "006-youtube-watching",
+    "title": "유튜브 똑똑하게 보는 법 - AI 추천의 비밀",
+    "excerpt": "유튜브 똑똑하게 보는 법 - AI 추천의 비밀",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "122",
+    "slug": "007-ai-translator",
+    "title": "AI 번역기 비교 - 파파고 vs 제미나이(Gemini) vs 구글번역",
+    "excerpt": "AI 번역기 비교 - 파파고 vs 제미나이(Gemini) vs 구글번역",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "123",
+    "slug": "007-smart-banking",
+    "title": "AI 시대의 스마트 뱅킹 - 안전하게 사용하기",
+    "excerpt": "AI 시대의 스마트 뱅킹 - 안전하게 사용하기",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "124",
+    "slug": "008-ai-english",
+    "title": "AI로 영어 공부하기 - 무료로 원어민 선생님 만들기",
+    "excerpt": "AI로 영어 공부하기 - 무료로 원어민 선생님 만들기",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "125",
+    "slug": "008-ai-translation",
+    "title": "AI 번역기 활용법 - 해외여행도 걱정 없어요",
+    "excerpt": "AI 번역기 활용법 - 해외여행도 걱정 없어요",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "126",
+    "slug": "009-ai-scam-prevention",
+    "title": "AI 보이스피싱 예방법 - 이것만 알면 안 당해요",
+    "excerpt": "AI 보이스피싱 예방법 - 이것만 알면 안 당해요",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "127",
+    "slug": "009-ai-voice-assistant",
+    "title": "AI 음성비서 활용법 - 시리, 빅스비, 구글 비교",
+    "excerpt": "AI 음성비서 활용법 - 시리, 빅스비, 구글 비교",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "128",
+    "slug": "010-ai-future",
+    "title": "AI와 함께하는 미래 - 두렵지 않아요",
+    "excerpt": "AI와 함께하는 미래 - 두렵지 않아요",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "129",
+    "slug": "010-ai-scam-warning",
+    "title": "AI 사기 주의! - 어르신 대상 AI 피싱 구별법",
+    "excerpt": "AI 사기 주의! - 어르신 대상 AI 피싱 구별법",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "130",
+    "slug": "011-rich-morning-routine",
+    "title": "부자들의 아침 루틴 5가지 - AI가 분석한 성공 습관",
+    "excerpt": "부자들의 아침 루틴 5가지 - AI가 분석한 성공 습관",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "131",
+    "slug": "012-budget-app-top5",
+    "title": "가계부 앱 추천 TOP 5 - AI가 자동으로 분류해주는 시대",
+    "excerpt": "가계부 앱 추천 TOP 5 - AI가 자동으로 분류해주는 시대",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "132",
+    "slug": "013-compound-interest",
+    "title": "복리의 마법 - 매일 1만원이 10년 후 얼마가 될까?",
+    "excerpt": "복리의 마법 - 매일 1만원이 10년 후 얼마가 될까?",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "133",
+    "slug": "014-senior-investment",
+    "title": "시니어 재테크 첫걸음 - 안전한 투자 시작하기",
+    "excerpt": "시니어 재테크 첫걸음 - 안전한 투자 시작하기",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "134",
+    "slug": "015-stock-basics-ai",
+    "title": "무료로 배우는 주식 기초 - AI가 알려주는 투자 용어",
+    "excerpt": "무료로 배우는 주식 기초 - AI가 알려주는 투자 용어",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "135",
+    "slug": "016-dividend-investing",
+    "title": "배당주 투자 입문 - 매달 용돈 받는 주식 투자법",
+    "excerpt": "배당주 투자 입문 - 매달 용돈 받는 주식 투자법",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "136",
+    "slug": "017-saving-tips",
+    "title": "절약의 기술 - 매달 30만원 아끼는 생활 습관 10가지",
+    "excerpt": "절약의 기술 - 매달 30만원 아끼는 생활 습관 10가지",
+    "coverImage": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "137",
+    "slug": "018-retirement-income",
+    "title": "은퇴 후 월 100만원 만들기 - 현실적인 방법 5가지",
+    "excerpt": "은퇴 후 월 100만원 만들기 - 현실적인 방법 5가지",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "138",
+    "slug": "019-rich-mindset",
+    "title": "부자 마인드셋 - 돈에 대한 생각을 바꾸면 인생이 바뀐다",
+    "excerpt": "부자 마인드셋 - 돈에 대한 생각을 바꾸면 인생이 바뀐다",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "139",
+    "slug": "020-spend-vs-invest",
+    "title": "소비 vs 투자 - 같은 돈을 쓰는 두 가지 방법",
+    "excerpt": "소비 vs 투자 - 같은 돈을 쓰는 두 가지 방법",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "140",
+    "slug": "021-gpt5-impact",
+    "title": "GPT-5가 나오면 우리 생활이 어떻게 바뀔까?",
+    "excerpt": "GPT-5가 나오면 우리 생활이 어떻게 바뀔까?",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "141",
+    "slug": "022-samsung-galaxy-ai",
+    "title": "삼성 갤럭시 AI 기능 총정리 - 시니어도 쓸 수 있는 것들",
+    "excerpt": "삼성 갤럭시 AI 기능 총정리 - 시니어도 쓸 수 있는 것들",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "142",
+    "slug": "023-ai-doctor",
+    "title": "AI 의사가 진짜 나올까? - 의료 AI의 현재와 미래",
+    "excerpt": "AI 의사가 진짜 나올까? - 의료 AI의 현재와 미래",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "143",
+    "slug": "024-ai-jobs",
+    "title": "AI가 일자리를 빼앗을까? - 걱정 말고 준비하는 법",
+    "excerpt": "AI가 일자리를 빼앗을까? - 걱정 말고 준비하는 법",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "144",
+    "slug": "025-free-ai-tools",
+    "title": "무료 AI 도구 10가지 - 돈 안 쓰고 AI 200% 활용하기",
+    "excerpt": "무료 AI 도구 10가지 - 돈 안 쓰고 AI 200% 활용하기",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "145",
+    "slug": "026-kiosk-guide",
+    "title": "키오스크 무서워? - 주문 키오스크 완전 정복 가이드",
+    "excerpt": "키오스크 무서워? - 주문 키오스크 완전 정복 가이드",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "146",
+    "slug": "027-mobile-banking",
+    "title": "모바일 뱅킹 안전하게 사용하는 법 - 보이스피싱 예방까지",
+    "excerpt": "모바일 뱅킹 안전하게 사용하는 법 - 보이스피싱 예방까지",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "147",
+    "slug": "028-kakao-advanced",
+    "title": "카카오톡 고급 기능 - 송금, 선물, 예약 메시지 활용법",
+    "excerpt": "카카오톡 고급 기능 - 송금, 선물, 예약 메시지 활용법",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "148",
+    "slug": "029-naver-map",
+    "title": "네이버 지도로 버스/지하철 타는 법 - 길 찾기 완전 정복",
+    "excerpt": "네이버 지도로 버스/지하철 타는 법 - 길 찾기 완전 정복",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "149",
+    "slug": "030-google-photos",
+    "title": "스마트폰 사진 정리하는 법 - 구글포토 무료 활용",
+    "excerpt": "스마트폰 사진 정리하는 법 - 구글포토 무료 활용",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-08",
+    "featured": false
+  },
+  {
+    "id": "150",
+    "slug": "031-digital-skill-31",
+    "title": "스마트폰 배터리 오래 쓰는 꿀팁 10가지",
+    "excerpt": "스마트폰 배터리 오래 쓰는 꿀팁 10가지",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "디지털스킬",
+      "시니어",
+      "AI"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-11",
     "featured": false
   }
 ]
