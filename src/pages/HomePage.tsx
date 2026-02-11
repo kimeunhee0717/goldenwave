@@ -7,7 +7,6 @@ import NewsletterCTA from '@/components/home/NewsletterCTA'
 export default function HomePage() {
   return (
     <>
-      <ExchangeRateTicker />
       <BriefingHero />
       <BriefingFeed />
       <PopularPosts />

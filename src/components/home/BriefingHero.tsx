@@ -1,4 +1,5 @@
 import { Clock } from 'lucide-react'
+import ExchangeRateTicker from './ExchangeRateTicker'
 
 export default function BriefingHero() {
   const today = new Date()
@@ -22,6 +23,9 @@ export default function BriefingHero() {
         <p className="mt-3 text-base md:text-lg text-soot-500 max-w-2xl">
           AI, 재테크, 부업, 마인드셋 — 경제적 자유를 향한 오늘의 인사이트
         </p>
+      </div>
+      <div className="mt-6">
+        <ExchangeRateTicker />
       </div>
     </section>
   )
