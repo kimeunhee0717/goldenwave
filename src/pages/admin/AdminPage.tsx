@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Home, Mail, BarChart3, Settings, Shield, Eye, EyeOff, Loader2 } from 'lucide-react';
+import { Users, Home, Mail, BarChart3, Settings, Shield, Eye, EyeOff, Loader2, FileText } from 'lucide-react';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
 const adminMenus = [
+  {
+    title: '포스트 관리',
+    description: '블로그 포스트 목록 조회, 수정, 삭제',
+    href: '/admin/posts',
+    icon: FileText,
+    color: 'bg-amber-500',
+  },
   {
     title: '구독자 관리',
     description: '뉴스레터 구독자 목록 조회 및 관리',
