@@ -1,9 +1,9 @@
 # 코딩 1도 몰라도 AI로 개발하기: 노코드 + AI로 웹서비스 만들기
 
-**발행일**: 2026-02-05  
-**카테고리**: AI & 개발  
-**태그**: 노코드, AI, 개발, 웹사이트, 앱개발, 자동화, 코딩  
-**읽는 시간**: 11분
+**발행일 **: 2026-02-05 
+**카테고리 **: AI & 개발 
+**태그 **: 노코드, AI, 개발, 웹사이트, 앱개발, 자동화, 코딩 
+**읽는 시간 **: 11분
 
 ---
 
@@ -70,123 +70,123 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Service</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Arial', sans-serif; line-height: 1.6; }
-        
-        /* Header */
-        header {
-            background: #fff;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        
-        .logo { font-size: 1.5rem; font-weight: bold; color: #333; }
-        nav a { margin-left: 2rem; text-decoration: none; color: #666; }
-        
-        /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 5rem 5%;
-            text-align: center;
-        }
-        
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
-        
-        .cta-button {
-            background: #fff;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        
-        /* Features */
-        .features {
-            padding: 4rem 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        /* Contact */
-        .contact {
-            background: #f8f9fa;
-            padding: 4rem 5%;
-            text-align: center;
-        }
-        
-        input[type="email"] {
-            padding: 1rem;
-            width: 300px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 1rem;
-        }
-        
-        button {
-            padding: 1rem 2rem;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>My Service</title>
+ <style>
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+ body { font-family: 'Arial', sans-serif; line-height: 1.6; }
+ 
+ /* Header */
+ header {
+ background: #fff;
+ padding: 1rem 5%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+ }
+ 
+ .logo { font-size: 1.5rem; font-weight: bold; color: #333; }
+ nav a { margin-left: 2rem; text-decoration: none; color: #666; }
+ 
+ /* Hero */
+ .hero {
+ background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+ color: white;
+ padding: 5rem 5%;
+ text-align: center;
+ }
+ 
+ .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+ .hero p { font-size: 1.2rem; margin-bottom: 2rem; }
+ 
+ .cta-button {
+ background: #fff;
+ color: #667eea;
+ padding: 1rem 2rem;
+ border-radius: 50px;
+ text-decoration: none;
+ font-weight: bold;
+ }
+ 
+ /* Features */
+ .features {
+ padding: 4rem 5%;
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+ gap: 2rem;
+ }
+ 
+ .feature-card {
+ padding: 2rem;
+ border-radius: 10px;
+ box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+ text-align: center;
+ }
+ 
+ /* Contact */
+ .contact {
+ background: #f8f9fa;
+ padding: 4rem 5%;
+ text-align: center;
+ }
+ 
+ input[type="email"] {
+ padding: 1rem;
+ width: 300px;
+ border: 1px solid #ddd;
+ border-radius: 5px;
+ margin-right: 1rem;
+ }
+ 
+ button {
+ padding: 1rem 2rem;
+ background: #667eea;
+ color: white;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ }
+ </style>
 </head>
 <body>
-    <header>
-        <div class="logo">MyCompany</div>
-        <nav>
-            <a href="#features">특징</a>
-            <a href="#contact">연락처</a>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h1>더 나은 서비스를 경험하세요</h1>
-        <p>쉽고 빠르게 시작하세요</p>
-        <a href="#contact" class="cta-button">지금 시작하기</a>
-    </section>
-    
-    <section class="features" id="features">
-        <div class="feature-card">
-            <h3>빠른 속도</h3>
-            <p>최적화된 성능으로 빠른 경험을 제공합니다</p>
-        </div>
-        <div class="feature-card">
-            <h3>안전한 보안</h3>
-            <p>최신 보안 기술로 데이터를 안전하게 보호합니다</p>
-        </div>
-        <div class="feature-card">
-            <h3>24/7 지원</h3>
-            <p>언제든지 도움을 받을 수 있습니다</p>
-        </div>
-    </section>
-    
-    <section class="contact" id="contact">
-        <h2>소식 받아보기</h2>
-        <form>
-            <input type="email" placeholder="이메일을 입력하세요">
-            <button type="submit">구독하기</button>
-        </form>
-    </section>
+ <header>
+ <div class="logo">MyCompany</div>
+ <nav>
+ <a href="#features">특징</a>
+ <a href="#contact">연락처</a>
+ </nav>
+ </header>
+ 
+ <section class="hero">
+ <h1>더 나은 서비스를 경험하세요</h1>
+ <p>쉽고 빠르게 시작하세요</p>
+ <a href="#contact" class="cta-button">지금 시작하기</a>
+ </section>
+ 
+ <section class="features" id="features">
+ <div class="feature-card">
+ <h3>빠른 속도</h3>
+ <p>최적화된 성능으로 빠른 경험을 제공합니다</p>
+ </div>
+ <div class="feature-card">
+ <h3>안전한 보안</h3>
+ <p>최신 보안 기술로 데이터를 안전하게 보호합니다</p>
+ </div>
+ <div class="feature-card">
+ <h3>24/7 지원</h3>
+ <p>언제든지 도움을 받을 수 있습니다</p>
+ </div>
+ </section>
+ 
+ <section class="contact" id="contact">
+ <h2>소식 받아보기</h2>
+ <form>
+ <input type="email" placeholder="이메일을 입력하세요">
+ <button type="submit">구독하기</button>
+ </form>
+ </section>
 </body>
 </html>
 ```
@@ -204,19 +204,19 @@
 **AI 답변:**
 ```
 1. 코드 설명:
-   - header: 상단 메뉴
-   - hero: 메인 배너 섹션
-   - features: 3열 특징 카드
-   - contact: 이메일 입력 폼
+ - header: 상단 메뉴
+ - hero: 메인 배너 섹션
+ - features: 3열 특징 카드
+ - contact: 이메일 입력 폼
 
 2. 색상 변경:
-   - background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-   - 이 부분의 HEX 코드를 원하는 색상으로 변경
+ - background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+ - 이 부분의 HEX 코드를 원하는 색상으로 변경
 
 3. 모바일 대응:
-   - 이미 포함되어 있음 (viewport meta 태그)
-   - grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-     → 화면 크기에 따라 자동 조정
+ - 이미 포함되어 있음 (viewport meta 태그)
+ - grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+ → 화면 크기에 따라 자동 조정
 ```
 
 ### 2.3 에러 해결
@@ -257,16 +257,16 @@
 2. Google Sheets 연동
 3. 템플릿 선택 (List/Grid/Catalog)
 4. 디자인 커스터마이징
-   - 색상 변경
-   - 로고 업로드
-   - 레이아웃 조정
+ - 색상 변경
+ - 로고 업로드
+ - 레이아웃 조정
 5. 기능 추가
-   - 검색 기능
-   - 필터링
-   - 즐겨찾기
+ - 검색 기능
+ - 필터링
+ - 즐겨찾기
 6. 게시
-   - 웹 링크 생성
-   - QR 코드 다운로드
+ - 웹 링크 생성
+ - QR 코드 다운로드
 ```
 
 **3. AI로 추가 기능:**
@@ -283,19 +283,19 @@ ChatGPT에게:
 1. webflow.com 접속
 2. 템플릿 선택 또는 빈 프로젝트
 3. 디자인
-   - 섹션 추가 (Hero, Features, CTA 등)
-   - 요소 드래그앤드롭
-   - 애니메이션 설정
+ - 섹션 추가 (Hero, Features, CTA 등)
+ - 요소 드래그앤드롭
+ - 애니메이션 설정
 4. 콘텐츠
-   - 텍스트 편집
-   - 이미지 업로드
-   - CMS 연동 (블로그 등)
+ - 텍스트 편집
+ - 이미지 업로드
+ - CMS 연동 (블로그 등)
 5. 반응형
-   - 모바일/태블릿 뷰 조정
+ - 모바일/태블릿 뷰 조정
 6. 배포
-   - 커스텀 도메인 연결
-   - SSL 인증서 자동 설정
-   - CDN 배포
+ - 커스텀 도메인 연결
+ - SSL 인증서 자동 설정
+ - CDN 배포
 ```
 
 ### 3.3 Zapier/Make로 자동화
@@ -303,15 +303,15 @@ ChatGPT에게:
 **시나리오: 문의 폼 자동화**
 ```
 [웹사이트 문의 폼] 
-    ↓
+ ↓
 [Zapier]
-    ↓
+ ↓
 [Google Sheets] - 데이터 저장
-    ↓
+ ↓
 [Slack] - 팀 알림
-    ↓
+ ↓
 [ChatGPT] - 자동 응답 생성
-    ↓
+ ↓
 [Gmail] - 고객에게 답변 발송
 ```
 

@@ -1,9 +1,9 @@
 # AI 음성 인식 및 변환: 말하는 대로 문서가 완성되는 시대
 
-**발행일**: 2026-02-05  
-**카테고리**: AI & 생산성  
-**태그**: 음성인식, AI, Whisper, Otter, 자동번역, 음성변환, 생산성  
-**읽는 시간**: 9분
+**발행일 **: 2026-02-05 
+**카테고리 **: AI & 생산성 
+**태그 **: 음성인식, AI, Whisper, Otter, 자동번역, 음성변환, 생산성 
+**읽는 시간 **: 9분
 
 ---
 
@@ -144,7 +144,7 @@ ChatGPT/Claude에게:
 **팁:**
 ```
 ✅ 회의 시작 전 "참석자 소개" 
-   → 스피커 구분 정확도 향상
+ → 스피커 구분 정확도 향상
 ✅ 중요 발언은 천천히 명확하게
 ✅ 전문 용어는 사전에 등록
 ```
@@ -156,7 +156,7 @@ ChatGPT/Claude에게:
 **온라인 도구 (묶은):**
 ```
 1. whisper.openai.com 또는 
-   heybrian.com/ko/whisper 접속
+ heybrian.com/ko/whisper 접속
 2. 음성/영상 파일 업로드
 3. 언어 선택 (한국어)
 4. SRT/VTT 자막 파일 다운로드
@@ -246,18 +246,18 @@ ChatGPT/Claude에게:
 **정확도 높이기:**
 ```
 ✅ 적당한 속도로 말하기
-   - 너무 빠르면 인식률 저하
-   - 너무 느리면 끊김 현상
+ - 너무 빠르면 인식률 저하
+ - 너무 느리면 끊김 현상
 
 ✅ 명확한 발음
-   - 앞뒤 단어 구분
-   - 받침 정확히
+ - 앞뒤 단어 구분
+ - 받침 정확히
 
 ✅ 구두점 발음
-   - "쉼표" → ,
-   - "마침표" → .
-   - "줄바꿈" → 새 문단
-   - "따옴표" → ""
+ - "쉼표" → ,
+ - "마침표" → .
+ - "줄바꿈" → 새 문단
+ - "따옴표" → ""
 ```
 
 ### 4.3 AI 사전 학습
@@ -288,10 +288,10 @@ import openai
 # 오디오 파일을 텍스트로 변환
 audio_file = open("meeting.mp3", "rb")
 transcript = openai.Audio.transcribe(
-    model="whisper-1",
-    file=audio_file,
-    language="ko",
-    response_format="srt"  # 자막 형식
+ model="whisper-1",
+ file=audio_file,
+ language="ko",
+ response_format="srt" # 자막 형식
 )
 
 print(transcript.text)

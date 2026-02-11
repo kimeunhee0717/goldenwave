@@ -1,22 +1,22 @@
 # AI 코딩 시작하기: 노코드부터 Python 자동화까지
 
-**발행일**: 2024-02-06  
-**카테고리**: 디지털 스킬 중급  
-**난이도**: ⭐⭐⭐ (중급)  
-**대상**: 코딩을 배우고 싶거나 자동화하고 싶은 분  
-**읽는 시간**: 18분
+**발행일 **: 2024-02-06 
+**카테고리 **: 디지털 스킬 중급 
+**난이도 **: ⭐⭐⭐ (중급) 
+**대상 **: 코딩을 배우고 싶거나 자동화하고 싶은 분 
+**읽는 시간 **: 18분
 
 ---
 
 ## "코딩은 어렵다"는 편견을 버리세요
 
-"코딩은 개발자만 하는 거 아닌가요?"  
-"나도 할 수 있을까요?"  
+"코딩은 개발자만 하는 거 아닌가요?" 
+"나도 할 수 있을까요?" 
 "어디서부터 시작해야 하나요?"
 
-**2024년, 코딩은 선택이 아니라 필수입니다.**  
-하지만 걱정 마세요! **AI의 도움**을 받으면  
-코딩 초보자도 **1주일 만에 실용적인 프로그램**을 만들 수 있습니다.
+**2024년, 코딩은 선택이 아니라 필수입니다.** 
+하지만 걱정 마세요! **AI의 도움 **을 받으면 
+코딩 초보자도 **1주일 만에 실용적인 프로그램 **을 만들 수 있습니다.
 
 ---
 
@@ -69,14 +69,14 @@ Python:
 
 ### 2-1. 노코드가 뭔가요?
 
-**정의:**  
-코드를 **한 줄도 안 쓰고** 프로그램 만들기
+**정의:** 
+코드를 **한 줄도 안 쓰고 ** 프로그램 만들기
 
 **쉬운 비유:**
-> 레고 블록을 조립하듯,  
-> 미리 만들어진 기능들을 끼워맞추는 거예요.  
-> 코드는 블록 뒤에 숨겨져 있고,  
-> 우리는 **조립 설명서**만 따라하면 됩니다.
+> 레고 블록을 조립하듯, 
+> 미리 만들어진 기능들을 끼워맞추는 거예요. 
+> 코드는 블록 뒤에 숨겨져 있고, 
+> 우리는 **조립 설명서 **만 따라하면 됩니다.
 
 ### 2-2. Make (Integromat) 시나리오
 
@@ -103,8 +103,8 @@ Trigger: 주문폼 제출
 Action: 재고 시트 확인
 ↓
 Router:
-  ├─ 재고 있음 → 배송 프로세스
-  └─ 재고 없음 → 발주 + 고객 알림
+ ├─ 재고 있음 → 배송 프로세스
+ └─ 재고 없음 → 발주 + 고객 알림
 
 설정 시간: 30분
 코드: 0줄
@@ -136,8 +136,8 @@ Router:
 ```
 
 **비유:**
-> Python은 **영어의 알파벳** 같은 존재예요.  
-> 컴퓨터와 대화하는 가장 기본적이고  
+> Python은 **영어의 알파벳 ** 같은 존재예요. 
+> 컴퓨터와 대화하는 가장 기본적이고 
 > 배우기 쉬운 언어입니다.
 
 ### 3-2. AI로 Python 배우기
@@ -171,11 +171,11 @@ Router:
 **1. 변수 (Variable):**
 ```python
 # 변수 = 상자
-name = "홍길동"  # 문자열
-age = 30         # 숫자
-is_student = True  # 참/거짓
+name = "홍길동" # 문자열
+age = 30 # 숫자
+is_student = True # 참/거짓
 
-print(name)  # 홍길동 출력
+print(name) # 홍길동 출력
 ```
 
 **2. 조걵문 (If):**
@@ -183,35 +183,35 @@ print(name)  # 홍길동 출력
 score = 85
 
 if score >= 90:
-    print("A등급")
+ print("A등급")
 elif score >= 80:
-    print("B등급")  # 이게 출력됨
+ print("B등급") # 이게 출력됨
 else:
-    print("C등급")
+ print("C등급")
 ```
 
 **3. 반복문 (For):**
 ```python
 # 5번 반복
 for i in range(5):
-    print(f"{i+1}번째 작업")
+ print(f"{i+1}번째 작업")
 
 # 리스트 순회
 fruits = ["사과", "바나나", "오렌지"]
 for fruit in fruits:
-    print(fruit)
+ print(fruit)
 ```
 
 **4. 함수 (Function):**
 ```python
 # 반복되는 작업을 함수로
 def calculate_total(price, quantity):
-    total = price * quantity
-    return total
+ total = price * quantity
+ return total
 
 # 사용
 result = calculate_total(1000, 5)
-print(result)  # 5000
+print(result) # 5000
 ```
 
 **5. 리스트 (List):**
@@ -221,7 +221,7 @@ scores = [85, 92, 78, 95, 88]
 
 # 평균 계산
 average = sum(scores) / len(scores)
-print(f"평균: {average}")  # 87.6
+print(f"평균: {average}") # 87.6
 ```
 
 ### 3-4. 실전 미니 프로젝트
@@ -232,21 +232,21 @@ import smtplib
 from email.mime.text import MIMEText
 
 def send_email(to_email, subject, content):
-    msg = MIMEText(content)
-    msg['Subject'] = subject
-    msg['From'] = "my@email.com"
-    msg['To'] = to_email
-    
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login("my@email.com", "password")
-    server.send_message(msg)
-    server.quit()
+ msg = MIMEText(content)
+ msg['Subject'] = subject
+ msg['From'] = "my@email.com"
+ msg['To'] = to_email
+ 
+ server = smtplib.SMTP('smtp.gmail.com', 587)
+ server.starttls()
+ server.login("my@email.com", "password")
+ server.send_message(msg)
+ server.quit()
 
 # 사용
 send_email("client@email.com", 
-           "안녕하세요", 
-           "견적서 보내드립니다.")
+ "안녕하세요", 
+ "견적서 보내드립니다.")
 ```
 
 **프로젝트 2: Excel 자동화**
@@ -262,8 +262,8 @@ avg = df['매출'].mean()
 
 # 결과 저장
 summary = pd.DataFrame({
-    '총매출': [total],
-    '평균': [avg]
+ '총매출': [total],
+ '평균': [avg]
 })
 summary.to_excel('summary.xlsx')
 ```
@@ -287,24 +287,24 @@ import shutil
 from pathlib import Path
 
 def organize_downloads():
-    download_path = Path.home() / "Downloads"
-    
-    # 폴더별 정리
-    folders = {
-        '.pdf': 'Documents',
-        '.jpg': 'Images',
-        '.mp4': 'Videos',
-        '.zip': 'Archives'
-    }
-    
-    for file in download_path.iterdir():
-        if file.is_file():
-            ext = file.suffix.lower()
-            if ext in folders:
-                dest = download_path / folders[ext]
-                dest.mkdir(exist_ok=True)
-                shutil.move(str(file), str(dest / file.name))
-                print(f"Moved: {file.name}")
+ download_path = Path.home() / "Downloads"
+ 
+ # 폴더별 정리
+ folders = {
+ '.pdf': 'Documents',
+ '.jpg': 'Images',
+ '.mp4': 'Videos',
+ '.zip': 'Archives'
+ }
+ 
+ for file in download_path.iterdir():
+ if file.is_file():
+ ext = file.suffix.lower()
+ if ext in folders:
+ dest = download_path / folders[ext]
+ dest.mkdir(exist_ok=True)
+ shutil.move(str(file), str(dest / file.name))
+ print(f"Moved: {file.name}")
 
 # 실행
 organize_downloads()
@@ -323,14 +323,14 @@ import requests
 from bs4 import BeautifulSoup
 
 def get_news():
-    url = "https://news.naver.com"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, 'html.parser')
-    
-    headlines = soup.select('.hdline_article_tit')
-    
-    for i, headline in enumerate(headlines[:5], 1):
-        print(f"{i}. {headline.text.strip()}")
+ url = "https://news.naver.com"
+ response = requests.get(url)
+ soup = BeautifulSoup(response.text, 'html.parser')
+ 
+ headlines = soup.select('.hdline_article_tit')
+ 
+ for i, headline in enumerate(headlines[:5], 1):
+ print(f"{i}. {headline.text.strip()}")
 
 get_news()
 ```
@@ -344,14 +344,14 @@ import openai
 openai.api_key = "your-api-key"
 
 def summarize_text(text):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": "텍스트를 3문장으로 요약해줘"},
-            {"role": "user", "content": text}
-        ]
-    )
-    return response.choices[0].message.content
+ response = openai.ChatCompletion.create(
+ model="gpt-3.5-turbo",
+ messages=[
+ {"role": "system", "content": "텍스트를 3문장으로 요약해줘"},
+ {"role": "user", "content": text}
+ ]
+ )
+ return response.choices[0].message.content
 
 # 사용
 long_text = "[긴 텍스트]"
@@ -475,12 +475,12 @@ AI가 선생님이 되어줍니다.
 
 ---
 
-**다음 강의 예고:**  
-👉 **"AI 디지털 마케팅: 광고부터 분석까지 자동화"**
+**다음 강의 예고:** 
+👉 ** "AI 디지털 마케팅: 광고부터 분석까지 자동화" **
 
 코딩으로 수집한 데이터를 활용해 마케팅을 자동화하는 방법을 배워볼까요?
 
 ---
 
-**작성자 디지털 스킬 강사**  
+**작성자 디지털 스킬 강사 ** 
 "코딩은 현대의 마법입니다. 당신도 마법사가 될 수 있어요! 🪄"

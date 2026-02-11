@@ -1,9 +1,9 @@
 # AI로 엑셀 업무 자동화: 반복 작업 90% 줄이는 실전 가이드
 
-**발행일**: 2026-02-05  
-**카테고리**: AI & 업무 자동화  
-**태그**: 엑셀, Excel, AI, 업무자동화, 데이터처리, 생산성  
-**읽는 시간**: 10분
+**발행일 **: 2026-02-05 
+**카테고리 **: AI & 업무 자동화 
+**태그 **: 엑셀, Excel, AI, 업무자동화, 데이터처리, 생산성 
+**읽는 시간 **: 10분
 
 ---
 
@@ -199,8 +199,8 @@ A열: 날짜, B열: 부서, C열: 매출액"
 2. 삽입 → 피벗 테이블
 3. 새 워크시트에 생성 선택
 4. 필드 목록에서:
-   - 행: 부서
-   - 값: 매출액 (합계)
+ - 행: 부서
+ - 값: 매출액 (합계)
 5. 완료
 
 피벗 테이블 옵션:
@@ -243,20 +243,20 @@ A열: 날짜, B열: 부서, C열: 매출액"
 자동화 방법:
 
 1. 데이터 연결
-   - 데이터 → 데이터 가져오기
-   - 외부 파일이나 데이터베이스 연결
+ - 데이터 → 데이터 가져오기
+ - 외부 파일이나 데이터베이스 연결
 
 2. 파워 쿼리 (Power Query)
-   - 데이터 변환 자동화
-   - 새로 고침으로 업데이트
+ - 데이터 변환 자동화
+ - 새로 고침으로 업데이트
 
 3. 매크로 (VBA)
-   - 반복 작업 자동화
-   - 개발자 도구 → 매크로 기록
+ - 반복 작업 자동화
+ - 개발자 도구 → 매크로 기록
 
 4. 수식 활용
-   - TODAY(), NOW() 함수로 날짜 자동 입력
-   - OFFSET()으로 동적 범위 설정
+ - TODAY(), NOW() 함수로 날짜 자동 입력
+ - OFFSET()으로 동적 범위 설정
 ```
 
 ---
@@ -343,23 +343,23 @@ VBA 매크로 코드를 만들어줘:
 **AI가 생성한 코드:**
 ```vba
 Sub 일일보고서생성()
-    ' 현재 날짜 입력
-    Range("A1").Value = Date
-    
-    ' 데이터 복사
-    Sheets("원본데이터").Range("A1:D100").Copy
-    
-    ' 새 시트 생성 및 붙여넣기
-    Sheets.Add
-    ActiveSheet.Name = Format(Date, "yyyy-mm-dd")
-    Range("A1").PasteSpecial
-    
-    ' PDF 저장
-    ActiveSheet.ExportAsFixedFormat _
-        Type:=xlTypePDF, _
-        Filename:="C:\Reports\일일보고서_" & Format(Date, "yyyymmdd") & ".pdf"
-    
-    MsgBox "보고서 생성 완료!"
+ ' 현재 날짜 입력
+ Range("A1").Value = Date
+ 
+ ' 데이터 복사
+ Sheets("원본데이터").Range("A1:D100").Copy
+ 
+ ' 새 시트 생성 및 붙여넣기
+ Sheets.Add
+ ActiveSheet.Name = Format(Date, "yyyy-mm-dd")
+ Range("A1").PasteSpecial
+ 
+ ' PDF 저장
+ ActiveSheet.ExportAsFixedFormat _
+ Type:=xlTypePDF, _
+ Filename:="C:\Reports\일일보고서_" & Format(Date, "yyyymmdd") & ".pdf"
+ 
+ MsgBox "보고서 생성 완료!"
 End Sub
 ```
 
@@ -383,9 +383,9 @@ End Sub
 1. 성장률: 평균 월 12% 성장
 2. 최고 성장: 3월→4월 (27% 증가)
 3. 권장 차트: 
-   - 월별 매출 막대 차트
-   - 성장률 라인 차트 (이중 축)
-   - 누적 매출 영역 차트
+ - 월별 매출 막대 차트
+ - 성장률 라인 차트 (이중 축)
+ - 누적 매출 영역 차트
 
 인사이트:
 - 4월에 특별한 이벤트나 캠페인이 있었는지 확인 필요

@@ -1,9 +1,9 @@
 # 구글 애널리틱스 4 완벽 설정 가이드: 초보자도 따라하는 단계별 매뉴얼
 
-**발행일**: 2024-02-05
-**카테고리**: 실무 팁
-**태그**: GA4, 구글 애널리틱스, 데이터 분석, 웹사이트 분석, 디지털 마케팅
-**읽는 시간**: 12분
+**발행일 **: 2024-02-05
+**카테고리 **: 실무 팁
+**태그 **: GA4, 구글 애널리틱스, 데이터 분석, 웹사이트 분석, 디지털 마케팅
+**읽는 시간 **: 12분
 
 ---
 
@@ -21,11 +21,11 @@
 
 | 항목 | Universal Analytics | GA4 |
 |------|-------------------|-----|
-| **데이터 모델** | 세션 기반 | 이벤트 기반 |
-| **측정 방식** | 페이지뷰 중심 | 모든 상호작용 측정 |
-| **크로스 디바이스** | 제한적 | 통합 추적 |
-| **머신러닝** | 없음 | 내장 예측 기능 |
-| **보고서** | 사전 정의 | 탐색적 분석 중심 |
+| **데이터 모델 ** | 세션 기반 | 이벤트 기반 |
+| **측정 방식 ** | 페이지뷰 중심 | 모든 상호작용 측정 |
+| **크로스 디바이스 ** | 제한적 | 통합 추적 |
+| **머신러닝 ** | 없음 | 내장 예측 기능 |
+| **보고서 ** | 사전 정의 | 탐색적 분석 중심 |
 
 ### GA4의 장점
 
@@ -63,8 +63,8 @@
 ```
 
 **계정 설정 옵션:**
-- **계정 데이터 공유 설정**: Google 제품 및 서비스 연결 권장
-- **비즈니스 정보**: 산업 카테고리, 비즈니스 규모 선택
+- **계정 데이터 공유 설정 **: Google 제품 및 서비스 연결 권장
+- **비즈니스 정보 **: 산업 카테고리, 비즈니스 규모 선택
 
 ### 2.2 속성(Property) 생성
 
@@ -107,11 +107,11 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
 
-  gtag('config', 'G-XXXXXXXXXX');
+ gtag('config', 'G-XXXXXXXXXX');
 </script>
 ```
 
@@ -175,13 +175,13 @@
 ```
 
 **수집되는 자동 이벤트:**
-- **페이지 조회**: 모든 페이지 방문
-- **스크롤**: 90% 스크롤 도달
-- **클릭**: 외부 링크 클릭
-- **양식 상호작용**: 폼 시작, 제출
-- **동영상 참여**: 재생, 완료, 진행률
-- **파일 다운로드**: PDF 등 다운로드
-- **사이트 검색**: 내부 검색어 추적
+- **페이지 조회 **: 모든 페이지 방문
+- **스크롤 **: 90% 스크롤 도달
+- **클릭 **: 외부 링크 클릭
+- **양식 상호작용 **: 폼 시작, 제출
+- **동영상 참여 **: 재생, 완료, 진행률
+- **파일 다운로드 **: PDF 등 다운로드
+- **사이트 검색 **: 내부 검색어 추적
 
 ### 4.2 맞춤 이벤트 설정
 
@@ -190,44 +190,44 @@
 **1) 연락처 폼 제출**
 ```javascript
 gtag('event', 'contact_form_submit', {
-  'event_category': 'form',
-  'event_label': 'contact_page',
-  'value': 1
+ 'event_category': 'form',
+ 'event_label': 'contact_page',
+ 'value': 1
 });
 ```
 
 **2) 전화번호 클릭**
 ```javascript
 gtag('event', 'phone_click', {
-  'event_category': 'contact',
-  'event_label': 'header_phone'
+ 'event_category': 'contact',
+ 'event_label': 'header_phone'
 });
 ```
 
 **3) 이메일 클릭**
 ```javascript
 gtag('event', 'email_click', {
-  'event_category': 'contact',
-  'event_label': 'footer_email'
+ 'event_category': 'contact',
+ 'event_label': 'footer_email'
 });
 ```
 
 **4) 파일 다운로드**
 ```javascript
 gtag('event', 'file_download', {
-  'event_category': 'content',
-  'event_label': 'whitepaper_2024',
-  'file_name': 'marketing-guide.pdf',
-  'file_extension': 'pdf'
+ 'event_category': 'content',
+ 'event_label': 'whitepaper_2024',
+ 'file_name': 'marketing-guide.pdf',
+ 'file_extension': 'pdf'
 });
 ```
 
 **5) 버튼 클릭**
 ```javascript
 gtag('event', 'cta_click', {
-  'event_category': 'engagement',
-  'event_label': 'hero_banner',
-  'button_text': '무료 상담 받기'
+ 'event_category': 'engagement',
+ 'event_label': 'hero_banner',
+ 'button_text': '무료 상담 받기'
 });
 ```
 
@@ -270,10 +270,10 @@ gtag('event', 'cta_click', {
 ### 5.2 사용자 특성 보고서
 
 **주요 지표:**
-- **신규 vs 재방문**: 사용자 충성도
-- **인구 통계**: 연령, 성별, 관심사
-- **지리**: 국가, 도시별 방문
-- **기술**: 사용 기기, 브라우저, OS
+- **신규 vs 재방문 **: 사용자 충성도
+- **인구 통계 **: 연령, 성별, 관심사
+- **지리 **: 국가, 도시별 방문
+- **기술 **: 사용 기기, 브라우저, OS
 
 **활용:**
 - 타겟 오디언스 검증
@@ -329,15 +329,15 @@ gtag('event', 'cta_click', {
 **전자상거래 추적:**
 ```javascript
 gtag('event', 'purchase', {
-  'transaction_id': 'T12345',
-  'value': 250000,
-  'currency': 'KRW',
-  'items': [{
-    'item_id': 'SKU123',
-    'item_name': '프리미엄 패키지',
-    'price': 250000,
-    'quantity': 1
-  }]
+ 'transaction_id': 'T12345',
+ 'value': 250000,
+ 'currency': 'KRW',
+ 'items': [{
+ 'item_id': 'SKU123',
+ 'item_name': '프리미엄 패키지',
+ 'price': 250000,
+ 'quantity': 1
+ }]
 });
 ```
 
@@ -363,9 +363,9 @@ gtag('event', 'purchase', {
 ```
 
 **활용 예시:**
-- **평균 주문 가치**: 매출 / 거래
-- **리드당 비용**: 광고비 / 리드 수
-- **페이지당 가치**: 수익 / 페이지뷰
+- **평균 주문 가치 **: 매출 / 거래
+- **리드당 비용 **: 광고비 / 리드 수
+- **페이지당 가치 **: 수익 / 페이지뷰
 
 ### 6.2 맞춤 차원 (Custom Dimensions)
 
@@ -377,13 +377,13 @@ gtag('event', 'purchase', {
 **설정:**
 ```javascript
 gtag('config', 'G-XXXXXXXXXX', {
-  'custom_map': {
-    'custom_parameter_1': 'user_type'
-  }
+ 'custom_map': {
+ 'custom_parameter_1': 'user_type'
+ }
 });
 
 gtag('event', 'page_view', {
-  'user_type': 'B2B'
+ 'user_type': 'B2B'
 });
 ```
 
@@ -398,10 +398,10 @@ gtag('event', 'page_view', {
 ```
 
 **유용한 맞춤 보고서:**
-1. **리드 생성 보고서**: 폼 제출 추적
-2. **콘텐츠 성과**: 블로그 포스트별 성과
+1. **리드 생성 보고서 **: 폼 제출 추적
+2. **콘텐츠 성과 **: 블로그 포스트별 성과
 3. **캠페인 ROI**: 마케팅 채널별 수익성
-4. **사용자 여정**: 퍼널별 전환율
+4. **사용자 여정 **: 퍼널별 전환율
 
 ---
 
