@@ -87,6 +87,14 @@ const colorStyles = {
 
 const tools: Tool[] = [
   {
+    name: '마크다운 에디터',
+    description: '제미나이(Gemini) 답변을 깔끔하게 정리해주는 에디터. 특수문자 오류 자동 수정, 미리보기, 서식 복사까지!',
+    icon: <FileText size={24} />,
+    href: '/markdown-editor.html',
+    ready: true,
+    color: 'thyme',
+  },
+  {
     name: '복리 계산기',
     description: '복리의 마법을 직접 확인하세요. 초기 투자금과 수익률로 미래 자산을 계산합니다.',
     icon: <TrendingUp size={24} />,
@@ -386,9 +394,15 @@ const ToolsPage: React.FC = () => {
               );
 
               return tool.ready && tool.href ? (
-                <Link key={tool.name} to={tool.href}>
-                  {Card}
-                </Link>
+                tool.href.endsWith('.html') ? (
+                  <a key={tool.name} href={tool.href} target="_blank" rel="noopener noreferrer">
+                    {Card}
+                  </a>
+                ) : (
+                  <Link key={tool.name} to={tool.href}>
+                    {Card}
+                  </Link>
+                )
               ) : (
                 <div key={tool.name}>{Card}</div>
               );
