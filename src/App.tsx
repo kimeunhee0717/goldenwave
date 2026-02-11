@@ -40,10 +40,13 @@ import ContactPage from '@/pages/ContactPage'
 import UnsubscribePage from '@/pages/UnsubscribePage'
 import AdminPage from '@/pages/admin/AdminPage'
 import SubscribersPage from '@/pages/admin/SubscribersPage'
+import EditPostPage from '@/pages/admin/EditPostPage'
 import NotFoundPage from '@/pages/NotFoundPage'
+import { AdminProvider } from '@/contexts/AdminContext'
 
 function App() {
   return (
+    <AdminProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -87,10 +90,12 @@ function App() {
           <Route path="unsubscribe" element={<UnsubscribePage />} />
           <Route path="admin" element={<AdminPage />} />
           <Route path="admin/subscribers" element={<SubscribersPage />} />
+          <Route path="admin/edit/:slug" element={<EditPostPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
+    </AdminProvider>
   )
 }
 

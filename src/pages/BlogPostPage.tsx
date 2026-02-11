@@ -11,12 +11,14 @@ import ShareButtons from '@/components/blog/ShareButtons'
 import AuthorCard from '@/components/blog/AuthorCard'
 import RelatedPosts from '@/components/blog/RelatedPosts'
 import GiscusComments from '@/components/blog/GiscusComments'
-import { Clock, Calendar, ArrowLeft } from 'lucide-react'
+import { Clock, Calendar, ArrowLeft, Edit3 } from 'lucide-react'
+import { useAdmin } from '@/contexts/AdminContext'
 
 export default function BlogPostPage() {
   const { slug } = useParams<{ slug: string }>()
   const { getPostBySlug, getRelatedPosts, isLoading } = usePosts()
 
+  const { isAdmin } = useAdmin()
   const post = slug ? getPostBySlug(slug) : undefined
   const relatedPosts = post ? getRelatedPosts(post, 3) : []
   const readingTime = post ? calculateReadingTime(post.content) : 0
@@ -101,6 +103,15 @@ export default function BlogPostPage() {
                   <Clock size={15} className="text-cocoa-400" />
                   <span className="text-espresso-700">{readingTime}분 읽기</span>
                 </span>
+                {isAdmin && (
+                  <Link
+                    to={`/admin/edit/${slug}`}
+                    className="flex items-center gap-2 bg-amber-500 text-white px-4 py-2 rounded-full shadow-sm hover:bg-amber-600 transition-colors text-sm font-semibold"
+                  >
+                    <Edit3 size={15} />
+                    수정
+                  </Link>
+                )}
               </div>
             </div>
           </div>
