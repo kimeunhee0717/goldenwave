@@ -65,12 +65,28 @@ export function usePosts() {
   }
 
   const getRelatedPosts = (currentPost: BlogPost, limit = 3): BlogPost[] => {
-    return posts
-      .filter(post =>
-        post.id !== currentPost.id &&
-        post.category.id === currentPost.category.id
-      )
-      .slice(0, limit)
+    // 태그 기반 매칭: 같은 태그가 많을수록 관련성 높음
+    const currentTags = new Set(currentPost.tags.map(t => t.toLowerCase()))
+
+    const scored = posts
+      .filter(post => post.id !== currentPost.id)
+      .map(post => {
+        const matchCount = post.tags.filter(t => currentTags.has(t.toLowerCase())).length
+        const sameCategory = post.category.id === currentPost.category.id ? 1 : 0
+        return { post, score: matchCount * 3 + sameCategory }
+      })
+      .filter(item => item.score > 0)
+
+    // 같은 점수끼리는 랜덤 셔플
+    for (let i = scored.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      if (scored[i].score === scored[j].score) {
+        ;[scored[i], scored[j]] = [scored[j], scored[i]]
+      }
+    }
+
+    scored.sort((a, b) => b.score - a.score)
+    return scored.slice(0, limit).map(item => item.post)
   }
 
   const featuredPosts = useMemo(() => {
