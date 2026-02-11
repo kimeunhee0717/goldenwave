@@ -3,7 +3,8 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import { usePosts } from '@/hooks/usePosts'
 import { useAdmin } from '@/contexts/AdminContext'
 import BlogPostContent from '@/components/blog/BlogPostContent'
-import { Save, Eye, Edit3, ArrowLeft, Loader2, Check, AlertCircle } from 'lucide-react'
+import { Save, Eye, Edit3, ArrowLeft, Loader2, Check, AlertCircle, Wrench } from 'lucide-react'
+import { fixMarkdown } from '@/lib/fixMarkdown'
 
 const LOCAL_API = 'http://localhost:18790'
 
@@ -21,6 +22,8 @@ export default function EditPostPage() {
   const [saving, setSaving] = useState(false)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
+  const [fixLog, setFixLog] = useState<string[]>([])
+  const [showFixLog, setShowFixLog] = useState(false)
   useEffect(() => {
     if (post) {
       setContent(post.content)
@@ -98,6 +101,25 @@ export default function EditPostPage() {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* 마크다운 자동 수정 */}
+            <button
+              onClick={() => {
+                const { fixed, changes } = fixMarkdown(content)
+                if (changes.length === 0) {
+                  setFixLog(['✅ 수정할 오류가 없습니다!'])
+                } else {
+                  setContent(fixed)
+                  setFixLog(changes)
+                }
+                setShowFixLog(true)
+                setTimeout(() => setShowFixLog(false), 5000)
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 hover:bg-purple-200 rounded-lg transition-colors"
+            >
+              <Wrench className="w-4 h-4" />
+              자동 수정
+            </button>
+
             {/* 미리보기 토글 */}
             <button
               onClick={() => setIsPreview(!isPreview)}
@@ -135,6 +157,16 @@ export default function EditPostPage() {
             </button>
           </div>
         </div>
+
+        {/* 자동 수정 로그 */}
+        {showFixLog && fixLog.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 py-2 bg-purple-50 border-t border-purple-200">
+            <p className="text-sm font-medium text-purple-700 mb-1">🔧 자동 수정 결과 ({fixLog.length}건)</p>
+            {fixLog.map((log, i) => (
+              <p key={i} className="text-xs text-purple-600">• {log}</p>
+            ))}
+          </div>
+        )}
 
         {/* 에러 메시지 */}
         {saveStatus === 'error' && errorMsg && (
