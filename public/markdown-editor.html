@@ -166,59 +166,84 @@ function fixMarkdown(text) {
 // ========== 마크다운 → HTML (미리보기용) ==========
 function mdToHtml(md) {
   let html = md;
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
-  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm, (match, header, body) => {
+  // 코드블록을 먼저 보호 (플레이스홀더로 교체)
+  const codeBlocks = [];
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (m, lang, code) => {
+    codeBlocks.push('<pre><code>' + code + '</code></pre>');
+    return '\n<!--CODE' + (codeBlocks.length - 1) + '-->\n';
+  });
+  // 표 변환 (끝에 줄바꿈 보장)
+  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n)*)/gm, (match, header, body) => {
     const ths = header.split('|').map(h => '<th>' + h.trim() + '</th>').join('');
     const rows = body.trim().split('\n').map(row => {
       const tds = row.replace(/^\||\|$/g, '').split('|').map(c => '<td>' + c.trim() + '</td>').join('');
       return '<tr>' + tds + '</tr>';
     }).join('');
-    return '<table><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>';
+    return '\n<table><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>\n';
   });
+  // 제목 (줄 단위)
   html = html.replace(/^######\s+(.+)$/gm, '<h6>$1</h6>');
   html = html.replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>');
   html = html.replace(/^####\s+(.+)$/gm, '<h4>$1</h4>');
   html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
   html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
   html = html.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+  // 인용, 구분선
   html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
-  html = html.replace(/^---$/gm, '<hr>');
+  html = html.replace(/^-{3,}$/gm, '<hr>');
+  // 인라인 서식
   html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
   html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  // 목록
   html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
   html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
   html = html.replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>');
   html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+  // 문단
   html = html.replace(/\n\n/g, '</p><p>');
   html = html.replace(/\n/g, '<br>');
   html = '<p>' + html + '</p>';
+  // 정리: 블록 요소를 p에서 꺼내기
   html = html.replace(/<p>\s*<(h[1-6]|ul|ol|pre|blockquote|table|hr)/g, '<$1');
   html = html.replace(/<\/(h[1-6]|ul|ol|pre|blockquote|table)>\s*<\/p>/g, '</$1>');
+  html = html.replace(/<p><br>/g, '<p>');
+  html = html.replace(/<br><\/p>/g, '</p>');
   html = html.replace(/<p>\s*<\/p>/g, '');
-  html = html.replace(/<p><hr><\/p>/g, '<hr>');
+  html = html.replace(/<p>\s*<hr>\s*<\/p>/g, '<hr>');
+  html = html.replace(/<p>\s*<hr>/g, '<hr>');
+  html = html.replace(/<hr>\s*<\/p>/g, '<hr>');
+  // 코드블록 복원
+  html = html.replace(/<!--CODE(\d+)-->/g, (m, i) => codeBlocks[parseInt(i)]);
   return html;
 }
 
 // ========== 마크다운 → 스타일 포함 HTML (깔끔 복사용) ==========
 function mdToStyledHtml(md) {
   let html = md;
+  const pStyle = 'margin:14px 0;line-height:1.9;font-size:15px;color:#3d2e22;';
 
-  html = html.replace(/```(\w*)\n([\s\S]*?)```/g,
-    '<pre style="background:#2d2d2d;color:#f8f8f2;padding:16px;border-radius:8px;margin:16px 0;font-family:Consolas,monospace;font-size:13px;line-height:1.6;"><code>$2</code></pre>');
+  // 코드블록 보호
+  const codeBlocks = [];
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (m, lang, code) => {
+    codeBlocks.push('<pre style="background:#2d2d2d;color:#f8f8f2;padding:16px;border-radius:8px;margin:16px 0;font-family:Consolas,monospace;font-size:13px;line-height:1.6;"><code>' + code + '</code></pre>');
+    return '\n<!--CODE' + (codeBlocks.length - 1) + '-->\n';
+  });
 
-  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n?)*)/gm, (match, header, body) => {
+  // 표 (끝에 줄바꿈 보장)
+  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n)*)/gm, (match, header, body) => {
     const ths = header.split('|').map(h => '<th style="border:1px solid #ddd;padding:10px 14px;background:#f5f0e8;font-weight:600;">' + h.trim() + '</th>').join('');
     const rows = body.trim().split('\n').map(row => {
       const tds = row.replace(/^\||\|$/g, '').split('|').map(c => '<td style="border:1px solid #ddd;padding:10px 14px;">' + c.trim() + '</td>').join('');
       return '<tr>' + tds + '</tr>';
     }).join('');
-    return '<table style="border-collapse:collapse;width:100%;margin:16px 0;"><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>';
+    return '\n<table style="border-collapse:collapse;width:100%;margin:16px 0;"><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>\n';
   });
 
+  // 제목
   html = html.replace(/^######\s+(.+)$/gm, '<h6 style="font-size:14px;font-weight:600;margin:14px 0 8px;color:#6b5744;">$1</h6>');
   html = html.replace(/^#####\s+(.+)$/gm, '<h5 style="font-size:15px;font-weight:600;margin:14px 0 8px;color:#6b5744;">$1</h5>');
   html = html.replace(/^####\s+(.+)$/gm, '<h4 style="font-size:16px;font-weight:600;margin:16px 0 10px;color:#544339;">$1</h4>');
@@ -226,15 +251,18 @@ function mdToStyledHtml(md) {
   html = html.replace(/^##\s+(.+)$/gm, '<h2 style="font-size:22px;font-weight:700;margin:24px 0 12px;color:#3d2e22;border-bottom:2px solid #d4a853;padding-bottom:8px;">$1</h2>');
   html = html.replace(/^#\s+(.+)$/gm, '<h1 style="font-size:28px;font-weight:800;margin:28px 0 16px;color:#3d2e22;border-bottom:2px solid #d4a853;padding-bottom:10px;">$1</h1>');
 
+  // 인용, 구분선
   html = html.replace(/^>\s+(.+)$/gm, '<blockquote style="border-left:4px solid #d4a853;padding:12px 16px;margin:16px 0;background:#faf6ee;color:#6b5744;line-height:1.8;">$1</blockquote>');
-  html = html.replace(/^---$/gm, '<hr style="border:none;border-top:1px solid #e8e0d5;margin:24px 0;">');
+  html = html.replace(/^-{3,}$/gm, '<hr style="border:none;border-top:1px solid #e8e0d5;margin:24px 0;">');
 
+  // 인라인 서식
   html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong style="font-weight:700;color:#3d2e22;"><em>$1</em></strong>');
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong style="font-weight:700;color:#3d2e22;">$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em style="color:#d97706;">$1</em>');
   html = html.replace(/`([^`]+)`/g, '<code style="background:#f3ede4;padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#c4943f;">$1</code>');
   html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#3b82f6;text-decoration:underline;">$1</a>');
 
+  // 목록
   html = html.replace(/^\* (.+)$/gm, '<li style="margin:6px 0;line-height:1.8;">$1</li>');
   html = html.replace(/^- (.+)$/gm, '<li style="margin:6px 0;line-height:1.8;">$1</li>');
   html = html.replace(/^(\d+)\. (.+)$/gm, '<li style="margin:6px 0;line-height:1.8;">$2</li>');
@@ -243,16 +271,22 @@ function mdToStyledHtml(md) {
   // "키워드:" 패턴 강조
   html = html.replace(/^([가-힣a-zA-Z0-9\s]{1,20}:\s)/gm, '<strong style="font-weight:700;color:#3d2e22;">$1</strong>');
 
-  // 문단 분리 (빈 줄)
-  html = html.replace(/\n\n/g, '</p><p style="margin:14px 0;line-height:1.9;font-size:15px;color:#3d2e22;">');
-  // 단일 줄바꿈 → <br>
+  // 문단
+  html = html.replace(/\n\n/g, '</p><p style="' + pStyle + '">');
   html = html.replace(/\n/g, '<br>');
-  html = '<p style="margin:14px 0;line-height:1.9;font-size:15px;color:#3d2e22;">' + html + '</p>';
+  html = '<p style="' + pStyle + '">' + html + '</p>';
 
-  // 빈 p 정리
+  // 정리
   html = html.replace(/<p[^>]*>\s*<(h[1-6]|ul|ol|pre|blockquote|table|hr)/g, '<$1');
   html = html.replace(/<\/(h[1-6]|ul|ol|pre|blockquote|table)>\s*<\/p>/g, '</$1>');
+  html = html.replace(/<p[^>]*><br>/g, '<p style="' + pStyle + '">');
+  html = html.replace(/<br><\/p>/g, '</p>');
   html = html.replace(/<p[^>]*>\s*<\/p>/g, '');
+  html = html.replace(/<p[^>]*>\s*<hr/g, '<hr');
+  html = html.replace(/<hr[^>]*>\s*<\/p>/g, '');
+
+  // 코드블록 복원
+  html = html.replace(/<!--CODE(\d+)-->/g, (m, i) => codeBlocks[parseInt(i)]);
 
   return '<div style="font-family:Segoe UI,-apple-system,sans-serif;max-width:700px;color:#3d2e22;">' + html + '</div>';
 }
