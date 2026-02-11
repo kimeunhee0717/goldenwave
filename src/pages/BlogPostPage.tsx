@@ -60,16 +60,6 @@ export default function BlogPostPage() {
           </div>
 
           <div className="container mx-auto px-6 max-w-3xl relative">
-            <Link
-              to="/blog"
-              className="group inline-flex items-center gap-3 text-cocoa-500 hover:text-espresso-700 mb-10 transition-all duration-300"
-            >
-              <span className="p-2.5 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm group-hover:shadow-md group-hover:bg-white transition-all border border-oatmeal-200">
-                <ArrowLeft size={18} />
-              </span>
-              <span className="font-medium">블로그 목록으로</span>
-            </Link>
-
             <Badge color={post.category.color} size="md" className="mb-6 px-4 py-1.5 shadow-sm">
               {post.category.title}
             </Badge>
