@@ -2688,5 +2688,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-12",
     "featured": false
+  },
+  {
+    "id": "155",
+    "slug": "smartphone-battery-tips",
+    "title": "스마트폰 배터리 오래 쓰는 꿀팁 10가지",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-13",
+    "featured": false
   }
 ]
