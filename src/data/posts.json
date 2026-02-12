@@ -2620,5 +2620,73 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-11",
     "featured": false
+  },
+  {
+    "id": "151",
+    "slug": "briefing-buulgyeong-2026-02-12",
+    "title": "🏙️ 부울경 뉴스 브리핑 - 2026-02-12",
+    "excerpt": "<div style=\"font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; max-width: 600px; margin: 0 auto; font-size: 16px; line-height: 1.8;\"><h2",
+    "coverImage": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "부울경",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-12",
+    "featured": false
+  },
+  {
+    "id": "152",
+    "slug": "briefing-finance-2026-02-12",
+    "title": "💰 금융 뉴스 브리핑 - 2026-02-12",
+    "excerpt": "1. [올림픽] 피겨 신지아, 팀 이벤트 여자 싱글 쇼트 4위 '클린 연기'",
+    "coverImage": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "금융",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-12",
+    "featured": false
+  },
+  {
+    "id": "153",
+    "slug": "briefing-senior-2026-02-12",
+    "title": "🧓 시니어 뉴스 브리핑 - 2026-02-12",
+    "excerpt": "1.  **Analyze the Request:**",
+    "coverImage": "https://images.unsplash.com/photo-1447005497901-b3e9ee359928?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "시니어",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-12",
+    "featured": false
+  },
+  {
+    "id": "154",
+    "slug": "briefing-ai-2026-02-12",
+    "title": "🤖 AI 뉴스 브리핑 - 2026-02-12",
+    "excerpt": "1.  **Analyze the User's Request:**",
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "AI",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-12",
+    "featured": false
   }
 ]

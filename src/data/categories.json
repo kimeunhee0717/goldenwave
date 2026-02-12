@@ -40,5 +40,12 @@
     "slug": "business",
     "description": "마케팅, SEO, 사업 성장, 성공 사례",
     "color": "teal"
+  },
+  {
+    "id": "briefing",
+    "title": "부자브리핑",
+    "slug": "briefing",
+    "description": "매일 아침 AI가 분석한 뉴스 브리핑",
+    "color": "indigo"
   }
 ]
