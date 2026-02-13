@@ -238,7 +238,13 @@ const LoanRefinanceCalculator: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="대출 갈아타기 비교기"
+        description="기존 대출과 신규 대출 조건을 비교하여 갈아타기 시 절감 금액을 계산합니다. 중도상환수수료까지 반영한 정확한 비교를 제공합니다."
+        url="/tools/loan-refinance"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -589,7 +595,8 @@ const LoanRefinanceCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default LoanRefinanceCalculator;

@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
+import SEOHead from '@/components/common/SEOHead';
 
 export default function TermsPage() {
   return (
     <div className="pt-28 pb-20 bg-white min-h-screen">
+      <SEOHead
+        title="이용약관"
+        description="부자타임의 서비스 이용약관입니다. 서비스 이용 전 반드시 확인해 주세요."
+        url="/terms"
+      />
       <div className="container mx-auto px-6 lg:px-12 max-w-3xl">
         <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
           이용약관

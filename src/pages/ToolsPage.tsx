@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEOHead from '@/components/common/SEOHead'
 import {
   TrendingUp,
   Landmark,
@@ -307,6 +308,11 @@ const tools: Tool[] = [
 const ToolsPage: React.FC = () => {
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, #FBEAD6 0%, #fdf6f7 30%, #FFFFFF 100%)' }}>
+      <SEOHead
+        title="무료 계산기 도구 모음"
+        description="복리 계산기, 대출 이자 계산기, 연봉 실수령액 계산기, 환율 계산기 등 20가지 이상의 무료 재무·생활 계산기를 이용하세요."
+        url="/tools"
+      />
       {/* Hero */}
       <section className="pt-32 pb-16 px-6 lg:px-12">
         <div className="container mx-auto max-w-4xl text-center">

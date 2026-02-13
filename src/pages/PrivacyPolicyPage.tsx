@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom';
+import SEOHead from '@/components/common/SEOHead';
 
 export default function PrivacyPolicyPage() {
   return (
     <div className="pt-28 pb-20 bg-white min-h-screen">
+      <SEOHead
+        title="개인정보처리방침"
+        description="부자타임의 개인정보처리방침입니다. 이용자의 개인정보를 어떻게 수집, 이용, 보호하는지 안내합니다."
+        url="/privacy"
+      />
       <div className="container mx-auto px-6 lg:px-12 max-w-3xl">
         <h1 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
           개인정보처리방침

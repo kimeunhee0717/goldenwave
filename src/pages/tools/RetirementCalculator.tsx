@@ -204,7 +204,13 @@ const RetirementCalculator: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="은퇴 자금 계산기"
+        description="은퇴 후 필요한 자금을 계산합니다. 현재 자산, 예상 생활비, 은퇴 시기를 입력하면 필요 저축액을 알려드립니다."
+        url="/tools/retirement"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -496,7 +502,8 @@ const RetirementCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default RetirementCalculator;

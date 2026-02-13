@@ -168,7 +168,13 @@ const AgeCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="나이·만나이 계산기"
+        description="생년월일을 입력하면 만나이, 한국식 나이, 연나이를 한번에 확인할 수 있습니다. 다음 생일까지 남은 일수도 알려드립니다."
+        url="/tools/age"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-3xl text-center">
@@ -521,7 +527,8 @@ const AgeCalculator: React.FC = () => {
         )}
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default AgeCalculator;

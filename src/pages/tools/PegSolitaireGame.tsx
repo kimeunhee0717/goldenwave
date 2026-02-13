@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Target, RotateCcw, Lightbulb, Undo2, Clock } from 'lucide-react';
+import SEOHead from '@/components/common/SEOHead'
 
 // ═══════════════════════════════════════════════════════
 // Types
@@ -313,6 +314,11 @@ export default function PegSolitaireGame() {
 
   return (
     <div className="min-h-screen bg-oatmeal-50">
+      <SEOHead
+        title="페그 솔리테어"
+        description="혼자 즐기는 클래식 보드게임 페그 솔리테어입니다. 점프하여 핀을 제거하고 마지막 하나만 남겨보세요."
+        url="/tools/peg-solitaire"
+      />
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-12 sm:py-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-3xl text-center">

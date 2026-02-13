@@ -110,7 +110,13 @@ const StockReturnCalculator: React.FC = () => {
   const isProfit = result ? result.netProfit >= 0 : true;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="주식 수익률 계산기"
+        description="주식 투자 수익률을 계산합니다. 매수·매도 가격, 수량, 수수료를 입력하면 실현 수익과 수익률을 확인할 수 있습니다."
+        url="/tools/stock-return"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -439,7 +445,8 @@ const StockReturnCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default StockReturnCalculator;

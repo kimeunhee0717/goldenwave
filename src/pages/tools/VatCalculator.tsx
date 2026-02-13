@@ -82,7 +82,13 @@ const VatCalculator: React.FC = () => {
   }, [vatRate]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="부가세(VAT) 계산기"
+        description="공급가액과 부가세를 간편하게 계산합니다. 부가세 포함/미포함 금액 간 변환과 세금계산서 작성에 필요한 금액을 확인하세요."
+        url="/tools/vat"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-4xl">
@@ -341,7 +347,8 @@ const VatCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default VatCalculator;

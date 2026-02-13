@@ -202,7 +202,13 @@ const ExchangeRateCalculator: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="환율 계산기"
+        description="실시간 환율 기반으로 통화를 변환합니다. USD, EUR, JPY, CNY 등 주요 통화 환율을 간편하게 계산하세요."
+        url="/tools/exchange-rate"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-3xl text-center">
@@ -521,7 +527,8 @@ const ExchangeRateCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default ExchangeRateCalculator;

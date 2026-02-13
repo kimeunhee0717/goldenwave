@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, Clock } from 'lucide-react';
+import SEOHead from '@/components/common/SEOHead';
 
 const contactInfo = [
   {
@@ -52,6 +53,11 @@ export default function ContactPage() {
 
   return (
     <div className="pt-28 pb-20 bg-white min-h-screen">
+      <SEOHead
+        title="문의하기"
+        description="부자타임에 문의사항이 있으시면 연락해 주세요. 빠르게 답변 드리겠습니다."
+        url="/contact"
+      />
       <div className="container mx-auto px-6 lg:px-12 max-w-4xl">
         {/* 헤더 */}
         <div className="text-center mb-16">

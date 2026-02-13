@@ -129,7 +129,13 @@ const SeveranceCalculator: React.FC = () => {
   }, [baseSalary, fixedAllowance, annualBonus, unusedLeave]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="퇴직금 계산기"
+        description="근속 기간과 급여 정보를 입력하면 예상 퇴직금을 계산합니다. 퇴직소득세 공제 후 실수령액도 확인 가능합니다."
+        url="/tools/severance"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -472,7 +478,8 @@ const SeveranceCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default SeveranceCalculator;

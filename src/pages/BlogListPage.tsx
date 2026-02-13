@@ -5,6 +5,7 @@ import FeaturedPosts from '@/components/blog/FeaturedPosts'
 import BlogList from '@/components/blog/BlogList'
 import CategoryFilter from '@/components/blog/CategoryFilter'
 import Skeleton from '@/components/common/Skeleton'
+import SEOHead from '@/components/common/SEOHead'
 
 export default function BlogListPage() {
   const { posts, categories, featuredPosts, isLoading } = usePosts()
@@ -28,6 +29,11 @@ export default function BlogListPage() {
 
   return (
     <div className="min-h-screen bg-cream-100">
+      <SEOHead
+        title="블로그"
+        description="AI, 재테크, 부업, 비즈니스 — 경제적 자유를 향한 매일의 인사이트를 전합니다."
+        url="/blog"
+      />
       {/* Hero 섹션 */}
       <section className="relative bg-gradient-to-br from-soot-900 via-moss-600 to-sage-500 text-white py-20 md:py-28 overflow-hidden">
         {/* 배경 패턴 - 자연스러운 잎 패턴 */}

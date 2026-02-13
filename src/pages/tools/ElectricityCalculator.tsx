@@ -132,7 +132,13 @@ const ElectricityCalculator: React.FC = () => {
   const quickKwh = [100, 200, 300, 400, 500, 600];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="전기요금 계산기"
+        description="가정용 전기요금을 누진제 기준으로 계산합니다. 사용량을 입력하면 기본요금, 전력량요금, 부가세를 포함한 예상 요금을 확인하세요."
+        url="/tools/electricity"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -442,7 +448,8 @@ const ElectricityCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default ElectricityCalculator;

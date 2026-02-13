@@ -597,7 +597,13 @@ export default function ChessGame() {
   const kingInCheck = (status === 'check' || status === 'checkmate') ? findKing(board, turn) : null;
 
   return (
-    <div className="min-h-screen bg-oatmeal-50">
+    <>
+      <SEOHead
+        title="체스 게임"
+        description="AI와 대결하는 온라인 체스 게임입니다. 초보부터 고수까지 다양한 난이도로 체스를 즐겨보세요."
+        url="/tools/chess"
+      />
+      <div className="min-h-screen bg-oatmeal-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-12 sm:py-16 px-4 sm:px-6">
         <div className="container mx-auto max-w-3xl text-center">
@@ -894,6 +900,7 @@ export default function ChessGame() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

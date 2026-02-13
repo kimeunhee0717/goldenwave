@@ -899,7 +899,13 @@ export default function JanggiGame() {
   const getY = (r: number) => PADDING + toVisual(r) * CELL_SIZE;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 to-amber-50">
+    <>
+      <SEOHead
+        title="장기 게임"
+        description="AI와 대국하는 온라인 장기 게임입니다. 한국 전통 보드게임 장기를 다양한 난이도로 즐겨보세요."
+        url="/tools/janggi"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-stone-100 to-amber-50">
       {/* 헤더 */}
       <div className="bg-gradient-to-r from-stone-800 to-stone-950 text-white shadow-lg">
         <div className="max-w-5xl mx-auto px-4 py-5 sm:py-6">
@@ -1481,5 +1487,6 @@ export default function JanggiGame() {
       </div>
       )}
     </div>
-  );
+  
+    </>);
 }

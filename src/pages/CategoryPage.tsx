@@ -3,6 +3,7 @@ import { usePosts } from '@/hooks/usePosts'
 import BlogList from '@/components/blog/BlogList'
 import CategoryFilter from '@/components/blog/CategoryFilter'
 import Skeleton from '@/components/common/Skeleton'
+import SEOHead from '@/components/common/SEOHead'
 import { ArrowLeft } from 'lucide-react'
 
 export default function CategoryPage() {
@@ -55,6 +56,11 @@ export default function CategoryPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title={`${category.title} - 블로그`}
+        description={category.description || `${category.title} 카테고리의 최신 글을 확인하세요.`}
+        url={`/blog/category/${category.slug}`}
+      />
       {/* Hero 섹션 */}
       <section className={`bg-gradient-to-r ${colorMap[category.color] || 'from-primary-600 to-indigo-700'} text-white py-16`}>
         <div className="container mx-auto px-6">

@@ -161,7 +161,13 @@ const SalaryCalculator: React.FC = () => {
   const deductionRate = annual > 0 ? ((result.totalDeduction * 12) / annual * 100).toFixed(1) : '0';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="연봉 실수령액 계산기"
+        description="연봉에서 4대보험과 소득세를 공제한 실수령액을 정확하게 계산합니다. 부양가족 수에 따른 세금 차이도 확인하세요."
+        url="/tools/salary"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -575,7 +581,8 @@ const SalaryCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default SalaryCalculator;

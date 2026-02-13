@@ -150,7 +150,13 @@ const SavingsCalculator: React.FC = () => {
   }, [result.monthlyData, months]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="적금·예금 이자 계산기"
+        description="적금과 예금의 만기 수령액을 비교 계산합니다. 단리·복리, 세전·세후 이자를 한번에 확인하세요."
+        url="/tools/savings"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -572,7 +578,8 @@ const SavingsCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default SavingsCalculator;

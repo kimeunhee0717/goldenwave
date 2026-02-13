@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { ChevronLeft, RotateCcw, Trophy, User, Bot, Volume2, VolumeX } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEOHead from '@/components/common/SEOHead'
 
 // ============================================================================
 // 오목 (Gomoku) - 15x15 보드, 3-3/4-4 금수, 입체 돌
@@ -400,6 +401,11 @@ export default function GomokuGame() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">
+      <SEOHead
+        title="오목 게임"
+        description="AI와 대결하는 오목 게임입니다. 렌주룰 적용으로 공정한 대국을 즐겨보세요."
+        url="/tools/gomoku"
+      />
       {/* 헤더 */}
       <div className="bg-gradient-to-r from-stone-800 to-stone-900 text-white shadow-lg">
         <div className="max-w-4xl mx-auto px-4 py-4">

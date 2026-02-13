@@ -101,7 +101,13 @@ const JeonseWolseCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="전세↔월세 전환 계산기"
+        description="전세보증금과 월세를 상호 전환하여 비교합니다. 전월세전환율을 기반으로 어떤 방식이 유리한지 판단해보세요."
+        url="/tools/jeonse-wolse"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-3xl text-center">
@@ -524,7 +530,8 @@ const JeonseWolseCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default JeonseWolseCalculator;

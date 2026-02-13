@@ -149,7 +149,13 @@ const LoanCalculator: React.FC = () => {
   const loanP = (parseFloat(loanAmount) || 0) * 10000;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="대출 이자 계산기"
+        description="대출 원리금 상환 계획을 한눈에. 원리금균등, 원금균등, 만기일시상환 방식별 월 상환액과 총 이자를 비교해보세요."
+        url="/tools/loan-interest"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -462,7 +468,8 @@ const LoanCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default LoanCalculator;

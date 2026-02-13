@@ -87,7 +87,13 @@ const CompoundInterestCalculator: React.FC = () => {
     : '0';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="복리 계산기"
+        description="복리 효과를 한눈에 확인하세요. 초기 투자금, 매월 적립액, 수익률을 입력하면 자산 성장 그래프와 연도별 상세 내역을 보여드립니다."
+        url="/tools/compound-interest"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -390,7 +396,8 @@ const CompoundInterestCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default CompoundInterestCalculator;

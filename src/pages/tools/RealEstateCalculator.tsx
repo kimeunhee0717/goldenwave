@@ -379,6 +379,12 @@ const RealEstateCalculator: React.FC = () => {
   };
 
   return (
+    <>
+    <SEOHead
+      title="부동산 수익률 계산기"
+      description="부동산 투자 수익률을 정확하게 분석합니다. 매매가, 전세가, 월세, 각종 비용을 반영한 실질 수익률을 계산해보세요."
+      url="/tools/real-estate"
+    />
     <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
@@ -850,7 +856,8 @@ const RealEstateCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default RealEstateCalculator;

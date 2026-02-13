@@ -455,7 +455,13 @@ export default function BadukGame() {
   const getY = (r: number) => PADDING + r * CELL_SIZE;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">
+    <>
+      <SEOHead
+        title="바둑 게임"
+        description="AI와 대국하는 온라인 바둑 게임입니다. 9x9, 13x13, 19x19 다양한 바둑판 크기로 즐겨보세요."
+        url="/tools/baduk"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-stone-100">
       {/* 헤더 */}
       <div className="bg-gradient-to-r from-stone-800 to-stone-900 text-white shadow-lg">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -828,5 +834,6 @@ export default function BadukGame() {
         </div>
       )}
     </div>
-  );
+  
+    </>);
 }

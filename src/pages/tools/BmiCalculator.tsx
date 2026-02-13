@@ -83,7 +83,13 @@ const BmiCalculator: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="BMI 계산기"
+        description="키와 몸무게를 입력하면 BMI 지수와 비만도를 확인할 수 있습니다. 건강한 체중 범위와 관리 팁도 함께 제공합니다."
+        url="/tools/bmi"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-3xl text-center">
@@ -428,7 +434,8 @@ const BmiCalculator: React.FC = () => {
         )}
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default BmiCalculator;

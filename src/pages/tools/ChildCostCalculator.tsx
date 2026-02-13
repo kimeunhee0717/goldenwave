@@ -132,7 +132,13 @@ const ChildCostCalculator: React.FC = () => {
   const maxYearly = Math.max(...result.yearly.map((y) => y.total), 1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="육아 비용 계산기"
+        description="자녀 양육에 드는 비용을 단계별로 계산합니다. 영유아기부터 대학까지 교육비, 생활비, 의료비 등 총 비용을 확인하세요."
+        url="/tools/child-cost"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -449,7 +455,8 @@ const ChildCostCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default ChildCostCalculator;

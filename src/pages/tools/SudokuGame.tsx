@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronLeft, RotateCcw, Trophy, Lightbulb, Timer, Save, Trash2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEOHead from '@/components/common/SEOHead'
 
 // ============================================================================
 // 스도쿠 (Sudoku) - Phase 1 완료, Phase 2-1 진행중
@@ -399,6 +400,11 @@ export default function SudokuGame() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+      <SEOHead
+        title="스도쿠 게임"
+        description="다양한 난이도의 스도쿠 퍼즐을 풀어보세요. 메모 기능, 힌트, 실수 체크 등 편리한 기능을 제공합니다."
+        url="/tools/sudoku"
+      />
       {/* 헤더 */}
       <div className="bg-gradient-to-r from-indigo-800 to-blue-900 text-white shadow-lg">
         <div className="max-w-4xl mx-auto px-4 py-4">

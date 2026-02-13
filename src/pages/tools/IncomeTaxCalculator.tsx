@@ -155,7 +155,13 @@ const IncomeTaxCalculator: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="종합소득세 계산기"
+        description="종합소득세를 간편하게 계산합니다. 사업소득, 근로소득, 기타소득에 대한 세금과 각종 공제를 반영한 납부세액을 확인하세요."
+        url="/tools/income-tax"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -524,7 +530,8 @@ const IncomeTaxCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default IncomeTaxCalculator;

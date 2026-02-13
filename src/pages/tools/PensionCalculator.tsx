@@ -156,7 +156,13 @@ const PensionCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
+    <>
+      <SEOHead
+        title="연금 수령액 계산기"
+        description="국민연금 예상 수령액을 계산합니다. 가입 기간, 평균 소득에 따른 월 수령액과 총 수령액을 확인하세요."
+        url="/tools/pension"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-cream-50 via-white to-golden-50">
       {/* Hero */}
       <div className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white py-16 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -720,7 +726,8 @@ const PensionCalculator: React.FC = () => {
         </div>
       </div>
     </div>
-  );
+  
+    </>);
 };
 
 export default PensionCalculator;

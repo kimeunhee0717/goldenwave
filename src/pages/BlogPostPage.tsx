@@ -4,6 +4,7 @@ import { formatDate } from '@/lib/formatDate'
 import { calculateReadingTime } from '@/lib/readingTime'
 import Badge from '@/components/common/Badge'
 import Skeleton from '@/components/common/Skeleton'
+import SEOHead from '@/components/common/SEOHead'
 import ReadingProgressBar from '@/components/blog/ReadingProgressBar'
 import BlogPostContent from '@/components/blog/BlogPostContent'
 import TableOfContents from '@/components/blog/TableOfContents'
@@ -49,6 +50,15 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-golden-100 via-oatmeal-200/30 to-golden-50">
+      <SEOHead
+        title={post.title}
+        description={post.excerpt}
+        url={`/blog/${post.slug}`}
+        image={post.coverImage}
+        type="article"
+        publishedAt={post.publishedAt}
+        tags={post.tags}
+      />
       <ReadingProgressBar />
 
       {/* 헤더 */}

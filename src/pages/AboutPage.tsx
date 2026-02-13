@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Target, Users, Lightbulb, TrendingUp } from 'lucide-react';
+import SEOHead from '@/components/common/SEOHead';
 
 const values = [
   {
@@ -27,6 +28,11 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="pt-28 pb-20 bg-white min-h-screen">
+      <SEOHead
+        title="소개"
+        description="부자타임은 AI 시대의 경제적 자유를 위한 인사이트를 매일 전하는 콘텐츠 플랫폼입니다."
+        url="/about"
+      />
       <div className="container mx-auto px-6 lg:px-12 max-w-3xl">
         {/* 헤더 */}
         <div className="text-center mb-16">

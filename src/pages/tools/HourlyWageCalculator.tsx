@@ -120,7 +120,13 @@ const HourlyWageCalculator: React.FC = () => {
   }, [result.hourly, hoursPerDay, daysPerWeek, includeWeeklyHoliday]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <>
+      <SEOHead
+        title="시급·일급 변환 계산기"
+        description="시급, 일급, 주급, 월급을 상호 변환합니다. 근무 시간과 주휴수당을 반영한 정확한 급여를 계산해보세요."
+        url="/tools/hourly-wage"
+      />
+      <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       {/* Hero */}
       <section className="bg-gradient-to-r from-espresso-800 to-espresso-950 text-white pt-28 pb-12 px-6">
         <div className="container mx-auto max-w-5xl">
@@ -502,7 +508,8 @@ const HourlyWageCalculator: React.FC = () => {
         </div>
       </section>
     </div>
-  );
+  
+    </>);
 };
 
 export default HourlyWageCalculator;
