@@ -2704,5 +2704,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-13",
     "featured": false
+  },
+  {
+    "id": "156",
+    "slug": "kakaotalk-font-size",
+    "title": "카카오톡 글자 크게 보는 법 - 시니어 설정 가이드",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1553729459-afe8f2e2ed08?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-15",
+    "featured": false
   }
 ]
