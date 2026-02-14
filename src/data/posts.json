@@ -2720,5 +2720,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-15",
     "featured": false
+  },
+  {
+    "id": "157",
+    "slug": "free-wifi-safety",
+    "title": "무료 와이파이 안전하게 사용하는 방법",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-15",
+    "featured": false
   }
 ]
