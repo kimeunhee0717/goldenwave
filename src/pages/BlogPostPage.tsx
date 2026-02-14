@@ -58,6 +58,7 @@ export default function BlogPostPage() {
         type="article"
         publishedAt={post.publishedAt}
         tags={post.tags}
+        noindex={post.category.slug === 'briefing'}
       />
       <ReadingProgressBar />
 

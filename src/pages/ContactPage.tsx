@@ -47,7 +47,16 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 실제 폼 전송 로직은 백엔드 연동 시 추가
+    const subject = `[부자타임 문의] ${formData.subject || '일반 문의'}`;
+    const body = [
+      `이름: ${formData.name}`,
+      `이메일: ${formData.email}`,
+      `문의 유형: ${formData.subject}`,
+      '',
+      formData.message,
+    ].join('\n');
+    const mailto = `mailto:kimeunhee0717@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
     setSubmitted(true);
   };
 

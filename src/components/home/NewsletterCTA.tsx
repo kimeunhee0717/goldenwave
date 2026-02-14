@@ -53,7 +53,7 @@ export default function NewsletterCTA() {
   }
 
   return (
-    <section data-newsletter className="py-16 bg-gradient-to-br from-soot-900 via-soot-800 to-moss-900">
+    <section id="newsletter" data-newsletter className="py-16 bg-gradient-to-br from-soot-900 via-soot-800 to-moss-900">
       <div className="container mx-auto px-6 text-center">
         <div className="inline-flex items-center justify-center w-14 h-14 bg-moss-600 rounded-2xl mb-6">
           <Mail className="text-white" size={24} />

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from '@/components/layout/Layout'
 import HomePage from '@/pages/HomePage'
 import BlogListPage from '@/pages/BlogListPage'
@@ -32,7 +32,6 @@ import GomokuGame from '@/pages/tools/GomokuGame'
 import SudokuGame from '@/pages/tools/SudokuGame'
 import BadukGame from '@/pages/tools/BadukGame'
 
-import CompanyPage from '@/pages/CompanyPage'
 import PrivacyPolicyPage from '@/pages/PrivacyPolicyPage'
 import TermsPage from '@/pages/TermsPage'
 import AboutPage from '@/pages/AboutPage'
@@ -55,7 +54,7 @@ function App() {
           <Route path="blog" element={<BlogListPage />} />
           <Route path="blog/:slug" element={<BlogPostPage />} />
           <Route path="blog/category/:category" element={<CategoryPage />} />
-          <Route path="company" element={<CompanyPage />} />
+          <Route path="company" element={<Navigate to="/about" replace />} />
           <Route path="tools" element={<ToolsPage />} />
           <Route path="tools/compound-interest" element={<CompoundInterestCalculator />} />
           <Route path="tools/loan-interest" element={<LoanCalculator />} />

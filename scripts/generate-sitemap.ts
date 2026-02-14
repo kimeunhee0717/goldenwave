@@ -39,6 +39,7 @@ for (const page of staticPages) {
 
 // 2. 카테고리 페이지
 for (const cat of categories) {
+  if (cat.slug === 'briefing') continue
   urls.push({
     loc: `${BASE_URL}/blog/category/${cat.slug}`,
     lastmod: TODAY,
@@ -88,6 +89,7 @@ for (const tool of tools) {
 
 // 4. 블로그 포스트
 for (const post of posts) {
+  if (post.categoryId === 'briefing') continue
   urls.push({
     loc: `${BASE_URL}/blog/${post.slug}`,
     lastmod: post.publishedAt,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, Youtube, ArrowUp, Mail } from 'lucide-react';
+import { ArrowUp, Mail } from 'lucide-react';
 
 const categories = [
   { label: 'AI 머니', href: '/blog/category/ai-money' },
@@ -35,8 +35,6 @@ const Footer: React.FC = () => {
               매일의 인사이트를 전합니다.
             </p>
             <div className="flex gap-4 pt-2">
-              <a href="#" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Instagram size={18} /></a>
-              <a href="#" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Youtube size={18} /></a>
               <a href="mailto:hello@bujatime.com" className="p-2 rounded-full bg-slate-100 text-slate-600 hover:bg-moss-50 hover:text-moss-600 transition-colors"><Mail size={18} /></a>
             </div>
           </div>
@@ -61,7 +59,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-3 text-sm text-slate-500">
               <li><Link to="/blog" className="hover:text-moss-600 transition-colors">전체 뉴스</Link></li>
               <li><Link to="/tools/compound-interest" className="hover:text-moss-600 transition-colors">복리 계산기</Link></li>
-              <li><a href="#" className="hover:text-moss-600 transition-colors">뉴스레터 구독</a></li>
+              <li><a href="/#newsletter" className="hover:text-moss-600 transition-colors">뉴스레터 구독</a></li>
             </ul>
           </div>
 
@@ -82,8 +80,6 @@ const Footer: React.FC = () => {
         <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-400">
             © {new Date().getFullYear()} 부자타임(BujaTime) | All Rights Reserved.
-            <span className="mx-2">·</span>
-            <Link to="/admin" className="text-slate-400 hover:text-moss-600 transition-colors">관리자</Link>
           </p>
           <button
             onClick={scrollToTop}

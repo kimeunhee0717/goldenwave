@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import { usePosts } from '@/hooks/usePosts'
 import Search from '@/components/blog/Search'
 import FeaturedPosts from '@/components/blog/FeaturedPosts'
@@ -113,9 +114,9 @@ export default function BlogListPage() {
                   <div className="mt-8 p-6 bg-gradient-to-br from-sage-50 to-mist-50 rounded-2xl border border-sage-200">
                     <h4 className="font-bold text-soot-900 mb-2">뉴스레터 구독</h4>
                     <p className="text-sm text-soot-600 mb-4">최신 인사이트를 이메일로 받아보세요</p>
-                    <button className="w-full py-2.5 px-4 bg-moss-600 text-white rounded-xl font-medium hover:bg-moss-700 transition-colors text-sm">
+                    <Link to="/#newsletter" className="block w-full py-2.5 px-4 bg-moss-600 text-white rounded-xl font-medium hover:bg-moss-700 transition-colors text-sm text-center">
                       구독하기
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </aside>
