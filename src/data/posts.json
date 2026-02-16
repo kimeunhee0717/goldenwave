@@ -2768,5 +2768,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-17",
     "featured": false
+  },
+  {
+    "id": "160",
+    "slug": "naver-cafe-guide",
+    "title": "네이버 카페 가입부터 글쓰기까지 완전 가이드",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-17",
+    "featured": false
   }
 ]
