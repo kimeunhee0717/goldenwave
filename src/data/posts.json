@@ -2784,5 +2784,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-17",
     "featured": false
+  },
+  {
+    "id": "161",
+    "slug": "smartphone-storage-fix",
+    "title": "스마트폰 저장공간 부족할 때 해결법",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-19",
+    "featured": false
   }
 ]
