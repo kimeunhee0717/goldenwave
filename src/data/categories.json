@@ -1,23 +1,16 @@
 [
   {
-    "id": "ai-money",
-    "title": "AI 머니",
-    "slug": "ai-money",
-    "description": "AI로 돈 벌고, 시간 아끼는 모든 것",
+    "id": "digital-life",
+    "title": "디지털 생활",
+    "slug": "digital-life",
+    "description": "AI와 디지털 도구로 더 스마트한 일상",
     "color": "purple"
   },
   {
-    "id": "finance",
-    "title": "재테크",
-    "slug": "finance",
-    "description": "복리, 투자, 절약, 자산 관리",
-    "color": "blue"
-  },
-  {
-    "id": "side-hustle",
-    "title": "부업·N잡",
-    "slug": "side-hustle",
-    "description": "추가 수입, 부업, 수익화 전략",
+    "id": "money-plus",
+    "title": "머니플러스",
+    "slug": "money-plus",
+    "description": "재테크, 부업, 비즈니스로 수익 창출",
     "color": "green"
   },
   {
@@ -28,24 +21,17 @@
     "color": "orange"
   },
   {
-    "id": "digital-skill",
-    "title": "디지털스킬",
-    "slug": "digital-skill",
-    "description": "디지털 도구, 생산성, 실무 활용",
-    "color": "red"
-  },
-  {
-    "id": "business",
-    "title": "비즈니스",
-    "slug": "business",
-    "description": "마케팅, SEO, 사업 성장, 성공 사례",
-    "color": "teal"
-  },
-  {
     "id": "briefing",
-    "title": "부자브리핑",
+    "title": "브리핑",
     "slug": "briefing",
     "description": "매일 아침 AI가 분석한 뉴스 브리핑",
     "color": "indigo"
+  },
+  {
+    "id": "draft",
+    "title": "편집중",
+    "slug": "draft",
+    "description": "작성 중인 글 (비공개)",
+    "color": "gray"
   }
 ]
