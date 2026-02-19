@@ -2,241 +2,235 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.bujatime.com/</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/about</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/contact</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/privacy</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/terms</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/category/ai-money</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/category/finance</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/category/side-hustle</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/category/mindset</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/category/digital-skill</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/blog/category/business</loc>
-    <lastmod>2026-02-13</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.bujatime.com/blog/category/briefing</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/compound-interest</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/loan-interest</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/salary</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/savings</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/severance</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/pension</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/real-estate</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/bmi</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/age</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/exchange-rate</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/jeonse-wolse</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/stock-return</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/loan-refinance</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/electricity</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/hourly-wage</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/income-tax</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/car-cost</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/retirement</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/child-cost</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/vat</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/chess</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/peg-solitaire</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/janggi</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/gomoku</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/sudoku</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.bujatime.com/tools/baduk</loc>
-    <lastmod>2026-02-13</lastmod>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -1141,32 +1135,44 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.bujatime.com/blog/briefing-buulgyeong-2026-02-12</loc>
-    <lastmod>2026-02-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.bujatime.com/blog/briefing-finance-2026-02-12</loc>
-    <lastmod>2026-02-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.bujatime.com/blog/briefing-senior-2026-02-12</loc>
-    <lastmod>2026-02-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.bujatime.com/blog/briefing-ai-2026-02-12</loc>
-    <lastmod>2026-02-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.bujatime.com/blog/smartphone-battery-tips</loc>
     <lastmod>2026-02-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/kakaotalk-font-size</loc>
+    <lastmod>2026-02-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/free-wifi-safety</loc>
+    <lastmod>2026-02-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/smartphone-photo-organize</loc>
+    <lastmod>2026-02-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/youtube-no-ads</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/naver-cafe-guide</loc>
+    <lastmod>2026-02-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.bujatime.com/blog/smartphone-storage-fix</loc>
+    <lastmod>2026-02-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
