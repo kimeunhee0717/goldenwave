@@ -1,26 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
-
-interface MenuItem {
-  label: string;
-  href: string;
-}
-
-const menuItems: MenuItem[] = [
-  { label: 'AI 머니', href: '/blog/category/ai-money' },
-  { label: '재테크', href: '/blog/category/finance' },
-  { label: '부업·N잡', href: '/blog/category/side-hustle' },
-  { label: '부자마인드', href: '/blog/category/mindset' },
-  { label: '디지털스킬', href: '/blog/category/digital-skill' },
-  { label: '비즈니스', href: '/blog/category/business' },
-  { label: '유용한 도구', href: '/tools' },
-];
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,24 +31,7 @@ const Navbar: React.FC = () => {
           </span>
         </Link>
 
-        {/* Desktop Menu */}
-        <nav className="hidden lg:flex items-center gap-6">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              to={item.href}
-              className={`text-sm font-medium transition-colors ${
-                location.pathname === item.href
-                  ? 'text-moss-600'
-                  : 'text-slate-600 hover:text-moss-600'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* CTA Button */}
+        {/* CTA Buttons */}
         <div className="hidden lg:flex items-center gap-4">
           <Link
             to="/blog"
@@ -95,26 +62,19 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-slate-100 shadow-xl p-6 flex flex-col gap-4">
-          {menuItems.map((item) => (
-            <Link
-              key={item.label}
-              to={item.href}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className={`text-base font-medium py-2 border-b border-slate-50 last:border-0 ${
-                location.pathname === item.href
-                  ? 'text-moss-600'
-                  : 'text-slate-600 hover:text-moss-600'
-              }`}
-            >
-              {item.label}
-            </Link>
-          ))}
           <Link
             to="/blog"
             onClick={() => setIsMobileMenuOpen(false)}
             className="text-base font-medium text-slate-600 hover:text-moss-600 py-2 border-b border-slate-50"
           >
             전체 뉴스
+          </Link>
+          <Link
+            to="/tools"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="text-base font-medium text-slate-600 hover:text-moss-600 py-2 border-b border-slate-50"
+          >
+            유용한 도구
           </Link>
           <div className="flex flex-col gap-3 mt-4">
             <button

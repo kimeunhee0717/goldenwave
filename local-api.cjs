@@ -15,6 +15,7 @@ const PORT = 18790
 const DATA_DIR = path.join(__dirname, 'src/data')
 const POSTS_JSON = path.join(DATA_DIR, 'posts.json')
 const POSTS_DIR = path.join(DATA_DIR, 'posts')
+const IMAGES_DIR = path.join(__dirname, 'public/images/posts')
 
 // JSON 응답 헬퍼
 function jsonResponse(res, status, data) {
@@ -41,6 +42,14 @@ function parseBody(req) {
     })
     req.on('error', reject)
   })
+}
+
+// 이미지 파일명 생성 (타임스탬프 + 랜덤)
+function generateImageFilename(originalName) {
+  const ext = path.extname(originalName).toLowerCase() || '.jpg'
+  const timestamp = Date.now()
+  const random = Math.random().toString(36).substring(2, 8)
+  return `${timestamp}-${random}${ext}`
 }
 
 // posts.json 읽기
@@ -234,6 +243,49 @@ async function handleRequest(req, res) {
       return
     }
 
+    // POST /api/upload-image - 이미지 업로드
+    if (method === 'POST' && pathname === '/api/upload-image') {
+      const body = await parseBody(req)
+      const { image, filename, slug } = body
+
+      if (!image) {
+        jsonResponse(res, 400, { error: '이미지 데이터가 없습니다' })
+        return
+      }
+
+      // base64 데이터에서 실제 이미지 데이터 추출
+      const matches = image.match(/^data:image\/([a-zA-Z+]+);base64,(.+)$/)
+      if (!matches) {
+        jsonResponse(res, 400, { error: '잘못된 이미지 형식입니다' })
+        return
+      }
+
+      const imageBuffer = Buffer.from(matches[2], 'base64')
+      const newFilename = generateImageFilename(filename || 'image.jpg')
+
+      // 슬러그별 폴더 또는 공통 폴더
+      const targetDir = slug ? path.join(IMAGES_DIR, slug) : IMAGES_DIR
+      if (!fs.existsSync(targetDir)) {
+        fs.mkdirSync(targetDir, { recursive: true })
+      }
+
+      const filePath = path.join(targetDir, newFilename)
+      fs.writeFileSync(filePath, imageBuffer)
+
+      // 웹에서 접근 가능한 경로 반환
+      const webPath = slug
+        ? `/images/posts/${slug}/${newFilename}`
+        : `/images/posts/${newFilename}`
+
+      console.log(`[UPLOAD] 이미지 저장: ${webPath}`)
+      jsonResponse(res, 200, {
+        success: true,
+        url: webPath,
+        filename: newFilename
+      })
+      return
+    }
+
     // POST /api/build - 빌드만 (발행)
     if (method === 'POST' && pathname === '/api/build') {
       console.log('[BUILD] 빌드 시작...')
@@ -321,6 +373,7 @@ server.listen(PORT, () => {
   console.log('  POST   /api/post               새 포스트 생성 (저장)')
   console.log('  PUT    /api/post/:cat/:slug    포스트 수정')
   console.log('  DELETE /api/post/:cat/:slug    포스트 삭제')
+  console.log('  POST   /api/upload-image       이미지 업로드')
   console.log('  POST   /api/build              빌드 (발행)')
   console.log('  POST   /api/deploy             커밋 + 푸시 (배포)')
   console.log('')

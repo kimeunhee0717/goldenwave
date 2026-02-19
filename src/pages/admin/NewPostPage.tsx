@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useNavigate, Navigate, Link } from 'react-router-dom'
 import { useAdmin } from '@/contexts/AdminContext'
 import { usePosts } from '@/hooks/usePosts'
 import BlogPostContent from '@/components/blog/BlogPostContent'
 import {
   ArrowLeft, Save, Eye, Edit3, Loader2, Check, AlertCircle,
-  Image, Tag, X, Plus, Rocket, Upload
+  Image, Tag, X, Plus, Rocket, Upload, ImagePlus
 } from 'lucide-react'
 
 const LOCAL_API = 'http://localhost:18790'
@@ -47,6 +47,12 @@ export default function NewPostPage() {
   const [deployStatus, setDeployStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
+  // 이미지 업로드 상태
+  const [uploading, setUploading] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
   if (!isAdmin) {
     return <Navigate to="/admin" replace />
   }
@@ -78,6 +84,125 @@ export default function NewPostPage() {
     if (e.key === 'Enter') {
       e.preventDefault()
       addTag()
+    }
+  }
+
+  // 이미지 파일을 base64로 변환
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => {
+        const result = reader.result as string
+        // data:image/png;base64,xxxxx 형식에서 base64 부분만 추출
+        const base64 = result.split(',')[1]
+        resolve(base64)
+      }
+      reader.onerror = reject
+    })
+  }
+
+  // 이미지 업로드 및 마크다운 삽입
+  const uploadImage = async (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드할 수 있습니다.')
+      return
+    }
+
+    // 파일 크기 제한 (10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('파일 크기는 10MB 이하여야 합니다.')
+      return
+    }
+
+    setUploading(true)
+
+    try {
+      const base64 = await fileToBase64(file)
+
+      const res = await fetch(`${LOCAL_API}/api/upload-image`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          image: base64,
+          filename: file.name,
+          slug: slug || 'temp',
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || '이미지 업로드 실패')
+      }
+
+      // 마크다운 이미지 문법 생성
+      const markdown = `![${file.name.replace(/\.[^/.]+$/, '')}](${data.url})`
+
+      // 커서 위치에 삽입
+      const textarea = textareaRef.current
+      if (textarea) {
+        const start = textarea.selectionStart
+        const end = textarea.selectionEnd
+        const before = content.slice(0, start)
+        const after = content.slice(end)
+
+        // 줄바꿈 처리: 이전 내용이 있고 줄바꿈으로 끝나지 않으면 줄바꿈 추가
+        const prefix = before && !before.endsWith('\n') ? '\n\n' : ''
+        const suffix = after && !after.startsWith('\n') ? '\n\n' : '\n'
+
+        const newContent = before + prefix + markdown + suffix + after
+        setContent(newContent)
+
+        // 커서를 삽입한 이미지 뒤로 이동
+        setTimeout(() => {
+          const newPos = start + prefix.length + markdown.length + suffix.length
+          textarea.selectionStart = newPos
+          textarea.selectionEnd = newPos
+          textarea.focus()
+        }, 0)
+      } else {
+        // textarea ref가 없으면 맨 끝에 추가
+        setContent(prev => prev + '\n\n' + markdown + '\n')
+      }
+
+    } catch (err: any) {
+      alert(err.message === 'Failed to fetch'
+        ? '로컬 API 서버가 꺼져 있습니다. node local-api.cjs를 실행해주세요.'
+        : err.message || '이미지 업로드 중 오류 발생')
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  // 파일 선택 핸들러
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      uploadImage(file)
+    }
+    // input 초기화 (같은 파일 다시 선택 가능하게)
+    e.target.value = ''
+  }
+
+  // 드래그 이벤트 핸들러
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragging(false)
+
+    const file = e.dataTransfer.files?.[0]
+    if (file) {
+      uploadImage(file)
     }
   }
 
@@ -471,17 +596,70 @@ export default function NewPostPage() {
             {/* 오른쪽: 본문 편집기 */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl border border-gray-200 overflow-hidden h-full flex flex-col">
+                {/* 에디터 툴바 */}
                 <div className="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-                  <span className="text-sm text-gray-500">마크다운 편집기</span>
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm text-gray-500">마크다운 편집기</span>
+
+                    {/* 이미지 추가 버튼 */}
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileSelect}
+                      accept="image/*"
+                      className="hidden"
+                    />
+                    <button
+                      onClick={() => fileInputRef.current?.click()}
+                      disabled={uploading}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-100 hover:bg-amber-200 text-amber-700 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
+                    >
+                      {uploading ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <ImagePlus className="w-4 h-4" />
+                      )}
+                      {uploading ? '업로드 중...' : '이미지 추가'}
+                    </button>
+                  </div>
                   <span className="text-xs text-gray-400">
                     {content.length.toLocaleString()}자
                   </span>
                 </div>
-                <textarea
-                  value={content}
-                  onChange={e => setContent(e.target.value)}
-                  className="flex-1 w-full p-6 font-mono text-sm leading-relaxed resize-none focus:outline-none text-gray-800 min-h-[calc(100vh-300px)]"
-                  placeholder={`안녕하세요, 부자타임입니다.
+
+                {/* 에디터 영역 (드래그앤드롭 지원) */}
+                <div
+                  className={`flex-1 relative ${isDragging ? 'bg-amber-50' : ''}`}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                >
+                  {/* 드래그 오버레이 */}
+                  {isDragging && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-amber-100/80 border-2 border-dashed border-amber-400 rounded-lg z-10 pointer-events-none">
+                      <div className="text-center">
+                        <ImagePlus className="w-12 h-12 text-amber-600 mx-auto mb-2" />
+                        <p className="text-amber-700 font-medium">이미지를 여기에 놓으세요</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 업로드 중 오버레이 */}
+                  {uploading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-white/80 z-10">
+                      <div className="text-center">
+                        <Loader2 className="w-8 h-8 text-amber-600 mx-auto mb-2 animate-spin" />
+                        <p className="text-gray-600 font-medium">이미지 업로드 중...</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <textarea
+                    ref={textareaRef}
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                    className="w-full h-full p-6 font-mono text-sm leading-relaxed resize-none focus:outline-none text-gray-800 min-h-[calc(100vh-300px)]"
+                    placeholder={`안녕하세요, 부자타임입니다.
 
 오늘은 ~~~에 대해 알아보겠습니다.
 
@@ -496,9 +674,12 @@ export default function NewPostPage() {
 ---
 
 지금까지 ~~~에 대해 알아보았습니다.
-부자타임에서 여러분의 성공을 응원합니다!`}
-                  spellCheck={false}
-                />
+부자타임에서 여러분의 성공을 응원합니다!
+
+💡 팁: 이미지를 드래그해서 놓거나, 위의 '이미지 추가' 버튼을 클릭하세요.`}
+                    spellCheck={false}
+                  />
+                </div>
               </div>
             </div>
           </div>

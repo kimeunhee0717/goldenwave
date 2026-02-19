@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { Wrench } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Category } from '@/types/blog'
 
@@ -58,6 +60,14 @@ export default function CategoryTabs({ categories, selected, onSelect }: Categor
               {cat.title}
             </button>
           ))}
+          {/* 유용한 도구 링크 */}
+          <Link
+            to="/tools"
+            className="flex-shrink-0 px-4 py-2 rounded-full text-sm font-semibold transition-all flex items-center gap-1.5 text-soot-600 hover:bg-slate-100"
+          >
+            <Wrench className="w-3.5 h-3.5" />
+            유용한 도구
+          </Link>
         </nav>
       </div>
     </div>
