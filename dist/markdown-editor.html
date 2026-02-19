@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마크다운 에디터 - 부자타임</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f8f6f3; color: #3d2e22; }
+  
+  .header { background: linear-gradient(135deg, #d4a853, #c4943f); color: white; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .header h1 { font-size: 20px; font-weight: 700; }
+  .header .badge { background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 20px; font-size: 12px; }
+  
+  .toolbar { background: white; border-bottom: 1px solid #e8e0d5; padding: 12px 24px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn { padding: 8px 16px; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.2s; }
+  .btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .btn-fix { background: #7c3aed; color: white; }
+  .btn-fix:hover { background: #6d28d9; }
+  .btn-preview { background: #f59e0b; color: white; }
+  .btn-preview:hover { background: #d97706; }
+  .btn-copy { background: #10b981; color: white; }
+  .btn-copy:hover { background: #059669; }
+  .btn-clear { background: #ef4444; color: white; }
+  .btn-clear:hover { background: #dc2626; }
+  .btn-paste { background: #3b82f6; color: white; }
+  .btn-paste:hover { background: #2563eb; }
+  
+  .main { display: flex; height: calc(100vh - 120px); }
+  .panel { flex: 1; display: flex; flex-direction: column; }
+  .panel-header { padding: 10px 16px; background: #f3ede4; border-bottom: 1px solid #e8e0d5; font-size: 13px; font-weight: 600; color: #8b7355; display: flex; justify-content: space-between; align-items: center; }
+  .panel-header .count { font-weight: 400; color: #a89880; }
+  
+  .editor { flex: 1; padding: 16px; font-family: 'Consolas', 'Monaco', monospace; font-size: 14px; line-height: 1.8; border: none; resize: none; outline: none; background: white; color: #3d2e22; }
+  .preview { flex: 1; padding: 24px 32px; overflow-y: auto; background: white; line-height: 1.9; font-size: 15px; }
+  .divider { width: 1px; background: #e8e0d5; }
+  
+  .preview h1 { font-size: 28px; font-weight: 800; margin: 24px 0 16px; color: #3d2e22; border-bottom: 2px solid #d4a853; padding-bottom: 8px; }
+  .preview h2 { font-size: 22px; font-weight: 700; margin: 20px 0 12px; color: #544339; }
+  .preview h3 { font-size: 18px; font-weight: 600; margin: 16px 0 8px; color: #6b5744; }
+  .preview p { margin: 10px 0; }
+  .preview strong { color: #3d2e22; font-weight: 700; }
+  .preview em { color: #d97706; font-style: italic; }
+  .preview code { background: #f3ede4; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-size: 13px; color: #c4943f; }
+  .preview pre { background: #2d2d2d; color: #f8f8f2; padding: 16px; border-radius: 8px; overflow-x: auto; margin: 12px 0; }
+  .preview pre code { background: none; color: inherit; padding: 0; }
+  .preview blockquote { border-left: 4px solid #d4a853; padding: 12px 16px; margin: 12px 0; background: #faf6ee; color: #6b5744; border-radius: 0 8px 8px 0; }
+  .preview ul, .preview ol { padding-left: 24px; margin: 10px 0; }
+  .preview li { margin: 4px 0; }
+  .preview a { color: #3b82f6; text-decoration: underline; }
+  .preview hr { border: none; border-top: 1px solid #e8e0d5; margin: 20px 0; }
+  .preview table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  .preview th, .preview td { border: 1px solid #e8e0d5; padding: 8px 12px; text-align: left; }
+  .preview th { background: #f3ede4; font-weight: 600; }
+  .preview img { max-width: 100%; border-radius: 8px; }
+  
+  .log { background: #faf5ff; border-top: 1px solid #e9d5ff; padding: 8px 24px; font-size: 12px; color: #7c3aed; max-height: 100px; overflow-y: auto; }
+  .log .item { padding: 2px 0; }
+  .log .success { color: #10b981; }
+  
+  .toast { position: fixed; top: 20px; right: 20px; background: #10b981; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; opacity: 0; transition: opacity 0.3s; z-index: 100; }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>마크다운 에디터 - 부자타임</h1>
+  <span class="badge">제미나이 답변 → 깔끔한 마크다운</span>
+</div>
+
+<div class="toolbar">
+  <button class="btn btn-paste" onclick="pasteFromClipboard()">📋 붙여넣기</button>
+  <button class="btn btn-fix" onclick="autoFix()">🔧 자동 수정</button>
+  <button class="btn btn-preview" onclick="togglePreview()">👁️ 미리보기</button>
+  <button class="btn btn-copy" onclick="copyRich()">📋 깔끔 복사</button>
+  <button class="btn btn-copy" style="background:#6b7280;" onclick="copyRaw()">📝 마크다운 복사</button>
+  <button class="btn btn-clear" onclick="clearAll()">🗑️ 초기화</button>
+</div>
+
+<div class="main">
+  <div class="panel" id="editorPanel">
+    <div class="panel-header">
+      <span>마크다운 입력 (제미나이 답변 붙여넣기)</span>
+      <span class="count" id="charCount">0자</span>
+    </div>
+    <textarea class="editor" id="editor" placeholder="여기에 제미나이 답변을 붙여넣으세요...
+
+Ctrl+V로 붙여넣기 → 🔧 자동 수정 → 📋 깔끔 복사
+
+특수문자 오류가 자동으로 교정됩니다!"></textarea>
+  </div>
+  <div class="divider"></div>
+  <div class="panel" id="previewPanel" style="display:none;">
+    <div class="panel-header">
+      <span>미리보기</span>
+      <span class="count" id="previewInfo"></span>
+    </div>
+    <div class="preview" id="preview"></div>
+  </div>
+</div>
+
+<div class="log" id="log" style="display:none;"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const editor = document.getElementById('editor');
+const preview = document.getElementById('preview');
+const log = document.getElementById('log');
+const charCount = document.getElementById('charCount');
+
+editor.addEventListener('input', () => {
+  charCount.textContent = editor.value.length.toLocaleString() + '자';
+});
+
+// ========== 자동 수정 ==========
+function fixMarkdown(text) {
+  const changes = [];
+  let result = text;
+
+  result = result.replace(/\*\*(\[[^\]]+\])\]/g, (m, p1) => { changes.push('대괄호 ]] → ]** 수정'); return '**' + p1 + '**'; });
+  result = result.replace(/\*\*([^*\n]+\[[^\]]+\])\]/g, (m, p1) => { changes.push('복합 대괄호 수정'); return '**' + p1 + '**'; });
+  result = result.replace(/\*\*(\[[^\]]+\])\*(?!\*)/g, (m, p1) => { changes.push('"*" 하나 닫기 수정'); return '**' + p1 + '**'; });
+  result = result.replace(/\*\*(\([^)]+\))\)/g, (m, p1) => { changes.push('소괄호 )) 수정'); return '**' + p1 + '**'; });
+  result = result.replace(/\*\*(\([^)]+\))\*(?!\*)/g, (m, p1) => { changes.push('소괄호 )* 수정'); return '**' + p1 + '**'; });
+  result = result.replace(/\*\*([^*\n]+\([^)]+\))\)/g, (m, p1) => { changes.push('복합 소괄호 수정'); return '**' + p1 + '**'; });
+
+  const lines = result.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+    const s = lines[i].trim();
+    if (s.startsWith('**') && !s.startsWith('***') && (s.match(/\*\*/g) || []).length === 1 && s.length < 200) {
+      changes.push('볼드 안 닫힘: ' + s.slice(0, 30) + '...');
+      lines[i] = lines[i].trimEnd() + '**';
+    }
+  }
+  result = lines.join('\n');
+
+  const b4 = result;
+  result = result.replace(/(?<!`)``(?!`)(.*?)(?<!`)`(?!`)/g, '`$1`');
+  result = result.replace(/(?<!`)`(?!`)(.*?)(?<!`)``(?!`)/g, '`$1`');
+  if (result !== b4) changes.push('백틱 개수 불일치 수정');
+
+  let inCode = false;
+  const lines2 = result.split('\n');
+  for (let i = 0; i < lines2.length; i++) {
+    if (lines2[i].trim().startsWith('```')) { inCode = !inCode; continue; }
+    if (inCode) continue;
+    const m = lines2[i].match(/^(#{1,6})([^\s#])/);
+    if (m) { changes.push('# 뒤 공백 추가'); lines2[i] = m[1] + ' ' + lines2[i].slice(m[1].length); }
+  }
+  result = lines2.join('\n');
+
+  inCode = false;
+  const lines3 = result.split('\n');
+  for (let i = 0; i < lines3.length; i++) {
+    if (lines3[i].trim().startsWith('```')) { inCode = !inCode; continue; }
+    if (inCode) continue;
+    const m = lines3[i].match(/^(\s*)-([^\s\-\d])/);
+    if (m) { changes.push('- 뒤 공백 추가'); lines3[i] = m[1] + '- ' + lines3[i].slice(m[1].length + 1); }
+  }
+  result = lines3.join('\n');
+
+  return { fixed: result, changes };
+}
+
+// ========== 마크다운 → HTML (미리보기용) ==========
+function mdToHtml(md) {
+  let html = md;
+  // 코드블록을 먼저 보호 (플레이스홀더로 교체)
+  const codeBlocks = [];
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (m, lang, code) => {
+    codeBlocks.push('<pre><code>' + code + '</code></pre>');
+    return '\n<!--CODE' + (codeBlocks.length - 1) + '-->\n';
+  });
+  // 표 변환 (끝에 줄바꿈 보장)
+  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n)*)/gm, (match, header, body) => {
+    const ths = header.split('|').map(h => '<th>' + h.trim() + '</th>').join('');
+    const rows = body.trim().split('\n').map(row => {
+      const tds = row.replace(/^\||\|$/g, '').split('|').map(c => '<td>' + c.trim() + '</td>').join('');
+      return '<tr>' + tds + '</tr>';
+    }).join('');
+    return '\n<table><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>\n';
+  });
+  // 제목 (줄 단위)
+  html = html.replace(/^######\s+(.+)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^#####\s+(.+)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^####\s+(.+)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+  // 인용, 구분선
+  html = html.replace(/^>\s+(.+)$/gm, '<blockquote>$1</blockquote>');
+  html = html.replace(/^-{3,}$/gm, '<hr>');
+  // 인라인 서식
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+  // 목록
+  html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/^(\d+)\. (.+)$/gm, '<li>$2</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+  // 문단
+  html = html.replace(/\n\n/g, '</p><p>');
+  html = html.replace(/\n/g, '<br>');
+  html = '<p>' + html + '</p>';
+  // 정리: 블록 요소를 p에서 꺼내기
+  html = html.replace(/<p>\s*<(h[1-6]|ul|ol|pre|blockquote|table|hr)/g, '<$1');
+  html = html.replace(/<\/(h[1-6]|ul|ol|pre|blockquote|table)>\s*<\/p>/g, '</$1>');
+  html = html.replace(/<p><br>/g, '<p>');
+  html = html.replace(/<br><\/p>/g, '</p>');
+  html = html.replace(/<p>\s*<\/p>/g, '');
+  html = html.replace(/<p>\s*<hr>\s*<\/p>/g, '<hr>');
+  html = html.replace(/<p>\s*<hr>/g, '<hr>');
+  html = html.replace(/<hr>\s*<\/p>/g, '<hr>');
+  // 코드블록 복원
+  html = html.replace(/<!--CODE(\d+)-->/g, (m, i) => codeBlocks[parseInt(i)]);
+  return html;
+}
+
+// ========== 마크다운 → 스타일 포함 HTML (깔끔 복사용) ==========
+function mdToStyledHtml(md) {
+  let html = md;
+  const pStyle = 'margin:14px 0;line-height:1.9;font-size:15px;color:#3d2e22;';
+
+  // 코드블록 보호
+  const codeBlocks = [];
+  html = html.replace(/```(\w*)\n([\s\S]*?)```/g, (m, lang, code) => {
+    codeBlocks.push('<pre style="background:#2d2d2d;color:#f8f8f2;padding:16px;border-radius:8px;margin:16px 0;font-family:Consolas,monospace;font-size:13px;line-height:1.6;"><code>' + code + '</code></pre>');
+    return '\n<!--CODE' + (codeBlocks.length - 1) + '-->\n';
+  });
+
+  // 표 (끝에 줄바꿈 보장)
+  html = html.replace(/^\|(.+)\|\s*\n\|[-| :]+\|\s*\n((?:\|.+\|\s*\n)*)/gm, (match, header, body) => {
+    const ths = header.split('|').map(h => '<th style="border:1px solid #ddd;padding:10px 14px;background:#f5f0e8;font-weight:600;">' + h.trim() + '</th>').join('');
+    const rows = body.trim().split('\n').map(row => {
+      const tds = row.replace(/^\||\|$/g, '').split('|').map(c => '<td style="border:1px solid #ddd;padding:10px 14px;">' + c.trim() + '</td>').join('');
+      return '<tr>' + tds + '</tr>';
+    }).join('');
+    return '\n<table style="border-collapse:collapse;width:100%;margin:16px 0;"><thead><tr>' + ths + '</tr></thead><tbody>' + rows + '</tbody></table>\n';
+  });
+
+  // 제목
+  html = html.replace(/^######\s+(.+)$/gm, '<h6 style="font-size:14px;font-weight:600;margin:14px 0 8px;color:#6b5744;">$1</h6>');
+  html = html.replace(/^#####\s+(.+)$/gm, '<h5 style="font-size:15px;font-weight:600;margin:14px 0 8px;color:#6b5744;">$1</h5>');
+  html = html.replace(/^####\s+(.+)$/gm, '<h4 style="font-size:16px;font-weight:600;margin:16px 0 10px;color:#544339;">$1</h4>');
+  html = html.replace(/^###\s+(.+)$/gm, '<h3 style="font-size:18px;font-weight:700;margin:20px 0 10px;color:#544339;">$1</h3>');
+  html = html.replace(/^##\s+(.+)$/gm, '<h2 style="font-size:22px;font-weight:700;margin:24px 0 12px;color:#3d2e22;border-bottom:2px solid #d4a853;padding-bottom:8px;">$1</h2>');
+  html = html.replace(/^#\s+(.+)$/gm, '<h1 style="font-size:28px;font-weight:800;margin:28px 0 16px;color:#3d2e22;border-bottom:2px solid #d4a853;padding-bottom:10px;">$1</h1>');
+
+  // 인용, 구분선
+  html = html.replace(/^>\s+(.+)$/gm, '<blockquote style="border-left:4px solid #d4a853;padding:12px 16px;margin:16px 0;background:#faf6ee;color:#6b5744;line-height:1.8;">$1</blockquote>');
+  html = html.replace(/^-{3,}$/gm, '<hr style="border:none;border-top:1px solid #e8e0d5;margin:24px 0;">');
+
+  // 인라인 서식
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong style="font-weight:700;color:#3d2e22;"><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong style="font-weight:700;color:#3d2e22;">$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em style="color:#d97706;">$1</em>');
+  html = html.replace(/`([^`]+)`/g, '<code style="background:#f3ede4;padding:2px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#c4943f;">$1</code>');
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" style="color:#3b82f6;text-decoration:underline;">$1</a>');
+
+  // 목록
+  html = html.replace(/^\* (.+)$/gm, '<li style="margin:6px 0;line-height:1.8;">$1</li>');
+  html = html.replace(/^- (.+)$/gm, '<li style="margin:6px 0;line-height:1.8;">$1</li>');
+  html = html.replace(/^(\d+)\. (.+)$/gm, '<li style="margin:6px 0;line-height:1.8;">$2</li>');
+  html = html.replace(/(<li[^>]*>.*<\/li>\n?)+/g, '<ul style="padding-left:24px;margin:12px 0;">$&</ul>');
+
+  // "키워드:" 패턴 강조
+  html = html.replace(/^([가-힣a-zA-Z0-9\s]{1,20}:\s)/gm, '<strong style="font-weight:700;color:#3d2e22;">$1</strong>');
+
+  // 문단
+  html = html.replace(/\n\n/g, '</p><p style="' + pStyle + '">');
+  html = html.replace(/\n/g, '<br>');
+  html = '<p style="' + pStyle + '">' + html + '</p>';
+
+  // 정리
+  html = html.replace(/<p[^>]*>\s*<(h[1-6]|ul|ol|pre|blockquote|table|hr)/g, '<$1');
+  html = html.replace(/<\/(h[1-6]|ul|ol|pre|blockquote|table)>\s*<\/p>/g, '</$1>');
+  html = html.replace(/<p[^>]*><br>/g, '<p style="' + pStyle + '">');
+  html = html.replace(/<br><\/p>/g, '</p>');
+  html = html.replace(/<p[^>]*>\s*<\/p>/g, '');
+  html = html.replace(/<p[^>]*>\s*<hr/g, '<hr');
+  html = html.replace(/<hr[^>]*>\s*<\/p>/g, '');
+
+  // 코드블록 복원
+  html = html.replace(/<!--CODE(\d+)-->/g, (m, i) => codeBlocks[parseInt(i)]);
+
+  return '<div style="font-family:Segoe UI,-apple-system,sans-serif;max-width:700px;color:#3d2e22;">' + html + '</div>';
+}
+
+// ========== 버튼 기능 ==========
+function autoFix() {
+  const { fixed, changes } = fixMarkdown(editor.value);
+  editor.value = fixed;
+  charCount.textContent = fixed.length.toLocaleString() + '자';
+
+  log.style.display = 'block';
+  if (changes.length === 0) {
+    log.innerHTML = '<div class="item success">수정할 오류가 없습니다! 깔끔한 마크다운입니다.</div>';
+  } else {
+    log.innerHTML = '<div class="item" style="font-weight:600;">' + changes.length + '건 자동 수정 완료!</div>' +
+      changes.map(c => '<div class="item">- ' + c + '</div>').join('');
+  }
+
+  if (document.getElementById('previewPanel').style.display !== 'none') updatePreview();
+}
+
+function togglePreview() {
+  const pp = document.getElementById('previewPanel');
+  if (pp.style.display === 'none') { pp.style.display = 'flex'; updatePreview(); }
+  else { pp.style.display = 'none'; }
+}
+
+function updatePreview() {
+  preview.innerHTML = mdToHtml(editor.value);
+  document.getElementById('previewInfo').textContent = '실시간 미리보기';
+}
+
+function copyRich() {
+  const html = mdToStyledHtml(editor.value);
+  const plainText = editor.value.replace(/\*\*/g, '').replace(/^#{1,6}\s/gm, '').replace(/^[-*]\s/gm, '- ').replace(/`([^`]+)`/g, '$1');
+  const blob = new Blob([html], { type: 'text/html' });
+  const textBlob = new Blob([plainText], { type: 'text/plain' });
+  navigator.clipboard.write([
+    new ClipboardItem({ 'text/html': blob, 'text/plain': textBlob })
+  ]).then(() => showToast('깔끔 복사 완료! 붙여넣기 하세요')).catch(() => showToast('클립보드 접근 권한이 필요합니다'));
+}
+
+function copyRaw() {
+  navigator.clipboard.writeText(editor.value).then(() => showToast('마크다운 원본 복사 완료!'));
+}
+
+async function pasteFromClipboard() {
+  try {
+    const text = await navigator.clipboard.readText();
+    editor.value = text;
+    charCount.textContent = text.length.toLocaleString() + '자';
+    showToast('붙여넣기 완료!');
+  } catch { showToast('클립보드 접근 권한이 필요합니다'); }
+}
+
+function clearAll() {
+  if (editor.value && !confirm('전체 내용을 지우시겠습니까?')) return;
+  editor.value = '';
+  preview.innerHTML = '';
+  log.style.display = 'none';
+  charCount.textContent = '0자';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+editor.addEventListener('input', () => {
+  if (document.getElementById('previewPanel').style.display !== 'none') updatePreview();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key === 's') { e.preventDefault(); autoFix(); }
+  if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); copyRich(); }
+});
+</script>
+</body>
+</html>

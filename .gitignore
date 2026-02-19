@@ -8,7 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist - 프리렌더된 HTML 포함, Vercel에서 puppeteer 실행 불가하므로 직접 푸시
+# dist
 dist-ssr
 *.local
 

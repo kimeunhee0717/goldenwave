@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    font-family: 'Noto Sans KR', sans-serif;
+    background: linear-gradient(135deg, #6B7556 0%, #4a513d 100%);
+  }
+  .border-frame {
+    position: absolute;
+    inset: 20px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+  }
+  .content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 0 100px;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .logo-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    font-weight: 900;
+  }
+  .logo-text {
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -1px;
+  }
+  .divider {
+    width: 60px;
+    height: 3px;
+    background: #F0C4CB;
+    margin: 0 auto 32px;
+    border-radius: 2px;
+  }
+  h1 {
+    font-size: 48px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.35;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .desc {
+    font-size: 20px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+  .tags {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .tag {
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .url {
+    position: absolute;
+    bottom: 36px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: #F0C4CB;
+    letter-spacing: 2px;
+    z-index: 10;
+  }
+  .corner-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #F0C4CB;
+    opacity: 0.5;
+    z-index: 10;
+  }
+  .corner-dot.tl { top: 40px; left: 40px; }
+  .corner-dot.tr { top: 40px; right: 40px; }
+  .corner-dot.bl { bottom: 40px; left: 40px; }
+  .corner-dot.br { bottom: 40px; right: 40px; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="border-frame"></div>
+  <div class="corner-dot tl"></div>
+  <div class="corner-dot tr"></div>
+  <div class="corner-dot bl"></div>
+  <div class="corner-dot br"></div>
+
+  <div class="content">
+    <div class="logo-row">
+      <div class="logo-icon">B</div>
+      <div class="logo-text">부자타임</div>
+    </div>
+    <div class="divider"></div>
+    <h1>매일의 인사이트로<br>부자가 되는 시간</h1>
+    <div class="desc">
+      AI · 재테크 · 부업 · 비즈니스 전략
+    </div>
+    <div class="tags">
+      <div class="tag">90+ 아티클</div>
+      <div class="tag">20+ 계산기</div>
+      <div class="tag">6 카테고리</div>
+    </div>
+  </div>
+
+  <div class="url">WWW.BUJATIME.COM</div>
+</body>
+</html>
