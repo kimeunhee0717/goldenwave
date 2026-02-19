@@ -9,6 +9,7 @@
 const http = require('http')
 const fs = require('fs')
 const path = require('path')
+const { exec } = require('child_process')
 
 const PORT = 18790
 const DATA_DIR = path.join(__dirname, 'src/data')
@@ -233,6 +234,69 @@ async function handleRequest(req, res) {
       return
     }
 
+    // POST /api/build - 빌드만 (발행)
+    if (method === 'POST' && pathname === '/api/build') {
+      console.log('[BUILD] 빌드 시작...')
+
+      exec('npm run build', { cwd: __dirname, maxBuffer: 50 * 1024 * 1024 }, (err, stdout, stderr) => {
+        if (err) {
+          console.error(`[BUILD] 실패: ${err.message}`)
+          jsonResponse(res, 500, { error: `빌드 실패: ${err.message}` })
+          return
+        }
+        console.log('[BUILD] 빌드 완료!')
+        jsonResponse(res, 200, { success: true, message: '빌드 완료' })
+      })
+      return
+    }
+
+    // POST /api/deploy - 커밋 + 푸시 (배포)
+    if (method === 'POST' && pathname === '/api/deploy') {
+      const body = await parseBody(req)
+      const commitMessage = body.message || 'Add new blog post'
+
+      console.log('[DEPLOY] 배포 시작...')
+
+      // 순차적으로 실행: git add → git commit → git push
+      const commands = [
+        'git add .',
+        `git commit -m "${commitMessage}\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>"`,
+        'git push'
+      ]
+
+      let step = 0
+      const runNext = () => {
+        if (step >= commands.length) {
+          console.log('[DEPLOY] 배포 완료!')
+          jsonResponse(res, 200, { success: true, message: '배포 완료' })
+          return
+        }
+
+        const cmd = commands[step]
+        console.log(`[DEPLOY] ${step + 1}/${commands.length}: ${cmd.split('\n')[0]}`)
+
+        exec(cmd, { cwd: __dirname, maxBuffer: 50 * 1024 * 1024 }, (err, stdout, stderr) => {
+          if (err) {
+            // git commit이 "nothing to commit"이면 무시하고 계속
+            if (cmd.startsWith('git commit') && stderr.includes('nothing to commit')) {
+              console.log('[DEPLOY] 변경사항 없음, 계속 진행')
+              step++
+              runNext()
+              return
+            }
+            console.error(`[DEPLOY] 실패: ${err.message}`)
+            jsonResponse(res, 500, { error: `${cmd} 실패: ${err.message}` })
+            return
+          }
+          step++
+          runNext()
+        })
+      }
+
+      runNext()
+      return
+    }
+
     // 404 Not Found
     jsonResponse(res, 404, { error: 'Not Found' })
 
@@ -254,9 +318,11 @@ server.listen(PORT, () => {
   console.log('API 엔드포인트:')
   console.log('  GET    /api/posts              전체 포스트 목록')
   console.log('  GET    /api/post/:cat/:slug    포스트 조회')
-  console.log('  POST   /api/post               새 포스트 생성')
+  console.log('  POST   /api/post               새 포스트 생성 (저장)')
   console.log('  PUT    /api/post/:cat/:slug    포스트 수정')
   console.log('  DELETE /api/post/:cat/:slug    포스트 삭제')
+  console.log('  POST   /api/build              빌드 (발행)')
+  console.log('  POST   /api/deploy             커밋 + 푸시 (배포)')
   console.log('')
   console.log('종료: Ctrl+C')
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')

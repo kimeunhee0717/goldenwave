@@ -5,7 +5,7 @@ import { usePosts } from '@/hooks/usePosts'
 import BlogPostContent from '@/components/blog/BlogPostContent'
 import {
   ArrowLeft, Save, Eye, Edit3, Loader2, Check, AlertCircle,
-  Image, Tag, X, Plus
+  Image, Tag, X, Plus, Rocket, Upload
 } from 'lucide-react'
 
 const LOCAL_API = 'http://localhost:18790'
@@ -40,7 +40,11 @@ export default function NewPostPage() {
   // UI 상태
   const [isPreview, setIsPreview] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [building, setBuilding] = useState(false)
+  const [deploying, setDeploying] = useState(false)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [buildStatus, setBuildStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [deployStatus, setDeployStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
   if (!isAdmin) {
@@ -77,8 +81,8 @@ export default function NewPostPage() {
     }
   }
 
-  // 발행하기
-  const handlePublish = async () => {
+  // 저장하기 (로컬에만 저장)
+  const handleSave = async () => {
     // 유효성 검사
     if (!title.trim()) {
       setErrorMsg('제목을 입력해주세요')
@@ -124,20 +128,74 @@ export default function NewPostPage() {
 
       setSaveStatus('success')
 
-      // 1.5초 후 포스트 페이지로 이동
-      setTimeout(() => {
-        navigate(`/blog/${slug}`)
-      }, 1500)
-
     } catch (err: any) {
       setSaveStatus('error')
       setErrorMsg(
         err.message === 'Failed to fetch'
-          ? '로컬 API 서버가 꺼져 있습니다. node local-api.js를 실행해주세요.'
+          ? '로컬 API 서버가 꺼져 있습니다. node local-api.cjs를 실행해주세요.'
           : err.message || '알 수 없는 오류'
       )
     } finally {
       setSaving(false)
+    }
+  }
+
+  // 발행하기 (빌드만 - dist 폴더에 index.html 생성)
+  const handleBuild = async () => {
+    setBuilding(true)
+    setBuildStatus('idle')
+    setErrorMsg('')
+
+    try {
+      const res = await fetch(`${LOCAL_API}/api/build`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || '발행 실패')
+      }
+
+      setBuildStatus('success')
+
+    } catch (err: any) {
+      setBuildStatus('error')
+      setErrorMsg(err.message || '발행 중 오류 발생')
+    } finally {
+      setBuilding(false)
+    }
+  }
+
+  // 배포하기 (git commit + push)
+  const handleDeploy = async () => {
+    setDeploying(true)
+    setDeployStatus('idle')
+    setErrorMsg('')
+
+    try {
+      const res = await fetch(`${LOCAL_API}/api/deploy`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: `Add blog post: ${title.trim() || 'new post'}`
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || '배포 실패')
+      }
+
+      setDeployStatus('success')
+
+    } catch (err: any) {
+      setDeployStatus('error')
+      setErrorMsg(err.message || '배포 중 오류 발생')
+    } finally {
+      setDeploying(false)
     }
   }
 
@@ -160,11 +218,11 @@ export default function NewPostPage() {
             </h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             {/* 미리보기 토글 */}
             <button
               onClick={() => setIsPreview(!isPreview)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors text-sm ${
                 isPreview
                   ? 'bg-amber-100 text-amber-700'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -174,26 +232,70 @@ export default function NewPostPage() {
               {isPreview ? '편집' : '미리보기'}
             </button>
 
-            {/* 발행 버튼 */}
+            <div className="h-6 w-px bg-gray-300" />
+
+            {/* 1. 저장 버튼 */}
             <button
-              onClick={handlePublish}
+              onClick={handleSave}
               disabled={saving}
-              className={`flex items-center gap-2 px-5 py-2 rounded-lg font-semibold transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                 saveStatus === 'success'
-                  ? 'bg-green-500 text-white'
+                  ? 'bg-green-100 text-green-700 border border-green-300'
                   : saveStatus === 'error'
-                  ? 'bg-red-500 text-white'
-                  : 'bg-amber-500 text-white hover:bg-amber-600'
+                  ? 'bg-red-100 text-red-700 border border-red-300'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-300'
               } disabled:opacity-50`}
             >
               {saving ? (
-                <><Loader2 className="w-4 h-4 animate-spin" /> 발행 중...</>
+                <><Loader2 className="w-4 h-4 animate-spin" /> 저장중</>
               ) : saveStatus === 'success' ? (
-                <><Check className="w-4 h-4" /> 발행 완료!</>
-              ) : saveStatus === 'error' ? (
-                <><AlertCircle className="w-4 h-4" /> 실패</>
+                <><Check className="w-4 h-4" /> 저장됨</>
               ) : (
-                <><Save className="w-4 h-4" /> 발행하기</>
+                <><Save className="w-4 h-4" /> 저장</>
+              )}
+            </button>
+
+            {/* 2. 발행 버튼 (빌드) */}
+            <button
+              onClick={handleBuild}
+              disabled={building || saveStatus !== 'success'}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                buildStatus === 'success'
+                  ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                  : buildStatus === 'error'
+                  ? 'bg-red-100 text-red-700 border border-red-300'
+                  : 'bg-blue-500 text-white hover:bg-blue-600'
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+              title={saveStatus !== 'success' ? '먼저 저장해주세요' : ''}
+            >
+              {building ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> 발행중</>
+              ) : buildStatus === 'success' ? (
+                <><Check className="w-4 h-4" /> 발행됨</>
+              ) : (
+                <><Upload className="w-4 h-4" /> 발행</>
+              )}
+            </button>
+
+            {/* 3. 배포 버튼 (git push) */}
+            <button
+              onClick={handleDeploy}
+              disabled={deploying || buildStatus !== 'success'}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all text-sm ${
+                deployStatus === 'success'
+                  ? 'bg-green-500 text-white'
+                  : deployStatus === 'error'
+                  ? 'bg-red-500 text-white'
+                  : 'bg-amber-500 text-white hover:bg-amber-600'
+              } disabled:opacity-50 disabled:cursor-not-allowed`}
+              title={buildStatus !== 'success' ? '먼저 발행해주세요' : ''}
+            >
+              {deploying ? (
+                <><Loader2 className="w-4 h-4 animate-spin" /> 배포중</>
+              ) : deployStatus === 'success' ? (
+                <><Check className="w-4 h-4" /> 배포완료</>
+              ) : (
+                <><Rocket className="w-4 h-4" /> 배포</>
               )}
             </button>
           </div>
