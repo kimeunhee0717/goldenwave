@@ -41,6 +41,7 @@ import AdminPage from '@/pages/admin/AdminPage'
 import SubscribersPage from '@/pages/admin/SubscribersPage'
 import EditPostPage from '@/pages/admin/EditPostPage'
 import PostsManagePage from '@/pages/admin/PostsManagePage'
+import NewPostPage from '@/pages/admin/NewPostPage'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { AdminProvider } from '@/contexts/AdminContext'
 
@@ -91,6 +92,7 @@ function App() {
           <Route path="admin" element={<AdminPage />} />
           <Route path="admin/subscribers" element={<SubscribersPage />} />
           <Route path="admin/posts" element={<PostsManagePage />} />
+          <Route path="admin/new" element={<NewPostPage />} />
           <Route path="admin/edit/:slug" element={<EditPostPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

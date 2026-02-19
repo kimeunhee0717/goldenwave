@@ -1,5 +1,65 @@
 [
   {
+    "id": "166",
+    "slug": "familyphoto",
+    "title": "가족 앨범 캡션 문구 100개 모음집",
+    "excerpt": "가족 앨범 캡션 문구 100개 모음집",
+    "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-19",
+    "featured": false
+  },
+  {
+    "id": "165",
+    "slug": "senioralbum",
+    "title": "시니어 추억앨범 구성 아이디어 5가지",
+    "excerpt": "시니어 추억앨범 구성 아이디어 5가지",
+    "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-19",
+    "featured": false
+  },
+  {
+    "id": "164",
+    "slug": "photoalbum",
+    "title": "포토앨범 제작 마스터 체크리스트",
+    "excerpt": "포토앨범 제작 마스터 체크리스트",
+    "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-19",
+    "featured": false
+  },
+  {
+    "id": "163",
+    "slug": "claude-mrna",
+    "title": "부자타임 과학 블로그 아이디어",
+    "excerpt": "부자타임 과학 블로그 아이디어",
+    "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=630&fit=crop",
+    "categoryId": "ai-money",
+    "tags": [],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-19",
+    "featured": false
+  },
+  {
+    "id": "162",
+    "slug": "canva",
+    "title": "캔바(Canva) 템플릿 직접 만드는 방법",
+    "excerpt": "캔바(Canva) 템플릿 직접 만드는 방법",
+    "coverImage": "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-19",
+    "featured": false
+  },
+  {
     "id": "1",
     "slug": "ai-marketing-guide-2024",
     "title": "2024 AI 마케팅 완벽 가이드: 비즈니스 성장을 위한 전략",

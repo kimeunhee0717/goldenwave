@@ -64,7 +64,7 @@ export default function BlogPostPage() {
 
       {/* 헤더 */}
       <article>
-        <header className="relative pt-12 pb-16">
+        <header className="relative pt-20 pb-16">
           {/* 배경 패턴 */}
           <div className="absolute inset-0 opacity-[0.03]">
             <div className="absolute inset-0" style={{

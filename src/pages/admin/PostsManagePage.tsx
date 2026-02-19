@@ -61,6 +61,13 @@ export default function PostsManagePage() {
               </span>
             </div>
           </div>
+          <Link
+            to="/admin/new"
+            className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-white rounded-lg hover:bg-amber-600 transition-colors font-medium"
+          >
+            <Plus className="w-5 h-5" />
+            새 글 작성
+          </Link>
         </div>
       </div>
 

@@ -153,18 +153,18 @@ export default function BlogPostContent({ content }: Props) {
             </td>
           ),
           ul: ({ children }) => (
-            <ul className="my-6 space-y-3">
+            <ul className="my-4 space-y-1.5 pl-1">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="my-6 space-y-3 list-decimal list-inside">
+            <ol className="my-4 space-y-1.5 list-decimal list-inside pl-1">
               {children}
             </ol>
           ),
           li: ({ children }) => (
-            <li className="flex items-start gap-3 text-espresso-700">
-              <span className="flex-shrink-0 w-2 h-2 mt-2.5 rounded-full bg-gradient-to-br from-cocoa-500 to-sand-400"></span>
+            <li className="flex items-start gap-2 text-espresso-700 leading-relaxed">
+              <span className="flex-shrink-0 w-1.5 h-1.5 mt-[0.6rem] rounded-full bg-gradient-to-br from-cocoa-500 to-sand-400"></span>
               <span className="flex-1">{children}</span>
             </li>
           ),
