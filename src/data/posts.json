@@ -2892,5 +2892,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-20",
     "featured": false
+  },
+  {
+    "id": "169",
+    "slug": "delivery-app-compare",
+    "title": "배달앱 비교 - 배민 vs 쿠팡이츠 vs 요기요",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-21",
+    "featured": false
   }
 ]
