@@ -2908,5 +2908,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-21",
     "featured": false
+  },
+  {
+    "id": "170",
+    "slug": "smartphone-font-size",
+    "title": "스마트폰 글자 크기 키우기 총정리",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-21",
+    "featured": false
   }
 ]
