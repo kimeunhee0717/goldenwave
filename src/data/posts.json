@@ -2940,5 +2940,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-22",
     "featured": false
+  },
+  {
+    "id": "172",
+    "slug": "internet-banking-security",
+    "title": "인터넷 뱅킹 보안 설정 완벽 가이드",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1553729459-afe8f2e2ed08?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-22",
+    "featured": false
   }
 ]
