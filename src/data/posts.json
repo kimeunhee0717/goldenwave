@@ -2924,5 +2924,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-21",
     "featured": false
+  },
+  {
+    "id": "171",
+    "slug": "ai-translator-compare",
+    "title": "무료 AI 번역기 비교 - 파파고 vs 구글 vs 제미나이",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-22",
+    "featured": false
   }
 ]
