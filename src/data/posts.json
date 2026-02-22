@@ -1,5 +1,59 @@
 [
   {
+    "id": "178",
+    "slug": "monthly-100-savings-budget-template",
+    "title": "월 100만원 모으는 예산 템플릿: 소득별 자동 배분표와 실천 루틴",
+    "excerpt": "월 100만원 저축은 결심보다 설계가 중요합니다. 소득 구간별 예산 템플릿과 자동이체 기반 실천 루틴을 제공합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=1200&h=630&fit=crop",
+    "categoryId": "money-plus",
+    "tags": [
+      "저축",
+      "예산",
+      "월100만원",
+      "가계관리",
+      "자산관리"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-22",
+    "featured": false
+  },
+  {
+    "id": "177",
+    "slug": "jeonse-vs-wolse-break-even-guide",
+    "title": "전세 vs 월세 손익분기 계산법: 2026년 기준으로 내 상황에 맞는 선택하기",
+    "excerpt": "전세와 월세의 유불리는 사람마다 다릅니다. 보증금 기회비용, 대출이자, 거주기간을 반영한 손익분기 계산법을 쉽게 설명합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&h=630&fit=crop",
+    "categoryId": "money-plus",
+    "tags": [
+      "전세",
+      "월세",
+      "손익분기",
+      "주거비",
+      "부동산"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-22",
+    "featured": true
+  },
+  {
+    "id": "176",
+    "slug": "household-budget-automation-2026",
+    "title": "2026 가계부 자동화 세팅법: 카드·계좌·현금까지 한 번에 관리하는 실전 루틴",
+    "excerpt": "가계부를 오래 유지하는 핵심은 의지가 아니라 자동화 시스템입니다. 카드·계좌 연동부터 주간 점검 루틴까지 2026년 실전 세팅법을 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1554224155-1696413565d3?w=1200&h=630&fit=crop",
+    "categoryId": "money-plus",
+    "tags": [
+      "가계부",
+      "자동화",
+      "예산관리",
+      "지출관리",
+      "재테크"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-22",
+    "featured": true
+  },
+  {
     "id": "166",
     "slug": "familyphoto",
     "title": "가족 앨범 캡션 문구 100개 모음집",
