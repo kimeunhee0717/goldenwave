@@ -1,34 +1,32 @@
 [
   {
     "id": "ceo",
-    "name": "부자타임",
-    "image": "/images/authors/ceo.jpg",
-    "role": "시니어 에디터",
-    "bio": "10년간 디지털 비즈니스와 AI 분야에서 활동하며 경제적 자유를 위한 인사이트를 전합니다. 부자타임의 AI 머니, 재테크 콘텐츠를 총괄합니다.",
+    "name": "부자타임 편집팀",
+    "image": "/images/authors/ceo.svg",
+    "role": "총괄 에디터",
+    "bio": "AI와 재테크를 중심으로, 실생활에 바로 적용 가능한 경제 콘텐츠를 기획·검수합니다.",
     "social": {
-      "linkedin": "https://linkedin.com/in/example",
-      "email": "ceo@bujatime.com"
+      "email": "kimeunhee0717@gmail.com"
     }
   },
   {
     "id": "marketing-lead",
-    "name": "부자타임",
-    "image": "/images/authors/marketing-lead.jpg",
-    "role": "시니어 에디터",
-    "bio": "콘텐츠 전략과 디지털 마케팅 전문가입니다. 부자타임에서 부업, 비즈니스 성장 관련 콘텐츠를 담당합니다.",
+    "name": "부자타임 에디터",
+    "image": "/images/authors/marketing-lead.svg",
+    "role": "콘텐츠 에디터",
+    "bio": "부업, 비즈니스, 디지털 활용법 등 독자의 성장에 직접 도움이 되는 실전형 글을 작성합니다.",
     "social": {
-      "twitter": "https://twitter.com/example",
-      "email": "marketing@bujatime.com"
+      "email": "kimeunhee0717@gmail.com"
     }
   },
   {
     "id": "tech-lead",
-    "name": "부자타임",
-    "image": "/images/authors/tech-lead.jpg",
-    "role": "시니어 에디터",
-    "bio": "풀스택 개발자 출신으로 AI 도구 활용법과 디지털 스킬 관련 콘텐츠를 집필합니다.",
+    "name": "부자타임 연구팀",
+    "image": "/images/authors/tech-lead.svg",
+    "role": "리서치 에디터",
+    "bio": "AI 도구와 디지털 스킬을 직접 테스트하고, 초보자도 따라할 수 있도록 쉬운 가이드로 정리합니다.",
     "social": {
-      "email": "tech@bujatime.com"
+      "email": "kimeunhee0717@gmail.com"
     }
   }
 ]

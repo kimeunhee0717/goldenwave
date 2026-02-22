@@ -58,7 +58,7 @@ export default function BlogPostPage() {
         type="article"
         publishedAt={post.publishedAt}
         tags={post.tags}
-        noindex={post.category.slug === 'briefing'}
+        noindex={post.category.slug === 'briefing' || post.category.slug === 'draft'}
       />
       <ReadingProgressBar />
 
@@ -93,7 +93,7 @@ export default function BlogPostPage() {
                     alt={post.author.name}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.style.display = 'none'
+                      e.currentTarget.src = '/images/authors/default.svg'
                     }}
                   />
                 </div>

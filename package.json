@@ -9,6 +9,7 @@
     "build": "vite build",
     "postbuild": "npx tsx scripts/prerender.ts",
     "build:no-prerender": "vite build",
+    "check:content": "node scripts/validate-content.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -1,12 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>부자타임 - AI 시대의 경제적 자유를 위한 인사이트</title>
+    <title>BujaTime - Daily Insights for Financial Freedom</title>
     <link>https://www.bujatime.com</link>
-    <description>AI, 재테크, 부업, 비즈니스 — 경제적 자유를 향한 매일의 인사이트를 전합니다.</description>
+    <description>AI, finance, side hustle, and business insights from BujaTime.</description>
     <language>ko</language>
-    <lastBuildDate>Wed, 18 Feb 2026 15:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 20 Feb 2026 15:00:00 GMT</lastBuildDate>
     <atom:link href="https://www.bujatime.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>배달앱 비교 - 배민 vs 쿠팡이츠 vs 요기요</title>
+      <link>https://www.bujatime.com/blog/delivery-app-compare</link>
+      <description>배달앱 비교 - 배민 vs 쿠팡이츠 vs 요기요</description>
+      <pubDate>Fri, 20 Feb 2026 15:00:00 GMT</pubDate>
+      <guid>https://www.bujatime.com/blog/delivery-app-compare</guid>
+    </item>
+
+    <item>
+      <title>스마트폰 글자 크기 키우기 총정리</title>
+      <link>https://www.bujatime.com/blog/smartphone-font-size</link>
+      <description>스마트폰 글자 크기 키우기 총정리</description>
+      <pubDate>Fri, 20 Feb 2026 15:00:00 GMT</pubDate>
+      <guid>https://www.bujatime.com/blog/smartphone-font-size</guid>
+    </item>
+
+    <item>
+      <title>카카오택시 처음 사용하는 분을 위한 가이드</title>
+      <link>https://www.bujatime.com/blog/kakao-taxi-guide</link>
+      <description>카카오택시 처음 사용하는 분을 위한 가이드</description>
+      <pubDate>Thu, 19 Feb 2026 15:00:00 GMT</pubDate>
+      <guid>https://www.bujatime.com/blog/kakao-taxi-guide</guid>
+    </item>
 
     <item>
       <title>가족 앨범 캡션 문구 100개 모음집</title>
@@ -51,7 +75,7 @@
     <item>
       <title>스마트폰 저장공간 부족할 때 해결법</title>
       <link>https://www.bujatime.com/blog/smartphone-storage-fix</link>
-      <description></description>
+      <description>스마트폰 저장공간 부족할 때 해결법</description>
       <pubDate>Wed, 18 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/smartphone-storage-fix</guid>
     </item>
@@ -59,7 +83,7 @@
     <item>
       <title>유튜브 광고 없이 보는 합법적인 방법들</title>
       <link>https://www.bujatime.com/blog/youtube-no-ads</link>
-      <description></description>
+      <description>유튜브 광고 없이 보는 합법적인 방법들</description>
       <pubDate>Mon, 16 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/youtube-no-ads</guid>
     </item>
@@ -67,7 +91,7 @@
     <item>
       <title>네이버 카페 가입부터 글쓰기까지 완전 가이드</title>
       <link>https://www.bujatime.com/blog/naver-cafe-guide</link>
-      <description></description>
+      <description>네이버 카페 가입부터 글쓰기까지 완전 가이드</description>
       <pubDate>Mon, 16 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/naver-cafe-guide</guid>
     </item>
@@ -75,7 +99,7 @@
     <item>
       <title>스마트폰 사진 정리하는 가장 쉬운 방법</title>
       <link>https://www.bujatime.com/blog/smartphone-photo-organize</link>
-      <description></description>
+      <description>스마트폰 사진 정리하는 가장 쉬운 방법</description>
       <pubDate>Sun, 15 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/smartphone-photo-organize</guid>
     </item>
@@ -83,7 +107,7 @@
     <item>
       <title>카카오톡 글자 크게 보는 법 - 시니어 설정 가이드</title>
       <link>https://www.bujatime.com/blog/kakaotalk-font-size</link>
-      <description></description>
+      <description>카카오톡 글자 크게 보는 법 - 시니어 설정 가이드</description>
       <pubDate>Sat, 14 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/kakaotalk-font-size</guid>
     </item>
@@ -91,7 +115,7 @@
     <item>
       <title>무료 와이파이 안전하게 사용하는 방법</title>
       <link>https://www.bujatime.com/blog/free-wifi-safety</link>
-      <description></description>
+      <description>무료 와이파이 안전하게 사용하는 방법</description>
       <pubDate>Sat, 14 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/free-wifi-safety</guid>
     </item>
@@ -99,41 +123,9 @@
     <item>
       <title>스마트폰 배터리 오래 쓰는 꿀팁 10가지</title>
       <link>https://www.bujatime.com/blog/smartphone-battery-tips</link>
-      <description></description>
+      <description>스마트폰 배터리 오래 쓰는 꿀팁 10가지</description>
       <pubDate>Thu, 12 Feb 2026 15:00:00 GMT</pubDate>
       <guid>https://www.bujatime.com/blog/smartphone-battery-tips</guid>
-    </item>
-
-    <item>
-      <title>🏙️ 부울경 뉴스 브리핑 - 2026-02-12</title>
-      <link>https://www.bujatime.com/blog/briefing-buulgyeong-2026-02-12</link>
-      <description>&lt;div style=&quot;font-family: &apos;Apple SD Gothic Neo&apos;, &apos;Malgun Gothic&apos;, sans-serif; max-width: 600px; margin: 0 auto; font-size: 16px; line-height: 1.8;&quot;&gt;&lt;h2</description>
-      <pubDate>Wed, 11 Feb 2026 15:00:00 GMT</pubDate>
-      <guid>https://www.bujatime.com/blog/briefing-buulgyeong-2026-02-12</guid>
-    </item>
-
-    <item>
-      <title>💰 금융 뉴스 브리핑 - 2026-02-12</title>
-      <link>https://www.bujatime.com/blog/briefing-finance-2026-02-12</link>
-      <description>1. [올림픽] 피겨 신지아, 팀 이벤트 여자 싱글 쇼트 4위 &apos;클린 연기&apos;</description>
-      <pubDate>Wed, 11 Feb 2026 15:00:00 GMT</pubDate>
-      <guid>https://www.bujatime.com/blog/briefing-finance-2026-02-12</guid>
-    </item>
-
-    <item>
-      <title>🧓 시니어 뉴스 브리핑 - 2026-02-12</title>
-      <link>https://www.bujatime.com/blog/briefing-senior-2026-02-12</link>
-      <description>1.  **Analyze the Request:**</description>
-      <pubDate>Wed, 11 Feb 2026 15:00:00 GMT</pubDate>
-      <guid>https://www.bujatime.com/blog/briefing-senior-2026-02-12</guid>
-    </item>
-
-    <item>
-      <title>🤖 AI 뉴스 브리핑 - 2026-02-12</title>
-      <link>https://www.bujatime.com/blog/briefing-ai-2026-02-12</link>
-      <description>1.  **Analyze the User&apos;s Request:**</description>
-      <pubDate>Wed, 11 Feb 2026 15:00:00 GMT</pubDate>
-      <guid>https://www.bujatime.com/blog/briefing-ai-2026-02-12</guid>
     </item>
 
     <item>

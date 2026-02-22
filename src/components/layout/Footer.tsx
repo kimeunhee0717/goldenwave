@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom';
 import { ArrowUp, Mail } from 'lucide-react';
 
 const categories = [
-  { label: 'AI 머니', href: '/blog/category/ai-money' },
-  { label: '재테크', href: '/blog/category/finance' },
-  { label: '부업·N잡', href: '/blog/category/side-hustle' },
+  { label: '디지털 생활', href: '/blog/category/digital-life' },
+  { label: '머니플러스', href: '/blog/category/money-plus' },
   { label: '부자마인드', href: '/blog/category/mindset' },
   { label: '디지털스킬', href: '/blog/category/digital-skill' },
-  { label: '비즈니스', href: '/blog/category/business' },
 ];
 
 const Footer: React.FC = () => {

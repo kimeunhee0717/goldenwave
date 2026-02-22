@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" role="img" aria-label="BujaTime Editor">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3f6212"/>
+      <stop offset="100%" stop-color="#84cc16"/>
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" rx="28" fill="url(#g1)"/>
+  <circle cx="120" cy="92" r="44" fill="#ecfccb"/>
+  <rect x="58" y="142" width="124" height="58" rx="29" fill="#ecfccb"/>
+  <text x="120" y="226" text-anchor="middle" font-size="18" font-family="Arial, sans-serif" fill="#f7fee7">BujaTime</text>
+</svg>

@@ -17,7 +17,7 @@ export default function AuthorCard({ author, className }: Props) {
             alt={author.name}
             className="w-full h-full object-cover"
             onError={(e) => {
-              e.currentTarget.style.display = 'none'
+              e.currentTarget.src = '/images/authors/default.svg'
             }}
           />
         </div>

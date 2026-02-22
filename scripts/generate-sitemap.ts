@@ -7,6 +7,8 @@ const TODAY = new Date().toISOString().split('T')[0]
 // 데이터 로드
 const posts = JSON.parse(readFileSync(resolve('src/data/posts.json'), 'utf-8'))
 const categories = JSON.parse(readFileSync(resolve('src/data/categories.json'), 'utf-8'))
+const HIDDEN_CATEGORY_IDS = new Set(['briefing', 'draft'])
+const HIDDEN_CATEGORY_SLUGS = new Set(['briefing', 'draft'])
 
 interface UrlEntry {
   loc: string
@@ -39,7 +41,7 @@ for (const page of staticPages) {
 
 // 2. 카테고리 페이지
 for (const cat of categories) {
-  if (cat.slug === 'briefing') continue
+  if (HIDDEN_CATEGORY_SLUGS.has(cat.slug)) continue
   urls.push({
     loc: `${BASE_URL}/blog/category/${cat.slug}`,
     lastmod: TODAY,
@@ -88,8 +90,11 @@ for (const tool of tools) {
 }
 
 // 4. 블로그 포스트
+const seenPostSlugs = new Set<string>()
 for (const post of posts) {
-  if (post.categoryId === 'briefing') continue
+  if (HIDDEN_CATEGORY_IDS.has(post.categoryId)) continue
+  if (seenPostSlugs.has(post.slug)) continue
+  seenPostSlugs.add(post.slug)
   urls.push({
     loc: `${BASE_URL}/blog/${post.slug}`,
     lastmod: post.publishedAt,

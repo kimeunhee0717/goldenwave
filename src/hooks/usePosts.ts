@@ -16,28 +16,40 @@ export function usePosts() {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
-  const categories = categoriesData as Category[]
+  const categories = (categoriesData as Category[]).filter(
+    category => category.slug !== 'draft'
+  )
   const authors = authorsData as Author[]
 
   useEffect(() => {
     function loadPosts() {
       try {
-        const loadedPosts = (postsData as PostMeta[]).map((postMeta) => {
+        const loadedPosts = (postsData as PostMeta[]).flatMap((postMeta) => {
           // slug로 마크다운 파일 탐색 (하위 폴더 무관)
           const mdEntry = Object.entries(markdownModules)
             .find(([path]) => path.endsWith(`/${postMeta.slug}.md`))
           const content = mdEntry ? mdEntry[1] : ''
 
-          const category = categories.find(c => c.id === postMeta.categoryId)!
-          const author = authors.find(a => a.id === postMeta.authorId)!
+          const category = categories.find(c => c.id === postMeta.categoryId)
+          const author = authors.find(a => a.id === postMeta.authorId)
 
-          return {
+          if (!category || !author) {
+            console.warn('Skipping invalid post metadata', {
+              id: postMeta.id,
+              slug: postMeta.slug,
+              categoryId: postMeta.categoryId,
+              authorId: postMeta.authorId,
+            })
+            return []
+          }
+
+          return [{
             ...postMeta,
             content,
             category,
             author,
             readingTime: calculateReadingTime(content),
-          } as BlogPost
+          } as BlogPost]
         })
 
         // 최신순 정렬

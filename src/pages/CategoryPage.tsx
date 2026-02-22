@@ -60,7 +60,7 @@ export default function CategoryPage() {
         title={`${category.title} - 블로그`}
         description={category.description || `${category.title} 카테고리의 최신 글을 확인하세요.`}
         url={`/blog/category/${category.slug}`}
-        noindex={category.slug === 'briefing'}
+        noindex={category.slug === 'briefing' || category.slug === 'draft'}
       />
       {/* Hero 섹션 */}
       <section className={`bg-gradient-to-r ${colorMap[category.color] || 'from-primary-600 to-indigo-700'} text-white py-16`}>

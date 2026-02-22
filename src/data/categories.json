@@ -21,6 +21,13 @@
     "color": "orange"
   },
   {
+    "id": "digital-skill",
+    "title": "디지털스킬",
+    "slug": "digital-skill",
+    "description": "실생활에 바로 쓰는 디지털 활용법",
+    "color": "teal"
+  },
+  {
     "id": "briefing",
     "title": "브리핑",
     "slug": "briefing",
