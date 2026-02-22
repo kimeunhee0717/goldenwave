@@ -24,16 +24,19 @@ jobs:
       - name: Fetch exchange rates
         run: node scripts/update-exchange-rates.mjs
 
+      - name: Copy to dist
+        run: cp public/data/exchange-rates.json dist/data/exchange-rates.json
+
       - name: Check for changes
         id: changes
         run: |
-          git diff --quiet public/data/exchange-rates.json || echo "changed=true" >> $GITHUB_OUTPUT
+          git diff --quiet public/data/exchange-rates.json dist/data/exchange-rates.json || echo "changed=true" >> $GITHUB_OUTPUT
 
       - name: Commit and push
         if: steps.changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/data/exchange-rates.json
+          git add public/data/exchange-rates.json dist/data/exchange-rates.json
           git commit -m "chore: 환율 데이터 자동 업데이트 ($(date -u +%Y-%m-%d))"
           git push
