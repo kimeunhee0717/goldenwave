@@ -3028,5 +3028,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-23",
     "featured": false
+  },
+  {
+    "id": "176",
+    "slug": "naver-blog-start",
+    "title": "네이버 블로그 시작하기 - 첫 글 쓰는 법",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-24",
+    "featured": false
   }
 ]
