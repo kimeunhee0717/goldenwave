@@ -45,6 +45,12 @@ export default function Footer() {
             </button>
           </div>
         </div>
+
+        <div className="mt-4 border-t border-slate-100 pt-4 text-[11px] leading-5 text-slate-500 text-center sm:text-left">
+          <p>상호: 골든웨이브 | 대표: 김은희 | 사업자등록번호: 370-18-02799</p>
+          <p>주소: 부산광역시 부산진구 동평로 183번길 86-3</p>
+          <p>이메일: kimeunhee0717@gmail.com | 전화: 010-6289-0101</p>
+        </div>
       </div>
     </footer>
   );
