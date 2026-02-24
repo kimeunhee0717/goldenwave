@@ -1,17 +1,20 @@
 /**
- * 경량 프리렌더: Puppeteer 없이 index.html을 복사하면서 라우트별 meta 태그만 교체.
- * Vercel 등 모든 CI/CD 환경에서 동작.
- *
- * - <head>: 라우트별 고유 title, description, og, canonical, JSON-LD
- * - <body>: SPA 그대로 (React가 클라이언트에서 렌더링)
+ * Puppeteer 프리렌더: 실제 브라우저에서 렌더링된 HTML을 저장.
+ * 애드센스 승인에 필수인 페이지들의 실제 콘텐츠를 크롤러가 읽을 수 있도록 함.
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs'
 import { resolve, dirname } from 'path'
+import puppeteer from 'puppeteer'
+import { spawn, ChildProcess } from 'child_process'
 
 const DIST_DIR = resolve('dist')
 const BASE_URL = 'https://www.bujatime.com'
 const SITE_NAME = '부자타임'
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`
+const SERVER_PORT = 4173 // Vite preview 기본 포트
+
+// 애드센스 승인에 필수인 페이지들 (완전 렌더링)
+const CRITICAL_PAGES = ['/about', '/privacy', '/terms', '/contact']
 
 // ── SEO 데이터 ──
 interface SEOData {
@@ -166,34 +169,177 @@ function getRoutes(): string[] {
   ]
 }
 
+// ── 서버 시작 및 준비 확인 ──
+async function startServer(): Promise<ChildProcess> {
+  return new Promise((resolve, reject) => {
+    const server = spawn('npx', ['vite', 'preview', '--port', SERVER_PORT.toString()], {
+      stdio: 'pipe',
+      shell: true
+    })
+
+    let started = false
+
+    server.stdout?.on('data', (data) => {
+      const output = data.toString()
+      console.log('  [서버]', output.trim())
+      if (output.includes('Local:') || output.includes('localhost')) {
+        started = true
+        resolve(server)
+      }
+    })
+
+    server.stderr?.on('data', (data) => {
+      console.error('  [서버 에러]', data.toString())
+    })
+
+    server.on('error', (err) => {
+      reject(err)
+    })
+
+    // 타임아웃: 10초 안에 시작 안 되면 실패
+    setTimeout(() => {
+      if (!started) {
+        server.kill()
+        reject(new Error('서버 시작 타임아웃'))
+      }
+    }, 10000)
+  })
+}
+
+// ── 서버 준비 확인 (HTTP 요청) ──
+async function waitForServer(port: number, maxRetries = 10): Promise<void> {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const res = await fetch(`http://localhost:${port}/`)
+      if (res.ok) {
+        console.log('  ✓ 서버 준비 완료')
+        return
+      }
+    } catch (e) {
+      // 아직 준비 안 됨
+    }
+    await new Promise(resolve => setTimeout(resolve, 500))
+  }
+  throw new Error('서버 응답 대기 실패')
+}
+
+// ── Puppeteer 완전 렌더링 ──
+async function renderWithPuppeteer(route: string, baseUrl: string): Promise<string> {
+  let browser = null
+  try {
+    browser = await puppeteer.launch({
+      headless: true,
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    })
+
+    const page = await browser.newPage()
+    await page.setViewport({ width: 1920, height: 1080 })
+
+    const url = `${baseUrl}${route}`
+    console.log(`    → ${url}`)
+
+    await page.goto(url, {
+      waitUntil: 'networkidle0',
+      timeout: 30000
+    })
+
+    // React 렌더링 완료 대기
+    await page.waitForSelector('#root', { timeout: 5000 })
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    const html = await page.content()
+
+    await browser.close()
+    return html
+
+  } catch (error) {
+    if (browser) {
+      await browser.close().catch(() => {})
+    }
+    throw error
+  }
+}
+
 // ── 메인 ──
-function main() {
+async function main() {
   const routes = getRoutes()
   const baseHtml = readFileSync(resolve(DIST_DIR, 'index.html'), 'utf-8')
 
-  console.log(`HTML 셸 생성 시작: ${routes.length}개 라우트`)
+  console.log(`프리렌더 시작: ${routes.length}개 라우트`)
+  console.log(`애드센스 필수 페이지 완전 렌더링: ${CRITICAL_PAGES.join(', ')}`)
 
-  let count = 0
-  for (const route of routes) {
-    if (route === '/') continue // 루트는 이미 index.html
+  let server: ChildProcess | null = null
+  let actualPort = SERVER_PORT
 
-    const seo = getSEOData(route)
-    const html = injectSEO(baseHtml, seo)
+  try {
+    // Vite preview 서버 시작
+    console.log('\n1. 프리뷰 서버 시작 중...')
+    server = await startServer()
 
-    const outputPath = resolve(DIST_DIR, route.slice(1), 'index.html')
-    const dir = dirname(outputPath)
-    if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
-    writeFileSync(outputPath, html, 'utf-8')
-    count++
+    // 실제 사용된 포트 감지 (4173이 이미 사용 중이면 다른 포트 사용)
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    // 포트 4173, 4174, 4175 순서로 시도
+    for (const port of [4173, 4174, 4175, 4176]) {
+      try {
+        const res = await fetch(`http://localhost:${port}/`)
+        if (res.ok) {
+          actualPort = port
+          console.log(`  ✓ 서버 포트: ${actualPort}`)
+          break
+        }
+      } catch (e) {
+        // 다음 포트 시도
+      }
+    }
+
+    console.log('\n2. 페이지 렌더링 중...')
+    let count = 0
+
+    for (const route of routes) {
+      const seo = getSEOData(route)
+      let html: string
+
+      // 애드센스 필수 페이지는 Puppeteer로 완전 렌더링
+      if (CRITICAL_PAGES.includes(route)) {
+        console.log(`  🔍 완전 렌더링: ${route}`)
+        try {
+          html = await renderWithPuppeteer(route, `http://localhost:${actualPort}`)
+          html = injectSEO(html, seo)
+        } catch (error) {
+          console.error(`    ⚠️ 렌더링 실패, 메타태그만 적용: ${error}`)
+          html = injectSEO(baseHtml, seo)
+        }
+      } else {
+        // 나머지는 메타태그만 교체
+        html = injectSEO(baseHtml, seo)
+      }
+
+      const outputPath = route === '/'
+        ? resolve(DIST_DIR, 'index.html')
+        : resolve(DIST_DIR, route.slice(1), 'index.html')
+
+      const dir = dirname(outputPath)
+      if (!existsSync(dir)) mkdirSync(dir, { recursive: true })
+      writeFileSync(outputPath, html, 'utf-8')
+      count++
+    }
+
+    console.log(`\n✅ 프리렌더 완료: ${count}개 파일`)
+
+  } catch (error) {
+    console.error('\n❌ 프리렌더 실패:', error)
+    throw error
+  } finally {
+    // 서버 종료
+    if (server) {
+      console.log('\n3. 서버 종료 중...')
+      server.kill()
+    }
   }
-
-  // 루트 index.html도 meta 교체
-  const rootSeo = getSEOData('/')
-  const rootHtml = injectSEO(baseHtml, rootSeo)
-  writeFileSync(resolve(DIST_DIR, 'index.html'), rootHtml, 'utf-8')
-  count++
-
-  console.log(`HTML 셸 생성 완료: ${count}개 파일`)
 }
 
-main()
+main().catch(err => {
+  console.error('치명적 에러:', err)
+  process.exit(1)
+})

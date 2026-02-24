@@ -5,8 +5,16 @@
     <link>https://www.bujatime.com</link>
     <description>AI, finance, side hustle, and business insights from BujaTime.</description>
     <language>ko</language>
-    <lastBuildDate>Sun, 22 Feb 2026 15:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 23 Feb 2026 15:00:00 GMT</lastBuildDate>
     <atom:link href="https://www.bujatime.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>네이버 블로그 시작하기 - 첫 글 쓰는 법</title>
+      <link>https://www.bujatime.com/blog/naver-blog-start</link>
+      <description>네이버 블로그 시작하기 - 첫 글 쓰는 법</description>
+      <pubDate>Mon, 23 Feb 2026 15:00:00 GMT</pubDate>
+      <guid>https://www.bujatime.com/blog/naver-blog-start</guid>
+    </item>
 
     <item>
       <title>비상금 1000만원 만들기: 월급쟁이 1년 달성 로드맵</title>
