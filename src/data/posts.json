@@ -3092,5 +3092,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-27",
     "featured": false
+  },
+  {
+    "id": "181",
+    "slug": "smartphone-alarm-tips",
+    "title": "스마트폰 알람 활용법 - 약 먹을 시간 알림 설정",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1553729459-afe8f2e2ed08?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-02-28",
+    "featured": false
   }
 ]
