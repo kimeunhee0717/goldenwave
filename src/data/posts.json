@@ -3108,5 +3108,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-02-28",
     "featured": false
+  },
+  {
+    "id": "182",
+    "slug": "cloud-storage-compare",
+    "title": "무료 클라우드 저장소 비교 - 구글 vs 네이버",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
   }
 ]
