@@ -1,0 +1,12 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F766E"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.24"/>
+  <text x="120" y="280" fill="white" font-family="Arial, sans-serif" font-size="56" font-weight="700">BujaTime</text>
+  <text x="120" y="350" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="34">대표 이미지 준비 중입니다</text>
+</svg>
