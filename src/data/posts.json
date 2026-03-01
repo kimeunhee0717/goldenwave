@@ -1,5 +1,23 @@
 [
   {
+    "id": "203",
+    "slug": "youtube-start-21-first-7-days-post-upload-checkpoints",
+    "title": "유튜브 시작하기 21편: 첫 영상 업로드 후 7일 운영 체크포인트",
+    "excerpt": "유튜브 초보자가 첫 영상 업로드 후 7일 동안 무엇을 확인하고 어떻게 개선해야 하는지 단계별 운영 체크포인트를 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "업로드 후 운영",
+      "유튜브 데이터",
+      "초보자 체크리스트",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "202",
     "slug": "youtube-start-20-title-thumbnail-description-seo-basics",
     "title": "유튜브 시작하기 20편: 제목·썸네일·설명란 SEO 기초 공식",
