@@ -1,5 +1,23 @@
 [
   {
+    "id": "211",
+    "slug": "youtube-start-29-beginners-faq-for-starting-youtube",
+    "title": "유튜브 시작하기 29편: 초보자 질문 Q&A 총정리",
+    "excerpt": "유튜브를 처음 시작하는 분들이 가장 자주 묻는 질문을 모아 장비, 주제, 업로드, 알고리즘, 수익화, 번아웃까지 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "초보자 Q&A",
+      "유튜브 입문",
+      "채널 운영",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "210",
     "slug": "youtube-start-28-time-management-for-workers-and-self-employed",
     "title": "유튜브 시작하기 28편: 직장인/자영업자 유튜브 시간관리 전략",
