@@ -1,5 +1,23 @@
 [
   {
+    "id": "213",
+    "slug": "gemini-quick-start-10min-first-result",
+    "title": "AI 초보 시작 가이드 1편: 제미나이로 10분 만에 첫 결과 만들기",
+    "excerpt": "AI가 처음인 분도 10분 안에 바로 쓸 수 있는 결과물 1개를 만드는 방법을 단계별로 안내합니다. 목적 정리, 질문 템플릿, 재질문 요령까지 초보자 기준으로 쉽게 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "제미나이",
+      "AI입문",
+      "초보자",
+      "프롬프트",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-02",
+    "featured": false
+  },
+  {
     "id": "212",
     "slug": "youtube-start-30-complete-roadmap-from-beginner-to-growth",
     "title": "유튜브 시작하기 30편: 초보 종합 로드맵(입문~성장)",
