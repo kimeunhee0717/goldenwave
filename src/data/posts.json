@@ -1,5 +1,23 @@
 [
   {
+    "id": "191",
+    "slug": "youtube-start-09-first-upload-checklist-15",
+    "title": "유튜브 시작하기 9편: 첫 영상 업로드 전 체크리스트 15개",
+    "excerpt": "유튜브 초보자를 위해 첫 영상 업로드 전 반드시 확인해야 할 체크리스트 15개를 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "첫 업로드",
+      "체크리스트",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "190",
     "slug": "youtube-start-08-youtube-studio-essential-menus",
     "title": "유튜브 시작하기 8편: 유튜브 스튜디오 필수 메뉴 완전 정리",
