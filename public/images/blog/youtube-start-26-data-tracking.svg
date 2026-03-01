@@ -1,0 +1,23 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1E293B"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect x="120" y="120" width="1360" height="660" rx="24" fill="white" fill-opacity="0.08" stroke="white" stroke-opacity="0.25"/>
+
+  <g opacity="0.9">
+    <rect x="220" y="520" width="120" height="180" rx="10" fill="#22D3EE"/>
+    <rect x="380" y="450" width="120" height="250" rx="10" fill="#38BDF8"/>
+    <rect x="540" y="390" width="120" height="310" rx="10" fill="#60A5FA"/>
+    <rect x="700" y="320" width="120" height="380" rx="10" fill="#818CF8"/>
+    <rect x="860" y="260" width="120" height="440" rx="10" fill="#A78BFA"/>
+  </g>
+
+  <polyline points="220,420 360,390 500,410 640,340 780,300 920,240 1060,210 1200,180" stroke="#FDE68A" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="220" y="220" fill="white" font-family="Arial, sans-serif" font-size="64" font-weight="700">YouTube 3-Month Data Tracking</text>
+  <text x="220" y="290" fill="#E2E8F0" font-family="Arial, sans-serif" font-size="36">Weekly metrics • Monthly review • Growth pattern analysis</text>
+</svg>
