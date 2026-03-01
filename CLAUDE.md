@@ -8,6 +8,12 @@
 - Local API 서버: `node local-api.cjs` (백그라운드 실행)
 - 링크만 던지고 서버 안 켜는 짓 하지 말 것
 
+### 블로그/콘텐츠 반영 시 배포 파일까지 반드시 처리
+- 이 프로젝트는 `vercel.json` 기준 `outputDirectory: dist`를 배포함
+- 따라서 `src/data/posts/*` 또는 `src/data/posts.json` 변경 후에는 **반드시 `npm run build` 실행**
+- 빌드 결과(`dist` 변경분)까지 함께 커밋/푸시해야 실제 사이트(bujatime.com)에 반영됨
+- "원본 글만 푸시"하고 끝내지 말 것
+
 ## 프로젝트 개요
 - **사이트명:** 부자타임 (BujaTime)
 - **도메인:** bujatime.com
