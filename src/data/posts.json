@@ -1,5 +1,23 @@
 [
   {
+    "id": "205",
+    "slug": "youtube-start-23-10-checkpoints-when-views-stagnate",
+    "title": "유튜브 시작하기 23편: 조회수 정체 시 점검할 10가지",
+    "excerpt": "유튜브 초보자가 조회수 정체를 만났을 때 점검해야 할 핵심 10가지를 단계별로 정리했습니다. 원인 진단부터 7일 개선 실험 루틴까지 실전 중심으로 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "조회수 정체",
+      "채널 분석",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "204",
     "slug": "youtube-start-22-youtube-algorithm-basics-for-beginners",
     "title": "유튜브 시작하기 22편: 알고리즘 기초, 초보자가 꼭 알아야 할 핵심",
