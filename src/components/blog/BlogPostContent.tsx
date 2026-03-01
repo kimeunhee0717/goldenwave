@@ -69,21 +69,11 @@ export default function BlogPostContent({ content }: Props) {
             )
           },
           img: ({ src, alt }) => (
-            <figure className="my-10">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl ring-1 ring-oatmeal-200">
-                <img
-                  src={src}
-                  alt={alt}
-                  className="w-full transition-transform duration-500 hover:scale-[1.02]"
-                />
-                <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl pointer-events-none"></div>
-              </div>
-              {alt && (
-                <figcaption className="text-center text-sm text-cocoa-500 mt-4 italic">
-                  {alt}
-                </figcaption>
-              )}
-            </figure>
+            <img
+              src={src}
+              alt={alt}
+              className="w-full my-10 rounded-2xl shadow-xl ring-1 ring-oatmeal-200"
+            />
           ),
           a: ({ href, children }) => (
             <a
