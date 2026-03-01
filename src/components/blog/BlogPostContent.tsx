@@ -1,3 +1,4 @@
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -50,11 +51,23 @@ export default function BlogPostContent({ content }: Props) {
               {children}
             </h4>
           ),
-          p: ({ children }) => (
-            <p className="text-espresso-700 leading-[1.85] mb-6 text-[17px]">
-              {children}
-            </p>
-          ),
+          p: ({ children }) => {
+            const childArray = React.Children.toArray(children)
+            const isImageOnlyParagraph =
+              childArray.length === 1 &&
+              React.isValidElement(childArray[0]) &&
+              childArray[0].type === 'img'
+
+            if (isImageOnlyParagraph) {
+              return <>{children}</>
+            }
+
+            return (
+              <p className="text-espresso-700 leading-[1.85] mb-6 text-[17px]">
+                {children}
+              </p>
+            )
+          },
           img: ({ src, alt }) => (
             <figure className="my-10">
               <div className="relative overflow-hidden rounded-2xl shadow-xl ring-1 ring-oatmeal-200">
