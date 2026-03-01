@@ -1,5 +1,23 @@
 [
   {
+    "id": "215",
+    "slug": "gemini-question-formula-double-quality",
+    "title": "AI 초보 시작 가이드 3편: 좋은 질문의 공식으로 답변 품질 2배 올리기",
+    "excerpt": "제미나이 초보자를 위한 질문 공식(목적+상황+출력형식+기준)을 예시와 함께 정리했습니다. 보정 질문까지 활용해 답변 품질을 안정적으로 높이는 실전 방법을 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "제미나이",
+      "질문법",
+      "프롬프트",
+      "AI입문",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-02",
+    "featured": false
+  },
+  {
     "id": "214",
     "slug": "gemini-beginner-settings-5-must-do",
     "title": "AI 초보 시작 가이드 2편: 회원가입 후 처음 해야 할 설정 5가지",
