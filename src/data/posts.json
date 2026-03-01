@@ -1,5 +1,23 @@
 [
   {
+    "id": "207",
+    "slug": "youtube-start-25-monetization-requirements-and-prep-strategy",
+    "title": "유튜브 시작하기 25편: 수익화 조건과 준비 전략",
+    "excerpt": "유튜브 초보자를 위해 수익화 조건의 핵심과 저작권·정책·채널 운영 관점의 준비 전략을 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "수익화",
+      "유튜브 정책",
+      "채널 성장",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "206",
     "slug": "youtube-start-24-from-zero-to-100-subscribers-plan",
     "title": "유튜브 시작하기 24편: 구독자 0→100명 현실 성장 플랜",
