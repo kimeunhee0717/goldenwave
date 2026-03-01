@@ -1,5 +1,23 @@
 [
   {
+    "id": "185",
+    "slug": "youtube-start-03-channel-name-profile-setup",
+    "title": "유튜브 시작하기 3편: 채널명·소개글·프로필 세팅 가이드",
+    "excerpt": "유튜브 초보자를 위해 채널명, 소개글, 프로필을 한 번에 세팅하는 방법을 단계별로 안내합니다. 바로 적용 가능한 템플릿과 체크리스트를 함께 제공합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "채널명",
+      "채널 소개글",
+      "프로필 세팅",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "184",
     "slug": "youtube-start-02-niche-selection-for-beginners",
     "title": "유튜브 시작하기 2편: 초보자를 위한 채널 주제(니치) 선택법",
