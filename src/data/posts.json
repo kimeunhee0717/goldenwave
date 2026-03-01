@@ -1,5 +1,23 @@
 [
   {
+    "id": "188",
+    "slug": "youtube-start-06-channel-setup-and-basic-settings",
+    "title": "유튜브 시작하기 6편: 채널 개설부터 기본 설정까지 한 번에 끝내기",
+    "excerpt": "유튜브 초보자를 위해 채널 개설, 소개글, 브랜딩, 업로드 기본 설정까지 한 번에 끝내는 방법을 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "유튜브 채널 개설",
+      "유튜브 설정",
+      "초보자 가이드",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "187",
     "slug": "youtube-start-05-beginner-minimum-gear-checklist",
     "title": "유튜브 시작하기 5편: 초보자 최소 장비 체크리스트",
