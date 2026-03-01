@@ -1,5 +1,23 @@
 [
   {
+    "id": "210",
+    "slug": "youtube-start-28-time-management-for-workers-and-self-employed",
+    "title": "유튜브 시작하기 28편: 직장인/자영업자 유튜브 시간관리 전략",
+    "excerpt": "유튜브 초보 직장인·자영업자를 위해 바쁜 일정에서도 지속 가능한 시간관리 전략을 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "시간관리",
+      "직장인 유튜브",
+      "자영업자 유튜브",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "209",
     "slug": "youtube-start-27-how-to-avoid-burnout-and-stay-consistent",
     "title": "유튜브 시작하기 27편: 번아웃 없이 지속하는 채널 운영법",
