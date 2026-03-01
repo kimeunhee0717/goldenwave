@@ -99,8 +99,6 @@ AI를 처음 시작할 때 가장 많이 나오는 질문은 이것입니다.
 
 ---
 
-## 이미지 예시 1 (ComfyUI 생성 이미지 삽입 위치)
-
 ![제미나이 초보 시작 화면 예시](/images/blog/gemini-quick-start-10min-first-result/step-01.png)
 
 ---
@@ -135,8 +133,6 @@ AI를 처음 시작할 때 가장 많이 나오는 질문은 이것입니다.
 ```
 
 ---
-
-## 이미지 예시 2 (ComfyUI 생성 이미지 삽입 위치)
 
 ![10분 실행 체크리스트 예시](/images/blog/gemini-quick-start-10min-first-result/step-02.png)
 
