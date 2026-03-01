@@ -1,5 +1,23 @@
 [
   {
+    "id": "194",
+    "slug": "youtube-start-12-video-structure-template-opening-body-closing",
+    "title": "유튜브 시작하기 12편: 영상 구성 템플릿(오프닝-본문-마무리)",
+    "excerpt": "유튜브 초보자를 위해 오프닝-본문-마무리 구조를 바로 적용할 수 있게 템플릿으로 정리했습니다. 말이 길어지는 문제를 줄이고 영상 완성도를 높이는 실전 가이드입니다.",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "영상 구성",
+      "오프닝 본문 마무리",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "193",
     "slug": "youtube-start-11-early-stage-strategy-over-views",
     "title": "유튜브 시작하기 11편: 조회수보다 중요한 초반 운영 전략",
