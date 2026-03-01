@@ -1,5 +1,23 @@
 [
   {
+    "id": "204",
+    "slug": "youtube-start-22-youtube-algorithm-basics-for-beginners",
+    "title": "유튜브 시작하기 22편: 알고리즘 기초, 초보자가 꼭 알아야 할 핵심",
+    "excerpt": "유튜브 초보자를 위해 알고리즘의 기본 원리를 쉽게 설명하고, CTR·시청지속·반응 신호 중심의 실전 점검 방법을 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "유튜브 알고리즘",
+      "CTR",
+      "시청지속시간",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "203",
     "slug": "youtube-start-21-first-7-days-post-upload-checkpoints",
     "title": "유튜브 시작하기 21편: 첫 영상 업로드 후 7일 운영 체크포인트",
