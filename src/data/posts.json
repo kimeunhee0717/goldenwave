@@ -1,5 +1,23 @@
 [
   {
+    "id": "214",
+    "slug": "gemini-beginner-settings-5-must-do",
+    "title": "AI 초보 시작 가이드 2편: 회원가입 후 처음 해야 할 설정 5가지",
+    "excerpt": "제미나이 초보자가 가입 직후 반드시 점검해야 할 설정 5가지를 단계별로 정리했습니다. 답변 스타일 고정, 템플릿 저장, 검토 기준 설정까지 실전 중심으로 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "제미나이",
+      "AI입문",
+      "초보자",
+      "설정",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-02",
+    "featured": false
+  },
+  {
     "id": "213",
     "slug": "gemini-quick-start-10min-first-result",
     "title": "AI 초보 시작 가이드 1편: 제미나이로 10분 만에 첫 결과 만들기",
