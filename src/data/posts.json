@@ -1,5 +1,23 @@
 [
   {
+    "id": "208",
+    "slug": "youtube-start-26-how-to-track-and-analyze-first-3-months",
+    "title": "유튜브 시작하기 26편: 시작 3개월 데이터 기록·분석 방법",
+    "excerpt": "유튜브 초보자를 위해 시작 3개월 동안 어떤 데이터를 어떻게 기록하고 분석해야 하는지 주간·월간 루틴 중심으로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1551281044-8b74d4f7f4c6?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "데이터 분석",
+      "채널 성장",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "207",
     "slug": "youtube-start-25-monetization-requirements-and-prep-strategy",
     "title": "유튜브 시작하기 25편: 수익화 조건과 준비 전략",
