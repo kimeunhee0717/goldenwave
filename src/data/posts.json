@@ -1,5 +1,23 @@
 [
   {
+    "id": "199",
+    "slug": "youtube-start-17-free-editing-tools-workflow-for-beginners",
+    "title": "유튜브 시작하기 17편: 무료 편집 툴로 시작하는 영상 편집 루틴",
+    "excerpt": "유튜브 초보자를 위해 무료 편집 툴 선택부터 컷 편집, 음질 정리, 자막, 내보내기까지 실전 편집 루틴을 단계별로 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "무료 편집 툴",
+      "영상 편집 루틴",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "198",
     "slug": "youtube-start-16-how-to-start-without-face-reveal",
     "title": "유튜브 시작하기 16편: 얼굴 공개 없이 유튜브 시작하는 법",
