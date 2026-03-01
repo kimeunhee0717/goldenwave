@@ -5,8 +5,16 @@
     <link>https://www.bujatime.com</link>
     <description>AI, finance, side hustle, and business insights from BujaTime.</description>
     <language>ko</language>
-    <lastBuildDate>Sat, 28 Feb 2026 15:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2026 15:00:00 GMT</lastBuildDate>
     <atom:link href="https://www.bujatime.com/rss.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>AI 초보 시작 가이드 1편: 제미나이로 10분 만에 첫 결과 만들기</title>
+      <link>https://www.bujatime.com/blog/gemini-quick-start-10min-first-result</link>
+      <description>AI가 처음인 분도 10분 안에 바로 쓸 수 있는 결과물 1개를 만드는 방법을 단계별로 안내합니다. 목적 정리, 질문 템플릿, 재질문 요령까지 초보자 기준으로 쉽게 정리했습니다.</description>
+      <pubDate>Sun, 01 Mar 2026 15:00:00 GMT</pubDate>
+      <guid>https://www.bujatime.com/blog/gemini-quick-start-10min-first-result</guid>
+    </item>
 
     <item>
       <title>유튜브 시작하기 30편: 초보 종합 로드맵(입문~성장)</title>
