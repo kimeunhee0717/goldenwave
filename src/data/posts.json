@@ -1,5 +1,23 @@
 [
   {
+    "id": "209",
+    "slug": "youtube-start-27-how-to-avoid-burnout-and-stay-consistent",
+    "title": "유튜브 시작하기 27편: 번아웃 없이 지속하는 채널 운영법",
+    "excerpt": "유튜브 초보자를 위해 번아웃의 원인 진단부터 작업 분할, 업로드 빈도 조정, 회복 루틴까지 지속 가능한 운영법을 단계별로 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "번아웃",
+      "채널 운영",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "208",
     "slug": "youtube-start-26-how-to-track-and-analyze-first-3-months",
     "title": "유튜브 시작하기 26편: 시작 3개월 데이터 기록·분석 방법",
