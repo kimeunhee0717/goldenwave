@@ -1,5 +1,23 @@
 [
   {
+    "id": "189",
+    "slug": "youtube-start-07-personal-vs-brand-channel-choice",
+    "title": "유튜브 시작하기 7편: 개인 채널 vs 브랜드 채널 선택 기준",
+    "excerpt": "유튜브 초보자가 개인 채널과 브랜드 채널 중 무엇을 선택해야 할지 쉽게 판단할 수 있도록 단계별 기준과 체크리스트를 정리했습니다.",
+    "coverImage": "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "개인 채널",
+      "브랜드 채널",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "188",
     "slug": "youtube-start-06-channel-setup-and-basic-settings",
     "title": "유튜브 시작하기 6편: 채널 개설부터 기본 설정까지 한 번에 끝내기",
