@@ -1,5 +1,23 @@
 [
   {
+    "id": "195",
+    "slug": "youtube-start-13-script-writing-how-much-detail",
+    "title": "유튜브 시작하기 13편: 대본 작성, 어디까지 써야 하는가",
+    "excerpt": "유튜브 초보자를 위해 풀대본·키워드·반대본 방식의 차이와 실전 작성법을 단계별로 정리했습니다. 촬영이 막히지 않는 대본 루틴을 쉽게 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "대본 작성",
+      "영상 스크립트",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "194",
     "slug": "youtube-start-12-video-structure-template-opening-body-closing",
     "title": "유튜브 시작하기 12편: 영상 구성 템플릿(오프닝-본문-마무리)",
