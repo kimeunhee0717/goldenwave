@@ -1,5 +1,23 @@
 [
   {
+    "id": "196",
+    "slug": "youtube-start-14-upload-frequency-weekly-vs-three-times",
+    "title": "유튜브 시작하기 14편: 주 1회 vs 주 3회, 초보자 최적 루틴",
+    "excerpt": "유튜브 초보자가 주 1회와 주 3회 업로드 중 무엇을 선택해야 할지 현실적인 기준으로 비교하고 단계형 운영 루틴을 제시합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "업로드 빈도",
+      "주1회 주3회",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "195",
     "slug": "youtube-start-13-script-writing-how-much-detail",
     "title": "유튜브 시작하기 13편: 대본 작성, 어디까지 써야 하는가",
