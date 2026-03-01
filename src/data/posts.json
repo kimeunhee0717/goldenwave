@@ -1,5 +1,23 @@
 [
   {
+    "id": "197",
+    "slug": "youtube-start-15-basic-shooting-lighting-audio-setup",
+    "title": "유튜브 시작하기 15편: 초보 촬영 구도·조명·음질 기본 세팅",
+    "excerpt": "유튜브 초보자가 촬영 품질을 빠르게 안정화할 수 있도록 구도, 조명, 음질 기본 세팅을 단계별로 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "촬영 구도",
+      "조명 세팅",
+      "음질 개선",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "196",
     "slug": "youtube-start-14-upload-frequency-weekly-vs-three-times",
     "title": "유튜브 시작하기 14편: 주 1회 vs 주 3회, 초보자 최적 루틴",
