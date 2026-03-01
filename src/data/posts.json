@@ -1,5 +1,23 @@
 [
   {
+    "id": "192",
+    "slug": "youtube-start-10-first-10-video-topic-formula",
+    "title": "유튜브 시작하기 10편: 첫 10개 영상 주제 뽑는 공식",
+    "excerpt": "유튜브 초보자가 첫 10개 영상 주제를 막힘 없이 정할 수 있도록 질문 수집부터 카테고리 분류, 제목 공식까지 단계별로 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "유튜브 시작하기",
+      "영상 주제",
+      "콘텐츠 기획",
+      "유튜브 초보",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
+  },
+  {
     "id": "191",
     "slug": "youtube-start-09-first-upload-checklist-15",
     "title": "유튜브 시작하기 9편: 첫 영상 업로드 전 체크리스트 15개",
