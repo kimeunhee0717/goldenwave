@@ -1,5 +1,23 @@
 [
   {
+    "id": "216",
+    "slug": "gemini-fix-weird-answers-3step",
+    "title": "AI 초보 시작 가이드 4편: AI가 엉뚱하게 답할 때 고치는 3단계 질문법",
+    "excerpt": "제미나이 답변이 엉뚱할 때 초보자도 바로 적용할 수 있는 3단계 보정 질문법을 정리했습니다. 문제 진단, 형식 강제, 기준 부여까지 실전 템플릿으로 안내합니다.",
+    "coverImage": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "제미나이",
+      "질문교정",
+      "프롬프트",
+      "AI입문",
+      "디지털스킬"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-02",
+    "featured": false
+  },
+  {
     "id": "215",
     "slug": "gemini-question-formula-double-quality",
     "title": "AI 초보 시작 가이드 3편: 좋은 질문의 공식으로 답변 품질 2배 올리기",

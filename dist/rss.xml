@@ -9,6 +9,14 @@
     <atom:link href="https://www.bujatime.com/rss.xml" rel="self" type="application/rss+xml"/>
 
     <item>
+      <title>AI 초보 시작 가이드 4편: AI가 엉뚱하게 답할 때 고치는 3단계 질문법</title>
+      <link>https://www.bujatime.com/blog/gemini-fix-weird-answers-3step</link>
+      <description>제미나이 답변이 엉뚱할 때 초보자도 바로 적용할 수 있는 3단계 보정 질문법을 정리했습니다. 문제 진단, 형식 강제, 기준 부여까지 실전 템플릿으로 안내합니다.</description>
+      <pubDate>Sun, 01 Mar 2026 15:00:00 GMT</pubDate>
+      <guid>https://www.bujatime.com/blog/gemini-fix-weird-answers-3step</guid>
+    </item>
+
+    <item>
       <title>AI 초보 시작 가이드 3편: 좋은 질문의 공식으로 답변 품질 2배 올리기</title>
       <link>https://www.bujatime.com/blog/gemini-question-formula-double-quality</link>
       <description>제미나이 초보자를 위한 질문 공식(목적+상황+출력형식+기준)을 예시와 함께 정리했습니다. 보정 질문까지 활용해 답변 품질을 안정적으로 높이는 실전 방법을 안내합니다.</description>
