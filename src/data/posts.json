@@ -3771,5 +3771,22 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-01",
     "featured": false
+  },
+  {
+    "id": "219",
+    "slug": "briefing-ai-2026-03-02",
+    "title": "🤖 AI 뉴스 브리핑 - 2026-03-02",
+    "excerpt": "1.  **Analyze the User's Request:**",
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "AI",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-02",
+    "featured": false
   }
 ]
