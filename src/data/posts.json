@@ -3754,5 +3754,22 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-01",
     "featured": false
+  },
+  {
+    "id": "218",
+    "slug": "briefing-ai-2026-03-01",
+    "title": "🤖 AI 뉴스 브리핑 - 2026-03-01",
+    "excerpt": "The user wants me to act as an AI analyst and select the 3 most important and influential AI-related news items from a provided list of 15 news snippe",
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "AI",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-01",
+    "featured": false
   }
 ]
