@@ -3805,5 +3805,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-03",
     "featured": false
+  },
+  {
+    "id": "221",
+    "slug": "smartphone-pdf-guide",
+    "title": "스마트폰으로 PDF 보고 편집하는 방법",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-04",
+    "featured": false
   }
 ]
