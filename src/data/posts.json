@@ -3837,5 +3837,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-05",
     "featured": false
+  },
+  {
+    "id": "223",
+    "slug": "video-call-guide",
+    "title": "손주와 영상통화하기 - 카톡 vs 페이스타임 vs 줌 (2026 최신판)",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-06",
+    "featured": false
   }
 ]
