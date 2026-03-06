@@ -3855,6 +3855,23 @@
     "featured": false
   },
   {
+    "id": "225",
+    "slug": "briefing-ai-2026-03-06",
+    "title": "🤖 AI 뉴스 브리핑 - 2026-03-06",
+    "excerpt": "1.  **Analyze the User's Request:**",
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "AI",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-06",
+    "featured": false
+  },
+  {
     "id": "224",
     "slug": "qr-code-guide",
     "title": "QR코드 찍는 법과 안전하게 사용하는 팁 (2026 최신판)",
