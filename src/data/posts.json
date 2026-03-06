@@ -3853,5 +3853,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-06",
     "featured": false
+  },
+  {
+    "id": "224",
+    "slug": "qr-code-guide",
+    "title": "QR코드 찍는 법과 안전하게 사용하는 팁 (2026 최신판)",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-07",
+    "featured": false
   }
 ]
