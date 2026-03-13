@@ -4017,5 +4017,22 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-14",
     "featured": false
+  },
+  {
+    "id": "234",
+    "slug": "briefing-ai-2026-03-13",
+    "title": "🤖 AI 뉴스 브리핑 - 2026-03-13",
+    "excerpt": "<div style=\"font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif; max-width: 700px; margin: 0 auto; background: #faf8f5; padding: 0;\">",
+    "coverImage": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=630&fit=crop",
+    "categoryId": "briefing",
+    "tags": [
+      "AI",
+      "브리핑",
+      "뉴스",
+      "AI분석"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-13",
+    "featured": false
   }
 ]
