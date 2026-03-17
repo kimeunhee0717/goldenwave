@@ -4116,5 +4116,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-17",
     "featured": false
+  },
+  {
+    "id": "240",
+    "slug": "youtube-no-ads",
+    "title": "유튜브 광고 없이 보는 합법적인 방법들 (2026 최신판)",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-18",
+    "featured": false
   }
 ]
