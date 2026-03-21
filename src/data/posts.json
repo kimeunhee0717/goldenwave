@@ -4164,5 +4164,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-21",
     "featured": false
+  },
+  {
+    "id": "243",
+    "slug": "smartphone-photo-organize",
+    "title": "스마트폰 사진 정리하는 가장 쉬운 방법 (2026 최신판)",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-22",
+    "featured": false
   }
 ]
