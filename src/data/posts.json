@@ -4212,5 +4212,21 @@
     "authorId": "ceo",
     "publishedAt": "2026-03-24",
     "featured": false
+  },
+  {
+    "id": "246",
+    "slug": "smart-tv-youtube",
+    "title": "스마트 TV에서 유튜브 보는 방법 총정리 (2026 최신판)",
+    "excerpt": "",
+    "coverImage": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop",
+    "categoryId": "digital-skill",
+    "tags": [
+      "AI",
+      "시니어",
+      "디지털"
+    ],
+    "authorId": "ceo",
+    "publishedAt": "2026-03-25",
+    "featured": false
   }
 ]
