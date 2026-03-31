@@ -6,7 +6,25 @@ interface Props {
   content: string
 }
 
+function normalizeLooseStrongMarkdown(content: string) {
+  const segments = content.split(/(```[\s\S]*?```|`[^`\n]+`)/g)
+
+  return segments
+    .map((segment, index) => {
+      if (index % 2 === 1) {
+        return segment
+      }
+
+      return segment.replace(/\*\*\s+([^*\n](?:[\s\S]*?[^*\n])?)\s+\*\*/g, (_match, inner: string) => {
+        return `**${inner.trim()}**`
+      })
+    })
+    .join('')
+}
+
 export default function BlogPostContent({ content }: Props) {
+  const normalizedContent = normalizeLooseStrongMarkdown(content)
+
   return (
     <article className="prose prose-lg max-w-none
       prose-headings:text-espresso-800 prose-headings:font-bold
@@ -194,7 +212,7 @@ export default function BlogPostContent({ content }: Props) {
           ),
         }}
       >
-        {content}
+        {normalizedContent}
       </ReactMarkdown>
     </article>
   )
