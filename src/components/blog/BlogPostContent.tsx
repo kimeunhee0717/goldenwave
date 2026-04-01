@@ -15,9 +15,13 @@ function normalizeLooseStrongMarkdown(content: string) {
         return segment
       }
 
-      return segment.replace(/\*\*\s+([^*\n](?:[\s\S]*?[^*\n])?)\s+\*\*/g, (_match, inner: string) => {
-        return `**${inner.trim()}**`
-      })
+      return segment
+        .replace(/\*\*\*\s*([^*\n][^*\n]*?:)\s*\*\*/g, (_match, inner: string) => {
+          return `**${inner.trim()}**`
+        })
+        .replace(/\*\*\s+([^*\n](?:[\s\S]*?[^*\n])?)\s+\*\*/g, (_match, inner: string) => {
+          return `**${inner.trim()}**`
+        })
     })
     .join('')
 }
